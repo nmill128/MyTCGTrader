@@ -13,3 +13,25 @@ body footer {
     background: #313233;
     color: #ecf0f1;
 }
+
+.social-links-bordered a {
+    display: inline-block;
+    margin-right: 7px;
+    color: #fff;
+    text-align: center;
+}
+
+
+.social-links-bordered a i {
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+    border-radius: 100%;
+    line-height: 48px;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    background: rgba(255, 255, 255, 0.18);
+    border: 2px solid #fff;
+}
