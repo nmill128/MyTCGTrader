@@ -3,7 +3,7 @@ package com.mycompany.jsfpackage;
 import com.mycompany.entitypackage.Users;
 import com.mycompany.jsfpackage.util.JsfUtil;
 import com.mycompany.jsfpackage.util.PaginationHelper;
-import com.mycompany.sessonBeanPackage.UsersFacade;
+import com.mycompany.sessionBeanPackage.UsersFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class UsersController implements Serializable {
     private Users current;
     private DataModel items = null;
     @EJB
-    private com.mycompany.sessonBeanPackage.UsersFacade ejbFacade;
+    private com.mycompany.sessionBeanPackage.UsersFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 

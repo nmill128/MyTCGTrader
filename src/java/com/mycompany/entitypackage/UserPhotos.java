@@ -4,6 +4,7 @@
  */
 package com.mycompany.entitypackage;
 
+import com.mycompany.managers.Constants;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -59,6 +60,11 @@ public class UserPhotos implements Serializable {
         this.id = id;
         this.extension = extension;
     }
+    
+    public UserPhotos(String extension, Users id) {
+        this.extension = extension;
+        userId = id;
+    }
 
     public Integer getId() {
         return id;
@@ -107,6 +113,22 @@ public class UserPhotos implements Serializable {
     @Override
     public String toString() {
         return "com.mycompany.entitypackage.UserPhotos[ id=" + id + " ]";
+    }
+    
+    public String getFilePath() {
+        return Constants.ROOT_DIRECTORY + getFilename();
+    }
+
+    public String getFilename() {
+        return getId() + "." + getExtension();
+    }
+    
+    public String getThumbnailName() {
+        return getId() + "_thumbnail." + getExtension();
+    }
+    
+    public String getThumbnailFilePath() {
+        return Constants.ROOT_DIRECTORY + getThumbnailName();
     }
     
 }
