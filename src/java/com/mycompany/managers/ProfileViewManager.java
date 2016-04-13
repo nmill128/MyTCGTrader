@@ -5,7 +5,9 @@
 package com.mycompany.managers;
 
 import com.mycompany.entitypackage.Users;
+import com.mycompany.entitypackage.Wants;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -21,6 +23,7 @@ public class ProfileViewManager implements Serializable {
 
     // Instance Variable (Property)
     private Users user;
+    List<Wants> wants;
     
   /**
    * The instance variable 'userFacade' is annotated with the @EJB annotation.
@@ -29,6 +32,14 @@ public class ProfileViewManager implements Serializable {
    */  
   @EJB
   private com.mycompany.sessionBeanPackage.UsersFacade userFacade;
+  
+            /**
+    * The instance variable 'userFacade' is annotated with the @EJB annotation.
+    * This means that the GlassFish application server, at runtime, will inject in
+    * this instance variable a reference to the @Stateless session bean UserFacade.
+    */  
+    @EJB
+    private com.mycompany.sessionBeanPackage.WantsFacade wantsFacade;
 
   public ProfileViewManager() {
 
@@ -45,8 +56,16 @@ public class ProfileViewManager implements Serializable {
     return user;
   }
 
+    public List<Wants> getWants(){
+        return wantsFacade.findPhotosByUserID(getLoggedInUser().getId());
+    }
+    
+    public void setWants(){
+        this.wants  = wantsFacade.findPhotosByUserID(getLoggedInUser().getId());;
+    }
+  
   public Users getLoggedInUser() {
-    return userFacade.find(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user_id"));
+    return user = userFacade.find(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user_id"));
   }
 
   /**

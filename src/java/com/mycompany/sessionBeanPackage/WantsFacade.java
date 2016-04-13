@@ -5,7 +5,9 @@
  */
 package com.mycompany.sessionBeanPackage;
 
+import com.mycompany.entitypackage.UserPhotos;
 import com.mycompany.entitypackage.Wants;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,12 @@ public class WantsFacade extends AbstractFacade<Wants> {
 
     public WantsFacade() {
         super(Wants.class);
+    }
+    
+    public List<Wants> findPhotosByUserID(Integer userID) {
+        return (List<Wants>) em.createNamedQuery("Wants.findWantsByUserId")
+                .setParameter("userId", userID)
+                .getResultList();
     }
     
 }

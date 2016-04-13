@@ -26,12 +26,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author nmiller
  */
 @Entity
-@Table(name = "UserPhotos")
+@Table(name = "userphotos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserPhotos.findAll", query = "SELECT u FROM UserPhotos u"),
     @NamedQuery(name = "UserPhotos.findById", query = "SELECT u FROM UserPhotos u WHERE u.id = :id"),
-    @NamedQuery(name = "Photo.findPhotosByUserId", query = "SELECT p FROM UserPhotos p WHERE p.userId.id = :userId"),
+    @NamedQuery(name = "UserPhotos.findPhotosByUserId", query = "SELECT u FROM UserPhotos u WHERE u.userId.id = :userId"),
     @NamedQuery(name = "UserPhotos.findByExtension", query = "SELECT u FROM UserPhotos u WHERE u.extension = :extension")})
 public class UserPhotos implements Serializable {
 
