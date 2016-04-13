@@ -7,120 +7,138 @@ Copyright © 2016 Matt Morrison. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Create Account</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <ui:insert name="importCraziness">
+            <ui:include src="template/importCraziness.xhtml"/>
+        </ui:insert>
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <h:outputStylesheet library="css" name="globalStyles.css"/>
     </h:head>
     <h:body>
+        <div class="container-fluid">
         <div align="center" style="width:50%; margin:0 auto;">
             <h:form class="form-signin">
                 <h2 class="form-signin-heading">New Account</h2>
                 <br/>
                 <f:event listener="#{accountManager.validateInformation}" type="postValidate"/>
-                <p:panel id="panel" 
-                         style="width: 400px; border: 0px solid white">
+                <div class="panel panel-default col-xs-12">
                 <p:messages id="msgs" />
 
-                <h:panelGrid columns="3" cellpadding="5">
-                    <p:outputLabel for="firstName" value="First Name" />
-                    <h:inputText id="firstName" value="#{accountManager.firstName}" 
+                <table class="table profile-table">
+                    <tr>
+                        <td><p:outputLabel for="firstName" value="First Name" /></td>
+                        <td><h:inputText id="firstName" value="#{accountManager.firstName}" 
                                  required="true" label="First Name">
                         <f:validateLength minimum="2" />
-                    </h:inputText>
-                    <p:message for="firstName" display="icon" />
-                    
-                    <p:outputLabel for="middleName" value="Middle Name or Initial" />
-                    <h:inputText id="middleName" value="#{accountManager.middleName}" 
+                            </h:inputText></td>
+                        <td><p:message for="firstName" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="middleName" value="Middle Name or Initial" /></td>
+                        <td><h:inputText id="middleName" value="#{accountManager.middleName}" 
                                  required="false" label="Middle Name">
-                    </h:inputText>
-                    <p:message for="middleName" display="icon" />                    
-
-                    <p:outputLabel for="lastName" value="Last Name" />
-                    <h:inputText id="lastName" value="#{accountManager.lastName}" 
+                            </h:inputText></td>
+                        <td><p:message for="middleName" display="icon" /></td>                
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="lastName" value="Last Name" /></td>
+                        <td><h:inputText id="lastName" value="#{accountManager.lastName}" 
                                  required="true" label="Last Name">
                         <f:validateLength minimum="2" />
-                    </h:inputText>
-                    <p:message for="lastName" display="icon" />
-
-
-                    <p:outputLabel for="address1" value="Address Line 1" />
-                    <h:inputText id="address1" value="#{accountManager.address1}" 
+                            </h:inputText></td>
+                        <td><p:message for="lastName" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="address1" value="Address Line 1" /></td>
+                        <td><h:inputText id="address1" value="#{accountManager.address1}" 
                                  required="true" label="address1">
                         <f:validateLength minimum="5" />
-                    </h:inputText>
-                    <p:message for="address1" display="icon" />
-                    
-                    <p:outputLabel for="address2" value="Address Line 2" />
-                    <h:inputText id="address2" value="#{accountManager.address2}" 
-                                 label="address2" />
-                    <p:message for="address2" display="icon" />
-                    
-                    <p:outputLabel for="city" value="City" />
-                    <h:inputText id="city" value="#{accountManager.city}" 
+                            </h:inputText></td>
+                        <td><p:message for="address1" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="address2" value="Address Line 2" /></td>
+                        <td><h:inputText id="address2" value="#{accountManager.address2}" 
+                                         label="address2" /></td>
+                        <td><p:message for="address2" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="city" value="City" /></td>
+                        <td><h:inputText id="city" value="#{accountManager.city}" 
                                  required="true" label="city">
                         <f:validateLength minimum="5" />
-                    </h:inputText>
-                    <p:message for="city" display="icon" />                    
-
-                    <p:outputLabel for="state" value="State" />
-                    <h:selectOneMenu id="state" value="#{accountManager.state}" required="true">
+                            </h:inputText></td>
+                        <td><p:message for="city" display="icon" /></td>                  
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="state" value="State" /></td>
+                        <td><h:selectOneMenu id="state" value="#{accountManager.state}" required="true">
                         <f:selectItems value="#{accountManager.listOfStates}" var="state"
                                        itemLabel="#{state}" itemValue="#{state}" />
-                    </h:selectOneMenu>
-                    <p:message for="state" display="icon" />
-                    
-                    <p:outputLabel for="zipcode" value="Zip Code" />
-                    <h:inputText id="zipcode" value="#{accountManager.zipcode}" 
+                            </h:selectOneMenu></td>
+                        <td><p:message for="state" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="zipcode" value="Zip Code" /></td>
+                        <td><h:inputText id="zipcode" value="#{accountManager.zipcode}" 
                                  required="true" label="Zip Code">
                         <f:validateLength minimum="5" maximum="5"/>
-                    </h:inputText>
-                    <p:message for="zipcode" display="icon" />                    
-                    
-                    <p:outputLabel for="security_ques" value="Security Question" />
-                    <h:selectOneMenu id="security_ques" value="#{accountManager.security_question}" required="true">
+                            </h:inputText></td>
+                        <td><p:message for="zipcode" display="icon" /></td>                  
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="security_ques" value="Security Question" /></td>
+                        <td><h:selectOneMenu id="security_ques" value="#{accountManager.security_question}" required="true">
                         <f:selectItems value="#{accountManager.security_questions}"/>
-                    </h:selectOneMenu>
-                    <p:message for="security_ques" display="icon" />                    
-                  
-                    <p:outputLabel for="security_ans" value="Answer" />
-                    <h:inputText id="security_ans" value="#{accountManager.security_answer}" 
+                            </h:selectOneMenu></td>
+                        <td><p:message for="security_ques" display="icon" /></td>                
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="security_ans" value="Answer" /></td>
+                        <td><h:inputText id="security_ans" value="#{accountManager.security_answer}" 
                                  required="true" label="city">
                         <f:validateLength minimum="4" />
-                    </h:inputText>
-                    <p:message for="security_ans" display="icon" />                    
-                    
-                    <p:outputLabel for="email" value="Email:" />
-                    <h:inputText id="email" value="#{accountManager.email}" 
+                            </h:inputText></td>
+                        <td><p:message for="security_ans" display="icon" /></td>                  
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="email" value="Email:" /></td>
+                        <td><h:inputText id="email" value="#{accountManager.email}" 
                                  label="Email" required="true">
                         <f:validateLength minimum="2" />
                         <f:validator validatorId="emailValidator" /> 
-                    </h:inputText>
-                    <p:message for="email" display="icon" />
-
-                    <p:outputLabel for="username" value="Username:" />
-                    <h:inputText id="username" value="#{accountManager.username}" 
+                            </h:inputText></td>
+                        <td><p:message for="email" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="username" value="Username:" /></td>
+                        <td><h:inputText id="username" value="#{accountManager.username}" 
                                  required="true" label="Username">
                         <f:validateLength minimum="4" />
-                    </h:inputText>
-                    <p:message for="username" display="icon" />
-
-                    <p:outputLabel for="password" value="Password:" />
-                    <h:inputSecret id="password" value="#{accountManager.password}" 
+                            </h:inputText></td>
+                        <td><p:message for="username" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="password" value="Password:" /></td>
+                        <td><h:inputSecret id="password" value="#{accountManager.password}" 
                                 required="true" label="Password">
                         <f:validator validatorId="passwordValidator" /> 
-                    </h:inputSecret>
-                    <p:message for="password" display="icon" />
-
-                    <p:outputLabel for="confirmPassword" value="Confirm Password:" />
-                    <h:inputSecret id="confirmPassword" 
+                            </h:inputSecret></td>
+                        <td><p:message for="password" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="confirmPassword" value="Confirm Password:" /></td>
+                        <td><h:inputSecret id="confirmPassword" 
                                 required="true" label="Confirm Password">
-                    </h:inputSecret>
-                    <p:message for="confirmPassword" display="icon"/>
-                </h:panelGrid>
-            </p:panel>
+                            </h:inputSecret></td>
+                        <td><p:message for="confirmPassword" display="icon"/></td>
+                    </tr>
+                </table>
+            </div>
             <h:outputLabel id="error" value="#{accountManager.statusMessage}"  />
             <br/>
             <h:commandButton class="btn btn-lg btn-success btn-block" id="submit" 
@@ -128,6 +146,10 @@ Copyright © 2016 Matt Morrison. All rights reserved.
             <h:button class="btn btn-lg btn-danger" id="cancel" outcome="index" value="Cancel" />
             </h:form>
         </div>
+        </div>
+        <ui:insert name="footer">
+            <ui:include src="template/footer.xhtml"/>
+        </ui:insert>
     </h:body>
 
 </html>
