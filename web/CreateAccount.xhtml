@@ -45,19 +45,6 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                     </h:inputText>
                     <p:message for="lastName" display="icon" />
 
-                    <p:outputLabel for="height" value="Height in Inches: " />
-                    <h:inputText id="height" value="#{accountManager.height}" 
-                                 required="true" label="height">
-                        <f:validateLongRange minimum="36" maximum="96" />
-                    </h:inputText>
-                    <p:message for="height" display="icon" />
-
-                    <p:outputLabel for="weight" value="Weight in Pounds: " />
-                    <h:inputText id="weight" value="#{accountManager.weight}" 
-                                 required="true" label="weight">
-                        <f:validateLongRange minimum="50" maximum="400" />
-                    </h:inputText>
-                    <p:message for="weight" display="icon" />
 
                     <p:outputLabel for="address1" value="Address Line 1" />
                     <h:inputText id="address1" value="#{accountManager.address1}" 

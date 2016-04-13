@@ -12,29 +12,47 @@
         <div align="center">
             <h:form class="form-signin">
                 <div align="center">
-                <h:graphicImage url="#{resource['images:users.png']}" style="width:100%; height:100%; max-height:342px; max-width:600px;" alt="Users"/>
-                
-                <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+                    <h:graphicImage url="#{resource['images:users.png']}" style="width:100%; height:100%; max-height:342px; max-width:600px;" alt="Users"/>
 
-                    <h:outputLabel styleClass="outputLabel" for="loginname" value="Username: " />
-                    <h:inputText class="form-control" id="loginname" value="#{loginManager.username}"/>
-                    
-                    <h:outputLabel styleClass="outputLabel" for="password" value="Password: " />
-                    <h:inputSecret class="form-control"  id="password" value="#{loginManager.password}"/>
-                
-                </h:panelGrid>
-                <br/>
-                <fieldset style="width:40%; margin:0 auto;">
-                    <h:commandButton id="login"  action="#{loginManager.loginUser()}" value="Login" styleClass="buttonText"/>
-                    <h:commandButton id="create"  action="#{loginManager.createUser()}" value="Create" styleClass="buttonText"/>
-                    <h:commandButton id="retrieve"  action="#{loginManager.resetPassword()}" value="Forgot Password" styleClass="buttonText"/>                
-                </fieldset>  
+                    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+
+                        <h:outputLabel styleClass="outputLabel" for="loginname" value="Username: " />
+                        <h:inputText class="form-control" id="loginname" value="#{loginManager.username}"/>
+
+                        <h:outputLabel styleClass="outputLabel" for="password" value="Password: " />
+                        <h:inputSecret class="form-control"  id="password" value="#{loginManager.password}"/>
+
+                    </h:panelGrid>
+                    <br/>
+                    <fieldset style="width:40%; margin:0 auto;">
+                        <h:commandButton id="login"  action="#{loginManager.loginUser()}" value="Login" styleClass="buttonText"/>
+                        <h:commandButton id="create"  action="#{loginManager.createUser()}" value="Create" styleClass="buttonText"/>
+                        <h:commandButton id="retrieve"  action="#{loginManager.resetPassword()}" value="Forgot Password" styleClass="buttonText"/>                
+                    </fieldset>  
                 </div>
                 <br/>
                 <h:outputLabel value ="#{loginManager.errorMessage}" />  
             </h:form>
         </div>
+        <br />
+        <h:link outcome="/cardPhotos/List" value="Show All CardPhotos Items"/>
+        <br />
+        <h:link outcome="/cards/List" value="Show All Cards Items"/>
+        <br />
+        <h:link outcome="/trades/List" value="Show All Trades Items"/>
+        <br />
+        <h:link outcome="/userPhotos/List" value="Show All UserPhotos Items"/>
+        <br />
+        <h:link outcome="/users/List" value="Show All Users Items"/>
+        <br />
+        <h:link outcome="/wants/List" value="Show All Wants Items"/>
     </h:body>
+
+
+
+
+
+
 
 </html>
 

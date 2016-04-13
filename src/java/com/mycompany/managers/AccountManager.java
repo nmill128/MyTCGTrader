@@ -10,7 +10,7 @@ import com.mycompany.sessionBeanPackage.UserPhotosFacade;
 import com.mycompany.sessionBeanPackage.UsersFacade;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.List; 
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -37,8 +37,6 @@ public class AccountManager implements Serializable {
     private String password;
     private String email;
     private String statusMessage;
-    private int height;
-    private int weight;
     private String address1;
     private String address2;
     private String city;
@@ -72,21 +70,6 @@ public class AccountManager implements Serializable {
         return listOfStates;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
 
     /**
      * Creates a new instance of AccountManager
@@ -281,8 +264,6 @@ public class AccountManager implements Serializable {
                 user.setFirstName(firstName);
                 user.setMiddleName(middleName);
                 user.setLastName(lastName);                
-                user.setHeight(height);
-                user.setWeight(weight);
                 user.setAddress1(address1);
                 user.setAddress2(address2);
                 user.setCity(city);
@@ -312,8 +293,6 @@ public class AccountManager implements Serializable {
             try {
                 editUser.setFirstName(this.selected.getFirstName());
                 editUser.setLastName(this.selected.getLastName());
-                editUser.setHeight(this.selected.getHeight());
-                editUser.setWeight(this.selected.getWeight());
                 editUser.setAddress1(this.selected.getAddress1());
                 editUser.setAddress2(this.selected.getAddress2());
                 editUser.setCity(this.selected.getCity());
@@ -405,7 +384,7 @@ public class AccountManager implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
         username = firstName = middleName = lastName = password = email = statusMessage = "";
         address1 = address2 = city = state = security_answer = "";
-        height = weight = security_question = 0;
+        security_question = 0;
         
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index.xhtml?faces-redirect=true";
@@ -421,5 +400,7 @@ public class AccountManager implements Serializable {
         }
         return photoList.get(0).getThumbnailName();
     }
+    
+
 
 }

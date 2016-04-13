@@ -28,6 +28,24 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWantsTitle_cardName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cardName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWantsTitle_cardCondition}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cardCondition}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWantsTitle_cardValue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cardValue}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListWantsTitle_userId}"/>
                             </f:facet>
                             <h:outputText value="#{item.userId}"/>

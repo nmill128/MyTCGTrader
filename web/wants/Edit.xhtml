@@ -17,8 +17,16 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditWantsLabel_id}" for="id" />
                     <h:inputText id="id" value="#{wantsController.selected.id}" title="#{bundle.EditWantsTitle_id}" required="true" requiredMessage="#{bundle.EditWantsRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditWantsLabel_cardName}" for="cardName" />
+                    <h:inputText id="cardName" value="#{wantsController.selected.cardName}" title="#{bundle.EditWantsTitle_cardName}" required="true" requiredMessage="#{bundle.EditWantsRequiredMessage_cardName}"/>
+                    <h:outputLabel value="#{bundle.EditWantsLabel_cardCondition}" for="cardCondition" />
+                    <h:inputText id="cardCondition" value="#{wantsController.selected.cardCondition}" title="#{bundle.EditWantsTitle_cardCondition}" required="true" requiredMessage="#{bundle.EditWantsRequiredMessage_cardCondition}"/>
+                    <h:outputLabel value="#{bundle.EditWantsLabel_cardValue}" for="cardValue" />
+                    <h:inputText id="cardValue" value="#{wantsController.selected.cardValue}" title="#{bundle.EditWantsTitle_cardValue}" required="true" requiredMessage="#{bundle.EditWantsRequiredMessage_cardValue}"/>
                     <h:outputLabel value="#{bundle.EditWantsLabel_userId}" for="userId" />
-                    <h:inputText id="userId" value="#{wantsController.selected.userId}" title="#{bundle.EditWantsTitle_userId}" required="true" requiredMessage="#{bundle.EditWantsRequiredMessage_userId}"/>
+                    <h:selectOneMenu id="userId" value="#{wantsController.selected.userId}" title="#{bundle.EditWantsTitle_userId}" required="true" requiredMessage="#{bundle.EditWantsRequiredMessage_userId}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{wantsController.update}" value="#{bundle.EditWantsSaveLink}"/>
                 <br />

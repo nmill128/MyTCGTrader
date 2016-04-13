@@ -17,10 +17,6 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditUsersLabel_id}" for="id" />
                     <h:inputText id="id" value="#{usersController.selected.id}" title="#{bundle.EditUsersTitle_id}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.EditUsersLabel_cards}" for="cards" />
-                    <h:inputText id="cards" value="#{usersController.selected.cards}" title="#{bundle.EditUsersTitle_cards}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_cards}"/>
-                    <h:outputLabel value="#{bundle.EditUsersLabel_wants}" for="wants" />
-                    <h:inputText id="wants" value="#{usersController.selected.wants}" title="#{bundle.EditUsersTitle_wants}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_wants}"/>
                     <h:outputLabel value="#{bundle.EditUsersLabel_username}" for="username" />
                     <h:inputText id="username" value="#{usersController.selected.username}" title="#{bundle.EditUsersTitle_username}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_username}"/>
                     <h:outputLabel value="#{bundle.EditUsersLabel_password}" for="password" />
@@ -31,10 +27,6 @@
                     <h:inputText id="middleName" value="#{usersController.selected.middleName}" title="#{bundle.EditUsersTitle_middleName}" />
                     <h:outputLabel value="#{bundle.EditUsersLabel_lastName}" for="lastName" />
                     <h:inputText id="lastName" value="#{usersController.selected.lastName}" title="#{bundle.EditUsersTitle_lastName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_lastName}"/>
-                    <h:outputLabel value="#{bundle.EditUsersLabel_height}" for="height" />
-                    <h:inputText id="height" value="#{usersController.selected.height}" title="#{bundle.EditUsersTitle_height}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_weight}" for="weight" />
-                    <h:inputText id="weight" value="#{usersController.selected.weight}" title="#{bundle.EditUsersTitle_weight}" />
                     <h:outputLabel value="#{bundle.EditUsersLabel_address1}" for="address1" />
                     <h:inputText id="address1" value="#{usersController.selected.address1}" title="#{bundle.EditUsersTitle_address1}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_address1}"/>
                     <h:outputLabel value="#{bundle.EditUsersLabel_address2}" for="address2" />

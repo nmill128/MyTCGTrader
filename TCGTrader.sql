@@ -3,15 +3,11 @@ DROP TABLE IF EXISTS Wants,Trades,CardPhotos,UserPhotos,Users,Cards;
 CREATE TABLE Users
 (
     id INT NOT NULL AUTO_INCREMENT,
-    cards INT NOT NULL,
-    wants INT NOT NULL,
     username VARCHAR (32) NOT NULL,
     password VARCHAR (256) NOT NULL,
     first_name VARCHAR (32) NOT NULL,
     middle_name VARCHAR (32),
     last_name VARCHAR (32) NOT NULL,
-    height INT, 
-    weight INT, 
     address1 VARCHAR (255) NOT NULL,
     address2 VARCHAR (255),
     city VARCHAR (255) NOT NULL,
@@ -33,14 +29,19 @@ CREATE TABLE Cards
     edition VARCHAR(255) NOT NULL,
     cardValue INT NOT NULL,
     notes VARCHAR(255),
-    binder INT NOT NULL,
-    date_added VARCHAR(255) NOT NULL
+    date_added VARCHAR(255) NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Wants
 (
     id INT PRIMARY KEY NOT NULL,
-    user_id INT NOT NULL
+    cardName VARCHAR(255) NOT NULL,
+    cardCondition VARCHAR(255) NOT NULL,
+    cardValue INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
 

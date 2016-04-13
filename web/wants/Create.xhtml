@@ -17,8 +17,16 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateWantsLabel_id}" for="id" />
                     <h:inputText id="id" value="#{wantsController.selected.id}" title="#{bundle.CreateWantsTitle_id}" required="true" requiredMessage="#{bundle.CreateWantsRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateWantsLabel_cardName}" for="cardName" />
+                    <h:inputText id="cardName" value="#{wantsController.selected.cardName}" title="#{bundle.CreateWantsTitle_cardName}" required="true" requiredMessage="#{bundle.CreateWantsRequiredMessage_cardName}"/>
+                    <h:outputLabel value="#{bundle.CreateWantsLabel_cardCondition}" for="cardCondition" />
+                    <h:inputText id="cardCondition" value="#{wantsController.selected.cardCondition}" title="#{bundle.CreateWantsTitle_cardCondition}" required="true" requiredMessage="#{bundle.CreateWantsRequiredMessage_cardCondition}"/>
+                    <h:outputLabel value="#{bundle.CreateWantsLabel_cardValue}" for="cardValue" />
+                    <h:inputText id="cardValue" value="#{wantsController.selected.cardValue}" title="#{bundle.CreateWantsTitle_cardValue}" required="true" requiredMessage="#{bundle.CreateWantsRequiredMessage_cardValue}"/>
                     <h:outputLabel value="#{bundle.CreateWantsLabel_userId}" for="userId" />
-                    <h:inputText id="userId" value="#{wantsController.selected.userId}" title="#{bundle.CreateWantsTitle_userId}" required="true" requiredMessage="#{bundle.CreateWantsRequiredMessage_userId}"/>
+                    <h:selectOneMenu id="userId" value="#{wantsController.selected.userId}" title="#{bundle.CreateWantsTitle_userId}" required="true" requiredMessage="#{bundle.CreateWantsRequiredMessage_userId}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{wantsController.create}" value="#{bundle.CreateWantsSaveLink}" />

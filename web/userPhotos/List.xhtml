@@ -40,6 +40,30 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserPhotosTitle_filePath}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.filePath}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserPhotosTitle_filename}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.filename}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserPhotosTitle_thumbnailName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.thumbnailName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserPhotosTitle_thumbnailFilePath}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.thumbnailFilePath}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
                             <h:commandLink action="#{userPhotosController.prepareView}" value="#{bundle.ListUserPhotosViewLink}"/>

@@ -1,12 +1,14 @@
 /*
- * Created by Nicholas Miller on 2016.04.12  * 
- * Copyright © 2016 Nicholas Miller. All rights reserved. * 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.mycompany.entitypackage;
 
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,23 +25,19 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author nmiller
+ * @author Erik
  */
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
-    @NamedQuery(name = "Users.findByCards", query = "SELECT u FROM Users u WHERE u.cards = :cards"),
-    @NamedQuery(name = "Users.findByWants", query = "SELECT u FROM Users u WHERE u.wants = :wants"),
     @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
     @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName"),
     @NamedQuery(name = "Users.findByMiddleName", query = "SELECT u FROM Users u WHERE u.middleName = :middleName"),
     @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName"),
-    @NamedQuery(name = "Users.findByHeight", query = "SELECT u FROM Users u WHERE u.height = :height"),
-    @NamedQuery(name = "Users.findByWeight", query = "SELECT u FROM Users u WHERE u.weight = :weight"),
     @NamedQuery(name = "Users.findByAddress1", query = "SELECT u FROM Users u WHERE u.address1 = :address1"),
     @NamedQuery(name = "Users.findByAddress2", query = "SELECT u FROM Users u WHERE u.address2 = :address2"),
     @NamedQuery(name = "Users.findByCity", query = "SELECT u FROM Users u WHERE u.city = :city"),
@@ -58,14 +56,6 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cards")
-    private int cards;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "wants")
-    private int wants;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 32)
@@ -89,10 +79,6 @@ public class Users implements Serializable {
     @Size(min = 1, max = 32)
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "height")
-    private Integer height;
-    @Column(name = "weight")
-    private Integer weight;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -138,8 +124,8 @@ public class Users implements Serializable {
     @Size(min = 1, max = 64)
     @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "userId")
-    private Collection<UserPhotos> userPhotosCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<Wants> wantsCollection;
 
     public Users() {
     }
@@ -148,10 +134,8 @@ public class Users implements Serializable {
         this.id = id;
     }
 
-    public Users(Integer id, int cards, int wants, String username, String password, String firstName, String lastName, String address1, String city, String usState, int zipcode, int securityQuestion, String securityAnswer, int goodTrades, int badTrades, String email) {
+    public Users(Integer id, String username, String password, String firstName, String lastName, String address1, String city, String usState, int zipcode, int securityQuestion, String securityAnswer, int goodTrades, int badTrades, String email) {
         this.id = id;
-        this.cards = cards;
-        this.wants = wants;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -173,22 +157,6 @@ public class Users implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getCards() {
-        return cards;
-    }
-
-    public void setCards(int cards) {
-        this.cards = cards;
-    }
-
-    public int getWants() {
-        return wants;
-    }
-
-    public void setWants(int wants) {
-        this.wants = wants;
     }
 
     public String getUsername() {
@@ -229,22 +197,6 @@ public class Users implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
     }
 
     public String getAddress1() {
@@ -328,12 +280,12 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<UserPhotos> getUserPhotosCollection() {
-        return userPhotosCollection;
+    public Collection<Wants> getWantsCollection() {
+        return wantsCollection;
     }
 
-    public void setUserPhotosCollection(Collection<UserPhotos> userPhotosCollection) {
-        this.userPhotosCollection = userPhotosCollection;
+    public void setWantsCollection(Collection<Wants> wantsCollection) {
+        this.wantsCollection = wantsCollection;
     }
 
     @Override

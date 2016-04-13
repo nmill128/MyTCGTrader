@@ -21,6 +21,14 @@
                     <h:outputText value="#{userPhotosController.selected.extension}" title="#{bundle.ViewUserPhotosTitle_extension}"/>
                     <h:outputText value="#{bundle.ViewUserPhotosLabel_userId}"/>
                     <h:outputText value="#{userPhotosController.selected.userId}" title="#{bundle.ViewUserPhotosTitle_userId}"/>
+                    <h:outputText value="#{bundle.ViewUserPhotosLabel_filePath}"/>
+                    <h:outputText value="#{userPhotosController.selected.filePath}" title="#{bundle.ViewUserPhotosTitle_filePath}"/>
+                    <h:outputText value="#{bundle.ViewUserPhotosLabel_filename}"/>
+                    <h:outputText value="#{userPhotosController.selected.filename}" title="#{bundle.ViewUserPhotosTitle_filename}"/>
+                    <h:outputText value="#{bundle.ViewUserPhotosLabel_thumbnailName}"/>
+                    <h:outputText value="#{userPhotosController.selected.thumbnailName}" title="#{bundle.ViewUserPhotosTitle_thumbnailName}"/>
+                    <h:outputText value="#{bundle.ViewUserPhotosLabel_thumbnailFilePath}"/>
+                    <h:outputText value="#{userPhotosController.selected.thumbnailFilePath}" title="#{bundle.ViewUserPhotosTitle_thumbnailFilePath}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{userPhotosController.destroyAndView}" value="#{bundle.ViewUserPhotosDestroyLink}"/>

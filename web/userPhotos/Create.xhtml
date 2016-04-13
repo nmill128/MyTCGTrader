@@ -23,6 +23,14 @@
                     <h:selectOneMenu id="userId" value="#{userPhotosController.selected.userId}" title="#{bundle.CreateUserPhotosTitle_userId}" >
                         <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateUserPhotosLabel_filePath}" for="filePath" />
+                    <h:inputText id="filePath" value="#{userPhotosController.selected.filePath}" title="#{bundle.CreateUserPhotosTitle_filePath}" />
+                    <h:outputLabel value="#{bundle.CreateUserPhotosLabel_filename}" for="filename" />
+                    <h:inputText id="filename" value="#{userPhotosController.selected.filename}" title="#{bundle.CreateUserPhotosTitle_filename}" />
+                    <h:outputLabel value="#{bundle.CreateUserPhotosLabel_thumbnailName}" for="thumbnailName" />
+                    <h:inputText id="thumbnailName" value="#{userPhotosController.selected.thumbnailName}" title="#{bundle.CreateUserPhotosTitle_thumbnailName}" />
+                    <h:outputLabel value="#{bundle.CreateUserPhotosLabel_thumbnailFilePath}" for="thumbnailFilePath" />
+                    <h:inputText id="thumbnailFilePath" value="#{userPhotosController.selected.thumbnailFilePath}" title="#{bundle.CreateUserPhotosTitle_thumbnailFilePath}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{userPhotosController.create}" value="#{bundle.CreateUserPhotosSaveLink}" />

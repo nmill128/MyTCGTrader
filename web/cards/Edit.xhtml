@@ -27,10 +27,12 @@
                     <h:inputText id="cardValue" value="#{cardsController.selected.cardValue}" title="#{bundle.EditCardsTitle_cardValue}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_cardValue}"/>
                     <h:outputLabel value="#{bundle.EditCardsLabel_notes}" for="notes" />
                     <h:inputText id="notes" value="#{cardsController.selected.notes}" title="#{bundle.EditCardsTitle_notes}" />
-                    <h:outputLabel value="#{bundle.EditCardsLabel_binder}" for="binder" />
-                    <h:inputText id="binder" value="#{cardsController.selected.binder}" title="#{bundle.EditCardsTitle_binder}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_binder}"/>
                     <h:outputLabel value="#{bundle.EditCardsLabel_dateAdded}" for="dateAdded" />
                     <h:inputText id="dateAdded" value="#{cardsController.selected.dateAdded}" title="#{bundle.EditCardsTitle_dateAdded}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_dateAdded}"/>
+                    <h:outputLabel value="#{bundle.EditCardsLabel_userId}" for="userId" />
+                    <h:selectOneMenu id="userId" value="#{cardsController.selected.userId}" title="#{bundle.EditCardsTitle_userId}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_userId}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{cardsController.update}" value="#{bundle.EditCardsSaveLink}"/>
                 <br />
