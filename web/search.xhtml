@@ -17,7 +17,7 @@
                                         <div class="dropdown dropdown-lg">
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                                             <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                <form class="form-horizontal" role="form">
+                                                <form class="form-horizontal" >
                                                     <div class="form-group">
                                                         <label for="filter">Filter by</label>
                                                         <select class="form-control">
@@ -27,19 +27,21 @@
                                                             <option value="3">Set</option>
                                                         </select>
                                                     </div>
-                                                    <!--                                                    <div class="form-group">
-                                                                                                            <label for="contain">Author</label>
-                                                                                                            <input class="form-control" type="text" />
-                                                                                                        </div>
-                                                                                                        <div class="form-group">
-                                                                                                            <label for="contain">Contains the words</label>
-                                                                                                            <input class="form-control" type="text" />
-                                                                                                        </div>-->
-                                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                                    <!--                                                    
+                                                    <div class="form-group">
+                                                        <label for="contain">Author</label>
+                                                        <input class="form-control" type="text" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="contain">Contains the words</label>
+                                                        <input class="form-control" type="text" />
+                                                    </div>
+                                                    -->
+                                                    <!--<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
                                                 </form>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                        <button type="button" id="searchButton" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="container">
+                <div id="searchTable" class="container" style="display:none">
                     <div class="row col-md-12 custyle">
                         <table class="table table-striped custab">
                             <thead>
@@ -71,6 +73,11 @@
                         </table>
                     </div>
                 </div>
+                <script>
+                    $('#searchButton').click(function(){
+                        $('#searchTable').show();
+                    });
+                </script>
             </ui:define>
         </ui:composition>
     </h:body>
