@@ -31,7 +31,7 @@ public class WantsFacade extends AbstractFacade<Wants> {
         super(Wants.class);
     }
     
-    public List<Wants> findPhotosByUserID(Integer userID) {
+    public List<Wants> findWantsByUserID(Integer userID) {
         return (List<Wants>) em.createNamedQuery("Wants.findWantsByUserId")
                 .setParameter("userId", userID)
                 .getResultList();

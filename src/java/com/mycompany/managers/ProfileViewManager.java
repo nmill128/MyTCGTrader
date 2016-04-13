@@ -57,11 +57,11 @@ public class ProfileViewManager implements Serializable {
   }
 
     public List<Wants> getWants(){
-        return wantsFacade.findPhotosByUserID(getLoggedInUser().getId());
+        return wantsFacade.findWantsByUserID(getLoggedInUser().getId());
     }
     
     public void setWants(){
-        this.wants  = wantsFacade.findPhotosByUserID(getLoggedInUser().getId());;
+        this.wants  = wantsFacade.findWantsByUserID(getLoggedInUser().getId());;
     }
   
   public Users getLoggedInUser() {

@@ -38,149 +38,21 @@ and open the template in the editor.
                                 </tr>
                             </thead>
                             <tbody class="tbody-scroll">
+                                <ui:repeat value="#{binderManager.entries}" var="entry">
                                 <tr>
                                     <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
+                                        <h:graphicImage class="card-preview" value="/FileStorageLocation/#{entry.file}"/>
                                     </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
+                                    <td>#{entry.card.cardName}</td>
+                                    <td>#{entry.card.cardCondition}</td>
+                                    <td>#{entry.card.edition}</td>
+                                    <td>#{entry.card.cardValue}$</td>
                                     <td>
                                         <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
                                         <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="#{resource['images:magic-cat.jpg']}"/>
-                                    </td>
-                                    <td>Sanctuary Cat</td>
-                                    <td>NM</td>
-                                    <td>C</td>
-                                    <td>0.05$</td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
-                                    </td>
-                                </tr>
+                                </ui:repeat>
                             </tbody>
                         </table>
                     </div>
