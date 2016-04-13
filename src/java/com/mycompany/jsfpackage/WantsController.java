@@ -3,7 +3,7 @@ package com.mycompany.jsfpackage;
 import com.mycompany.entitypackage.Wants;
 import com.mycompany.jsfpackage.util.JsfUtil;
 import com.mycompany.jsfpackage.util.PaginationHelper;
-import com.mycompany.sessonBeanPackage.WantsFacade;
+import com.mycompany.sessionBeanPackage.WantsFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class WantsController implements Serializable {
     private Wants current;
     private DataModel items = null;
     @EJB
-    private com.mycompany.sessonBeanPackage.WantsFacade ejbFacade;
+    private com.mycompany.sessionBeanPackage.WantsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
