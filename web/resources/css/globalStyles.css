@@ -25,7 +25,9 @@ body {
   height: 60px;
   background-color: #f5f5f5;
 }
-
+#content{
+    min-height: 69vh;
+}
 /* Dropdown Style
 -------------------------------------------------- */
 .dropdown.dropdown-lg .dropdown-menu {
