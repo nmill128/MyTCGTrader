@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group" id="adv-search">
-                                <input type="text" class="form-control" placeholder="Search for snippets" />
+                                <h:inputText  styleClass="form-control" value="#{searchManager.searchString}" />
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
                                         <div class="dropdown dropdown-lg">
@@ -41,7 +41,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <button type="button" id="searchButton" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                        <h:commandButton type="button" id="searchButton" class="btn btn-primary" action="#{searchManager.searchCardsByName()}" value="Search"></h:commandButton>
                                     </div>
                                 </div>
                             </div>
@@ -53,6 +53,22 @@
                     <div class="row col-md-12 custyle">
                         <table class="table table-striped custab">
                             <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Condition</th>
+                                    <th>My Value</th>
+                                </tr>
+                                <tbody>
+                                    <ui:repeat value="#{searchManager.searchResults}" var="card">
+                                    <tr>
+                                        <td class="td-center">#{card.cardName}</td>
+                                        <td class="td-center">#{card.cardCondition}</td>
+                                        <td class="td-center">#{card.cardValue}$</td>
+                                    </tr>
+                                </ui:repeat>
+                                </tbody>
+                            </thead>
+                            <!--<thead>
                                 <tr>
                                     <th>Card Name</th>
                                     <th>Owned By</th>
@@ -69,7 +85,7 @@
                             <tr>
                                 <td>Snapcaster Mage</td>
                                 <td>Erile</td>
-                               </tr>
+                               </tr>-->
                         </table>
                     </div>
                 </div>
