@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Matt Morrison on 2016.02.14 
+Copyright © 2016 Matt Morrison. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="globalStyles.css"/>
+    </h:head>
+    <h:body>
+        <div align="center" style="width:50%; margin:0 auto;">
+            <h:form class="form-signin">
+                <h:graphicImage value="FileStorageLocation/#{accountManager.userPhoto()}" id="profilePic"
+                          class="img-rounded col-md-3"></h:graphicImage>
+                    <h2> #{profileViewManager.loggedInUser.firstName} #{profileViewManager.loggedInUser.lastName} </h2>
+                    <h:button value="Edit Profile"  outcome="EditAccount"/>
+                    <h:button value="Change Photo"  outcome="EditPhoto"/>
+                    <h:button value="My Binder" outcome="MyBinder"/>
+                    <h:commandButton value="Log Out" action="#{accountManager.logout()}" />
+                <br/>
+                <br/>
+                <p:tabView  >
+                  <p:tab title="Basic Info">
+                    <!-- Basic Info goes here -->
+                    <h:panelGrid columns="2" cellpadding="6">
+                      <h:outputText value="First Name: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.firstName}" />
+
+                      <h:outputText value="Middle Name or Initial: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.middleName}" />                      
+                      
+                      <h:outputText value="Last Name: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.lastName}" />
+
+                      <h:outputText value="Height in Inches: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.height}" />
+
+                      <h:outputText value="Weight in Pounds: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.weight}" />
+                      
+                      <h:outputText value="Address Line 1: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.address1}" />
+                      
+                      <h:outputText value="Address Line 2: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.address2}" />
+                      
+                      <h:outputText value="City: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.city}" />
+                      
+                      <h:outputText value="State: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.usState}" />
+                      
+                      <h:outputText value="Zip Code: " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.zipcode}" />       
+
+                      <h:outputText value="Email " />
+                      <h:outputText value="#{profileViewManager.loggedInUser.email}" />
+                    </h:panelGrid>
+                  </p:tab>           
+                </p:tabView>
+                <br/>
+                <br/>
+            </h:form>
+        </div>
+    </h:body>
+
+</html>
