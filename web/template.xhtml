@@ -7,16 +7,26 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
+        <ui:insert name="importCraziness">
+            <ui:include src="template/importCraziness.xhtml"/>
+        </ui:insert>
+        
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
     </h:head>
 
     <h:body>
+        <ui:insert name="header">
+            <ui:include src="template/header.xhtml"/>
+        </ui:insert>
         <h1>
             <ui:insert name="title">Default Title</ui:insert>
         </h1>
         <p>
             <ui:insert name="body">Default Body</ui:insert>
         </p>
+        <ui:insert name="footer">
+            <ui:include src="template/footer.xhtml"/>
+        </ui:insert>
     </h:body>
 
 </html>
