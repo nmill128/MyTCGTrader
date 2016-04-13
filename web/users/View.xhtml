@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewUsersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewUsersLabel_id}"/>
+                    <h:outputText value="#{usersController.selected.id}" title="#{bundle.ViewUsersTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_cards}"/>
+                    <h:outputText value="#{usersController.selected.cards}" title="#{bundle.ViewUsersTitle_cards}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_wants}"/>
+                    <h:outputText value="#{usersController.selected.wants}" title="#{bundle.ViewUsersTitle_wants}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_username}"/>
+                    <h:outputText value="#{usersController.selected.username}" title="#{bundle.ViewUsersTitle_username}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_password}"/>
+                    <h:outputText value="#{usersController.selected.password}" title="#{bundle.ViewUsersTitle_password}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_firstName}"/>
+                    <h:outputText value="#{usersController.selected.firstName}" title="#{bundle.ViewUsersTitle_firstName}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_middleName}"/>
+                    <h:outputText value="#{usersController.selected.middleName}" title="#{bundle.ViewUsersTitle_middleName}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_lastName}"/>
+                    <h:outputText value="#{usersController.selected.lastName}" title="#{bundle.ViewUsersTitle_lastName}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_height}"/>
+                    <h:outputText value="#{usersController.selected.height}" title="#{bundle.ViewUsersTitle_height}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_weight}"/>
+                    <h:outputText value="#{usersController.selected.weight}" title="#{bundle.ViewUsersTitle_weight}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_address1}"/>
+                    <h:outputText value="#{usersController.selected.address1}" title="#{bundle.ViewUsersTitle_address1}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_address2}"/>
+                    <h:outputText value="#{usersController.selected.address2}" title="#{bundle.ViewUsersTitle_address2}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_city}"/>
+                    <h:outputText value="#{usersController.selected.city}" title="#{bundle.ViewUsersTitle_city}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_usState}"/>
+                    <h:outputText value="#{usersController.selected.usState}" title="#{bundle.ViewUsersTitle_usState}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_zipcode}"/>
+                    <h:outputText value="#{usersController.selected.zipcode}" title="#{bundle.ViewUsersTitle_zipcode}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_securityQuestion}"/>
+                    <h:outputText value="#{usersController.selected.securityQuestion}" title="#{bundle.ViewUsersTitle_securityQuestion}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_securityAnswer}"/>
+                    <h:outputText value="#{usersController.selected.securityAnswer}" title="#{bundle.ViewUsersTitle_securityAnswer}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_goodTrades}"/>
+                    <h:outputText value="#{usersController.selected.goodTrades}" title="#{bundle.ViewUsersTitle_goodTrades}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_badTrades}"/>
+                    <h:outputText value="#{usersController.selected.badTrades}" title="#{bundle.ViewUsersTitle_badTrades}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_email}"/>
+                    <h:outputText value="#{usersController.selected.email}" title="#{bundle.ViewUsersTitle_email}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{usersController.destroyAndView}" value="#{bundle.ViewUsersDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewUsersEditLink}"/>
+                <br />
+                <h:commandLink action="#{usersController.prepareCreate}" value="#{bundle.ViewUsersCreateLink}" />
+                <br />
+                <h:commandLink action="#{usersController.prepareList}" value="#{bundle.ViewUsersShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewUsersIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
