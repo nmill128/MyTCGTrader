@@ -3,7 +3,7 @@ package com.mycompany.jsfpackage;
 import com.mycompany.entitypackage.Cards;
 import com.mycompany.jsfpackage.util.JsfUtil;
 import com.mycompany.jsfpackage.util.PaginationHelper;
-import com.mycompany.sessonBeanPackage.CardsFacade;
+import com.mycompany.sessionBeanPackage.CardsFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class CardsController implements Serializable {
     private Cards current;
     private DataModel items = null;
     @EJB
-    private com.mycompany.sessonBeanPackage.CardsFacade ejbFacade;
+    private com.mycompany.sessionBeanPackage.CardsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 

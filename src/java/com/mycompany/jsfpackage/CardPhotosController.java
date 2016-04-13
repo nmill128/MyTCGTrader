@@ -3,7 +3,7 @@ package com.mycompany.jsfpackage;
 import com.mycompany.entitypackage.CardPhotos;
 import com.mycompany.jsfpackage.util.JsfUtil;
 import com.mycompany.jsfpackage.util.PaginationHelper;
-import com.mycompany.sessonBeanPackage.CardPhotosFacade;
+import com.mycompany.sessionBeanPackage.CardPhotosFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class CardPhotosController implements Serializable {
     private CardPhotos current;
     private DataModel items = null;
     @EJB
-    private com.mycompany.sessonBeanPackage.CardPhotosFacade ejbFacade;
+    private com.mycompany.sessionBeanPackage.CardPhotosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 

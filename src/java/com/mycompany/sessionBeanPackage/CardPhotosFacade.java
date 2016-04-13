@@ -2,9 +2,9 @@
  * Created by Nicholas Miller on 2016.04.12  * 
  * Copyright © 2016 Nicholas Miller. All rights reserved. * 
  */
-package com.mycompany.sessonBeanPackage;
+package com.mycompany.sessionBeanPackage;
 
-import com.mycompany.entitypackage.Wants;
+import com.mycompany.entitypackage.CardPhotos;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  * @author nmiller
  */
 @Stateless
-public class WantsFacade extends AbstractFacade<Wants> {
+public class CardPhotosFacade extends AbstractFacade<CardPhotos> {
 
     @PersistenceContext(unitName = "MyTCGTraderPU")
     private EntityManager em;
@@ -24,8 +24,8 @@ public class WantsFacade extends AbstractFacade<Wants> {
         return em;
     }
 
-    public WantsFacade() {
-        super(Wants.class);
+    public CardPhotosFacade() {
+        super(CardPhotos.class);
     }
     
 }

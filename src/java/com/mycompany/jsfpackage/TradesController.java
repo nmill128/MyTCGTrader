@@ -3,7 +3,7 @@ package com.mycompany.jsfpackage;
 import com.mycompany.entitypackage.Trades;
 import com.mycompany.jsfpackage.util.JsfUtil;
 import com.mycompany.jsfpackage.util.PaginationHelper;
-import com.mycompany.sessonBeanPackage.TradesFacade;
+import com.mycompany.sessionBeanPackage.TradesFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class TradesController implements Serializable {
     private Trades current;
     private DataModel items = null;
     @EJB
-    private com.mycompany.sessonBeanPackage.TradesFacade ejbFacade;
+    private com.mycompany.sessionBeanPackage.TradesFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 

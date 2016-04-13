@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <h2>Your Trade Offer</h2>
-                            <table class="table offerTable">
+                            <table class="table highlightTable">
                                 <thead>
                                     <tr>
                                         <th>Trader</th>
@@ -33,18 +33,74 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <h2>Past Trade Offer</h2>
+                            <table class="table highlightTable">
+                                <thead>
+                                    <tr>
+                                        <th>Trader</th>
+                                        <th>Offer Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dan</td>
+                                        <td>04/01/2016</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Daniel</td>
+                                        <td>04/01/2015</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vans</td>
+                                        <td>04/01/2014</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="col-md-9">
-                            <h2 class="center">Current Offer</h2>
+                            <h2 class="centerText">Current Offer</h2>
+                            <div class="input-group">
+                                <span class="input-group-addon" >Make a Trade Offer To</span>
+                                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" />
+                            </div>
+                            <br />
                             <div class="row">
-                                <div id="custom-search-input">
-                                    <div class="input-group col-md-12">
-                                        <input type="text" class="form-control input-lg" placeholder="Buscar" />
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-info btn-lg" type="button">
-                                                <i class="glyphicon glyphicon-search"></i>
-                                            </button>
-                                        </span>
+                                <div class="col-md-6 card">
+                                    <h3>My Cards</h3>
+                                    <hr />
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Snapcaster Mage</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Jace, the Mind Sculptor</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Lilliana of the Veil</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Siege Rhino</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Sensei's Diving Top</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 card">
+                                    <h3>User's Cards</h3>
+                                    <hr />
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Nettle Sentinel</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Heritage Druid</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Cavern of Soul</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Llanowar Elves</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value=""/>Shaman of the Pack</label>
                                     </div>
                                 </div>
                             </div>
