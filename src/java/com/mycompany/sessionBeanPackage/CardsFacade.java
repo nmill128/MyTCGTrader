@@ -6,11 +6,11 @@
 package com.mycompany.sessionBeanPackage;
 
 import com.mycompany.entitypackage.Cards;
-import com.mycompany.entitypackage.Wants;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -44,5 +44,12 @@ public class CardsFacade extends AbstractFacade<Cards> {
                 .getResultList();
     }
     
+    
+    public List<Cards> findByName(String name) {
+        Query query = em.createQuery("SELECT c FROM Cards c");
+        //query.setParameter(":name", name);
+        System.out.println("Searching for " + name);
+        return query.getResultList();
+    }
     
 }
