@@ -12,6 +12,7 @@ and open the template in the editor.
 body footer {
     background: #313233;
     color: #ecf0f1;
+    padding-bottom: auto;
 }
 
 .social-links-bordered a {

@@ -22,12 +22,31 @@ and open the template in the editor.
     color:blue;
 }
 
-.binder-table td, .binder-table th {
+.binder-table > tbody > tr > td, .binder-table > thead > tr > th {
     text-align: center;
     margin: auto auto auto auto;
+    vertical-align: middle;
 }
 
 .binder {
     max-height:400px;
-    overflow:scroll;
+    overflow-y:scroll;
+}
+
+.binder-container {
+    padding-left:100px;
+    padding-right:100px;
+}
+
+.wants-list {
+    max-height:400px;
+    overflow-y:scroll;
+}
+
+.wants-list tbody tr {
+    height: 55px;
+}
+
+.wants-list > .binder-table > tbody > tr >  .td-center {
+    vertical-align: middle;
 }
