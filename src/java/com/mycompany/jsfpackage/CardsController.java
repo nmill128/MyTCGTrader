@@ -115,7 +115,6 @@ public class CardsController implements Serializable {
 
     public String prepareCreate() {
         current = new Cards();
-        copyFile(file);
         selectedItemIndex = -1;
         return "Create";
     }
@@ -124,6 +123,7 @@ public class CardsController implements Serializable {
         try {
             if (file.getSize() != 0) {
                 getFacade().create(current);
+                copyFile(file);
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsCreated"));
                 message = "";
                 return prepareCreate();

@@ -121,11 +121,11 @@ public class UserPhotos implements Serializable {
     }
 
     public String getFilename() {
-        return getId() + "." + getExtension();
+        return "userPhotos/" + getId() + "." + getExtension();
     }
     
     public String getThumbnailName() {
-        return getId() + "_thumbnail." + getExtension();
+        return "userPhotos/" + getId() + "_thumbnail." + getExtension();
     }
     
     public String getThumbnailFilePath() {
