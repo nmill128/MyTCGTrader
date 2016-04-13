@@ -100,3 +100,8 @@ html {
 .centerText{
     text-align: center;
 }
+
+.profile-table{
+    vertical-align: middle;
+    margin: auto auto;
+}

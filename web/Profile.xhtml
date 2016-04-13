@@ -7,62 +7,82 @@ Copyright © 2016 Matt Morrison. All rights reserved.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <ui:insert name="importCraziness">
+            <ui:include src="template/importCraziness.xhtml"/>
+        </ui:insert>
+        <h:outputStylesheet library="css" name="MyBinder.css"/>
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <h:outputStylesheet library="css" name="globalStyles.css"/>
     </h:head>
     <h:body>
+        <ui:insert name="header">
+            <ui:include src="template/header.xhtml"/>
+        </ui:insert>
+        <div class="container-fluid">
         <div align="center" style="width:50%; margin:0 auto;">
             <h:form class="form-signin">
                 <h:graphicImage value="FileStorageLocation/#{accountManager.userPhoto()}" id="profilePic"
-                          class="img-rounded col-md-3"></h:graphicImage>
+                          class="img-rounded col-md-3"></h:graphicImage><br />
                     <h2> #{profileViewManager.loggedInUser.firstName} #{profileViewManager.loggedInUser.lastName} </h2>
                     <h:button value="Edit Profile"  outcome="EditAccount"/>
                     <h:button value="Change Photo"  outcome="EditPhoto"/>
-                    <h:button value="My Binder" outcome="MyBinder"/>
                     <h:commandButton value="Log Out" action="#{accountManager.logout()}" />
                 <br/>
                 <br/>
-                <p:tabView  >
-                  <p:tab title="Basic Info">
+                <div class="panel panel-default col-xs-12">
                     <!-- Basic Info goes here -->
-                    <h:panelGrid columns="2" cellpadding="6">
-                      <h:outputText value="First Name: " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.firstName}" />
-
-                      <h:outputText value="Middle Name or Initial: " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.middleName}" />                      
-                      
-                      <h:outputText value="Last Name: " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.lastName}" />
-                      
-                      <h:outputText value="Address Line 1: " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.address1}" />
-                      
-                      <h:outputText value="Address Line 2: " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.address2}" />
-                      
-                      <h:outputText value="City: " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.city}" />
-                      
-                      <h:outputText value="State: " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.usState}" />
-                      
-                      <h:outputText value="Zip Code: " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.zipcode}" />       
-
-                      <h:outputText value="Email " />
-                      <h:outputText value="#{profileViewManager.loggedInUser.email}" />
-                    </h:panelGrid>
-                  </p:tab>           
-                </p:tabView>
+                    <table class="table profile-table">
+                        <tr>
+                            <td><h:outputText value="First Name: " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.firstName}" /></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputText value="Middle Name or Initial: " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.middleName}" /></td>                      
+                        </tr>
+                        <tr>
+                            <td><h:outputText value="Last Name: " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.lastName}" /></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputText value="Address Line 1: " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.address1}" /></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputText value="Address Line 2: " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.address2}" /></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputText value="City: " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.city}" /></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputText value="State: " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.usState}" /></td>
+                        </tr>
+                        <tr>
+                            <td><h:outputText value="Zip Code: " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.zipcode}" /></td>     
+                        </tr>
+                        <tr>
+                            <td><h:outputText value="Email " /></td>
+                            <td><h:outputText value="#{profileViewManager.loggedInUser.email}" /></td>
+                        </tr>
+                    </table>
+                </div>
                 <br/>
                 <br/>
             </h:form>
         </div>
+        </div>
+        <ui:insert name="footer">
+            <ui:include src="template/footer.xhtml"/>
+        </ui:insert>
     </h:body>
 
 </html>
