@@ -2,7 +2,7 @@
  * Created by Nicholas Miller on 2016.04.12  * 
  * Copyright © 2016 Nicholas Miller. All rights reserved. * 
  */
-package com.mycompany.sessonBeanPackage;
+package com.mycompany.sessionBeanPackage;
 
 import java.util.List;
 import javax.persistence.EntityManager;
