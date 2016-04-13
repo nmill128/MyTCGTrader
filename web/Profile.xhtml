@@ -27,7 +27,8 @@ Copyright © 2016 Matt Morrison. All rights reserved.
         <div align="center" style="width:50%; margin:0 auto;">
             <h:form class="form-signin">
                 <h:graphicImage value="FileStorageLocation/#{accountManager.userPhoto()}" id="profilePic"
-                          class="img-rounded col-md-3"></h:graphicImage><br />
+                          class="img-rounded col-md-3 block-image"></h:graphicImage>
+                          <br />
                     <h2> #{profileViewManager.loggedInUser.firstName} #{profileViewManager.loggedInUser.lastName} </h2>
                     <h:button value="Edit Profile"  outcome="EditAccount"/>
                     <h:button value="Change Photo"  outcome="EditPhoto"/>

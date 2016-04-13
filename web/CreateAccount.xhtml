@@ -19,6 +19,9 @@ Copyright © 2016 Matt Morrison. All rights reserved.
         <h:outputStylesheet library="css" name="globalStyles.css"/>
     </h:head>
     <h:body>
+        <ui:insert name="header">
+            <ui:include src="template/preHeader.xhtml"/>
+        </ui:insert>
         <div class="container-fluid">
         <div align="center" style="width:50%; margin:0 auto;">
             <h:form class="form-signin">
@@ -141,9 +144,9 @@ Copyright © 2016 Matt Morrison. All rights reserved.
             </div>
             <h:outputLabel id="error" value="#{accountManager.statusMessage}"  />
             <br/>
-            <h:commandButton class="btn btn-lg btn-success btn-block" id="submit" 
+            <h:commandButton id="submit" 
                              action="#{accountManager.createAccount()}" value="Submit" />   
-            <h:button class="btn btn-lg btn-danger" id="cancel" outcome="index" value="Cancel" />
+            <h:button id="cancel" outcome="index" value="Cancel" />
             </h:form>
         </div>
         </div>

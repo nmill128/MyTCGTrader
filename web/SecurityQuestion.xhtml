@@ -5,17 +5,25 @@ Copyright © 2016 Matt Morrison. All rights reserved.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Security Question</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <ui:insert name="importCraziness">
+            <ui:include src="template/importCraziness.xhtml"/>
+        </ui:insert>
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <h:outputStylesheet library="css" name="globalStyles.css"/>
     </h:head>
     <h:body>
-        <div align="center" style="width:50%; margin:0 auto;">
+        <ui:insert name="header">
+            <ui:include src="template/preHeader.xhtml"/>
+        </ui:insert>
+        <div class="container-fluid" align="center" style="width:50%; margin:0 auto;">
             <h:form class="form-signin">
                 <h2 class="form-signin-heading">Please Answer Your Security Question</h2>
+                <div class="panel panel-default col-xs-12 binder">
                 <fieldset>
                 <div class="form-group" style="margin-bottom:20px">
                     <h:outputLabel for="question" value="#{passwordResetManager.securityQuestion}" />
@@ -25,12 +33,16 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                 </div>
                 <br/>
                 <h:commandButton id="submit" action="#{passwordResetManager.securityquestionSubmit()}" value="Submit" />
-                <h:button class="btn btn-lg btn-danger" id="cancel" outcome="index" value="Cancel" />
+                <h:button id="cancel" outcome="index" value="Cancel" />
                 </fieldset>
+                </div>
                 <br/>
                 <h:outputLabel value ="#{passwordResetManager.message}" />                  
             </h:form>
         </div>
+        <ui:insert name="footer">
+            <ui:include src="template/footer.xhtml"/>
+        </ui:insert>
     </h:body>
 
 </html>

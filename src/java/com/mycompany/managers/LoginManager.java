@@ -97,7 +97,7 @@ public class LoginManager implements Serializable {
       if (user.getUsername().equals(getUsername()) && user.getPassword().equals(getPassword())) {
         errorMessage = "";
         initializeSessionMap(user);
-        return "Profile";
+        return "MyBinder";
       }
       errorMessage = "Invalid username or password!";
       return "";

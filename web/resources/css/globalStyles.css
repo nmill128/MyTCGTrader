@@ -106,3 +106,7 @@ html {
     margin: auto auto;
     text-align: center;
 }
+
+.block-image{
+    display:block;
+}
