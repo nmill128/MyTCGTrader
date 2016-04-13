@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTradesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTradesLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{tradesController.selected.id}" title="#{bundle.EditTradesTitle_id}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditTradesLabel_creatorId}" for="creatorId" />
+                    <h:inputText id="creatorId" value="#{tradesController.selected.creatorId}" title="#{bundle.EditTradesTitle_creatorId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_creatorId}"/>
+                    <h:outputLabel value="#{bundle.EditTradesLabel_recieverId}" for="recieverId" />
+                    <h:inputText id="recieverId" value="#{tradesController.selected.recieverId}" title="#{bundle.EditTradesTitle_recieverId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_recieverId}"/>
+                    <h:outputLabel value="#{bundle.EditTradesLabel_ccardsId}" for="ccardsId" />
+                    <h:inputText id="ccardsId" value="#{tradesController.selected.ccardsId}" title="#{bundle.EditTradesTitle_ccardsId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_ccardsId}"/>
+                    <h:outputLabel value="#{bundle.EditTradesLabel_rcardsId}" for="rcardsId" />
+                    <h:inputText id="rcardsId" value="#{tradesController.selected.rcardsId}" title="#{bundle.EditTradesTitle_rcardsId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_rcardsId}"/>
+                    <h:outputLabel value="#{bundle.EditTradesLabel_offerDate}" for="offerDate" />
+                    <h:inputText id="offerDate" value="#{tradesController.selected.offerDate}" title="#{bundle.EditTradesTitle_offerDate}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_offerDate}"/>
+                    <h:outputLabel value="#{bundle.EditTradesLabel_parentOffer}" for="parentOffer" />
+                    <h:inputText id="parentOffer" value="#{tradesController.selected.parentOffer}" title="#{bundle.EditTradesTitle_parentOffer}" />
+                    <h:outputLabel value="#{bundle.EditTradesLabel_approved}" for="approved" />
+                    <h:inputText id="approved" value="#{tradesController.selected.approved}" title="#{bundle.EditTradesTitle_approved}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_approved}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{tradesController.update}" value="#{bundle.EditTradesSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTradesViewLink}"/>
+                <br />
+                <h:commandLink action="#{tradesController.prepareList}" value="#{bundle.EditTradesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTradesIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

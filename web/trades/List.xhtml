@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTradesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTradesEmpty}" rendered="#{tradesController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tradesController.items.rowCount > 0}">
+                    <h:outputText value="#{tradesController.pagination.pageFirstItem + 1}..#{tradesController.pagination.pageLastItem + 1}/#{tradesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tradesController.previous}" value="#{bundle.Previous} #{tradesController.pagination.pageSize}" rendered="#{tradesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tradesController.next}" value="#{bundle.Next} #{tradesController.pagination.pageSize}" rendered="#{tradesController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tradesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_creatorId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.creatorId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_recieverId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recieverId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_ccardsId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ccardsId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_rcardsId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rcardsId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_offerDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.offerDate}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_parentOffer}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.parentOffer}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_approved}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.approved}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tradesController.prepareView}" value="#{bundle.ListTradesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tradesController.prepareEdit}" value="#{bundle.ListTradesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tradesController.destroy}" value="#{bundle.ListTradesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tradesController.prepareCreate}" value="#{bundle.ListTradesCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTradesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

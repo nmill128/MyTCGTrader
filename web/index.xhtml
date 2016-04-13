@@ -5,6 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
         <ui:composition template="template/commonLayout.xhtml">
@@ -38,6 +39,24 @@
                 </nav>
             </ui:define>
         </ui:composition>
+        <br />
+        <h:link outcome="/cardPhotos/List" value="Show All CardPhotos Items"/>
+        <br />
+        <h:link outcome="/cards/List" value="Show All Cards Items"/>
+        <br />
+        <h:link outcome="/trades/List" value="Show All Trades Items"/>
+        <br />
+        <h:link outcome="/userPhotos/List" value="Show All UserPhotos Items"/>
+        <br />
+        <h:link outcome="/users/List" value="Show All Users Items"/>
+        <br />
+        <h:link outcome="/wants/List" value="Show All Wants Items"/>
     </h:body>
+
+
+
+
+
+
 </html>
 

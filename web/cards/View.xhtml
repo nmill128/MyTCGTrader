@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCardsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCardsLabel_id}"/>
+                    <h:outputText value="#{cardsController.selected.id}" title="#{bundle.ViewCardsTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewCardsLabel_cardName}"/>
+                    <h:outputText value="#{cardsController.selected.cardName}" title="#{bundle.ViewCardsTitle_cardName}"/>
+                    <h:outputText value="#{bundle.ViewCardsLabel_cardCondition}"/>
+                    <h:outputText value="#{cardsController.selected.cardCondition}" title="#{bundle.ViewCardsTitle_cardCondition}"/>
+                    <h:outputText value="#{bundle.ViewCardsLabel_edition}"/>
+                    <h:outputText value="#{cardsController.selected.edition}" title="#{bundle.ViewCardsTitle_edition}"/>
+                    <h:outputText value="#{bundle.ViewCardsLabel_cardValue}"/>
+                    <h:outputText value="#{cardsController.selected.cardValue}" title="#{bundle.ViewCardsTitle_cardValue}"/>
+                    <h:outputText value="#{bundle.ViewCardsLabel_notes}"/>
+                    <h:outputText value="#{cardsController.selected.notes}" title="#{bundle.ViewCardsTitle_notes}"/>
+                    <h:outputText value="#{bundle.ViewCardsLabel_binder}"/>
+                    <h:outputText value="#{cardsController.selected.binder}" title="#{bundle.ViewCardsTitle_binder}"/>
+                    <h:outputText value="#{bundle.ViewCardsLabel_dateAdded}"/>
+                    <h:outputText value="#{cardsController.selected.dateAdded}" title="#{bundle.ViewCardsTitle_dateAdded}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{cardsController.destroyAndView}" value="#{bundle.ViewCardsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCardsEditLink}"/>
+                <br />
+                <h:commandLink action="#{cardsController.prepareCreate}" value="#{bundle.ViewCardsCreateLink}" />
+                <br />
+                <h:commandLink action="#{cardsController.prepareList}" value="#{bundle.ViewCardsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCardsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
