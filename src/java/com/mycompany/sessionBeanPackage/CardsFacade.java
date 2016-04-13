@@ -6,6 +6,8 @@
 package com.mycompany.sessionBeanPackage;
 
 import com.mycompany.entitypackage.Cards;
+import com.mycompany.entitypackage.Wants;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,11 +31,18 @@ public class CardsFacade extends AbstractFacade<Cards> {
         super(Cards.class);
     }
     
-        public Cards findById(int id) {
+    public Cards findById(int id) {
 
-            return (Cards) (em.createQuery("SELECT c FROM Cards c WHERE c.id = :id")
-                .setParameter("id", id)
-                .getSingleResult());        
+        return (Cards) (em.createQuery("SELECT c FROM Cards c WHERE c.id = :id")
+            .setParameter("id", id)
+            .getSingleResult());        
     }
+        
+    public List<Cards> findCardsByUserID(Integer userID) {
+        return (List<Cards>) em.createNamedQuery("Cards.findCardsByUserId")
+                .setParameter("userId", userID)
+                .getResultList();
+    }
+    
     
 }

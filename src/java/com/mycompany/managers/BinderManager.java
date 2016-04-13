@@ -7,12 +7,15 @@ package com.mycompany.managers;
 
 import com.mycompany.entitypackage.Users;
 import com.mycompany.entitypackage.Wants;
+import com.mycompany.entitypackage.Cards;
+import com.mycompany.entitypackage.CardPhotos;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.util.List;
+import java.util.ArrayList;
 
 @Named(value = "binderManager")
 @SessionScoped
@@ -24,6 +27,41 @@ public class BinderManager implements Serializable{
     
     private Users user;
     List<Wants> wants;
+    List<Entry> entries; 
+    
+    public class Entry{
+        private CardPhotos photo;
+        private Cards card;
+        
+        public Entry(Cards card, CardPhotos photo){
+            this.card = card;
+            this.photo = photo;
+        }
+        
+        public Cards getCard(){
+            return card;
+        }
+        
+        public void setCard(Cards card){
+            this.card = card;
+        }
+        
+        public CardPhotos getPhoto(){
+            return photo;
+        }
+        
+        public void setPhoto(CardPhotos photo){
+            this.photo = photo;
+        }
+        
+        public String getFile(){
+            if(photo == null){
+                return "/DefaultUserPhoto.png";
+            } else {
+                return photo.getFilename();
+            }
+        }
+    }
     
     
       /**
@@ -42,10 +80,37 @@ public class BinderManager implements Serializable{
     @EJB
     private com.mycompany.sessionBeanPackage.WantsFacade wantsFacade;
     
+        @EJB
+    private com.mycompany.sessionBeanPackage.CardsFacade cardsFacade;
+        
+                @EJB
+    private com.mycompany.sessionBeanPackage.CardPhotosFacade cardPhotosFacade;
+    
     public BinderManager(){
         
     }
     
+    public List<Entry> getEntries(){
+        List<Cards> cards = cardsFacade.findCardsByUserID(user.getId());
+        List<Entry> entriesReturn = new ArrayList(0);
+        for(Cards card : cards){
+            List<CardPhotos> photos = cardPhotosFacade.findPhotosByCardID(card.getId());
+            CardPhotos photo;
+            if(!photos.isEmpty()){
+                photo = photos.get(0);
+            } else {
+                photo = null;
+            }
+            entriesReturn.add(new Entry(card, photo));
+            
+        }
+        setEntries(entriesReturn);
+        return entriesReturn;
+    }
+    
+    public void setEntries(List<Entry> entries){
+        this.entries = entries;
+    }
       /**
     * @return the user
     */
@@ -65,16 +130,16 @@ public class BinderManager implements Serializable{
     }
     
     public List<Wants> getWants(){
-        return wantsFacade.findPhotosByUserID(user.getId());
+        return wantsFacade.findWantsByUserID(user.getId());
     }
     
     public void setWants(){
-        this.wants  = wantsFacade.findPhotosByUserID(user.getId());;
+        this.wants  = wantsFacade.findWantsByUserID(user.getId());;
     }
     
     public String viewMyBinder(){
         user = getLoggedInUser();
-        wants = wantsFacade.findPhotosByUserID(user.getId());
+        wants = wantsFacade.findWantsByUserID(user.getId());
         return "MyBinder";
     }
 
