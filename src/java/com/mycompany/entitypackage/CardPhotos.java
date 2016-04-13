@@ -4,6 +4,7 @@
  */
 package com.mycompany.entitypackage;
 
+import com.mycompany.managers.Constants;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -30,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CardPhotos.findAll", query = "SELECT c FROM CardPhotos c"),
     @NamedQuery(name = "CardPhotos.findById", query = "SELECT c FROM CardPhotos c WHERE c.id = :id"),
+    @NamedQuery(name = "CardPhotos.findPhotosByCardId", query = "SELECT c FROM CardPhotos c WHERE c.cardId.id = :cardId"),
     @NamedQuery(name = "CardPhotos.findByExtension", query = "SELECT c FROM CardPhotos c WHERE c.extension = :extension")})
 public class CardPhotos implements Serializable {
 
@@ -58,6 +60,11 @@ public class CardPhotos implements Serializable {
     public CardPhotos(Integer id, String extension) {
         this.id = id;
         this.extension = extension;
+    }
+    
+    public CardPhotos(String extension, Cards id) {
+        this.extension = extension;
+        cardId = id;
     }
 
     public Integer getId() {
@@ -107,6 +114,22 @@ public class CardPhotos implements Serializable {
     @Override
     public String toString() {
         return "com.mycompany.entitypackage.CardPhotos[ id=" + id + " ]";
+    }
+    
+    public String getFilePath() {
+        return Constants.ROOT_DIRECTORY + getFilename();
+    }
+
+    public String getFilename() {
+        return getId() + "." + getExtension();
+    }
+    
+    public String getThumbnailName() {
+        return getId() + "_thumbnail." + getExtension();
+    }
+    
+    public String getThumbnailFilePath() {
+        return Constants.ROOT_DIRECTORY + getThumbnailName();
     }
     
 }

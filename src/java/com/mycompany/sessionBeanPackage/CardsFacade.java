@@ -29,4 +29,11 @@ public class CardsFacade extends AbstractFacade<Cards> {
         super(Cards.class);
     }
     
+        public Cards findById(int id) {
+
+            return (Cards) (em.createQuery("SELECT c FROM Cards c WHERE c.id = :id")
+                .setParameter("id", id)
+                .getSingleResult());        
+    }
+    
 }

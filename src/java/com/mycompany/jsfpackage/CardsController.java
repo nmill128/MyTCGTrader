@@ -1,15 +1,32 @@
 package com.mycompany.jsfpackage;
 
 import com.mycompany.entitypackage.Cards;
+import com.mycompany.entitypackage.CardPhotos;
+import com.mycompany.entitypackage.Users;
 import com.mycompany.jsfpackage.util.JsfUtil;
 import com.mycompany.jsfpackage.util.PaginationHelper;
+import com.mycompany.managers.Constants;
+import com.mycompany.managers.FileManager;
 import com.mycompany.sessionBeanPackage.CardsFacade;
+import com.mycompany.sessionBeanPackage.CardPhotosFacade;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,6 +34,9 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.imageio.ImageIO;
+import org.imgscalr.Scalr;
+import org.primefaces.model.UploadedFile;
 
 @Named("cardsController")
 @SessionScoped
@@ -28,6 +48,25 @@ public class CardsController implements Serializable {
     private com.mycompany.sessionBeanPackage.CardsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private UploadedFile file;
+    private String message = "";
+    
+    
+        /**
+     * The instance variable 'userFacade' is annotated with the @EJB annotation.
+     * This means that the GlassFish application server, at runtime, will inject in
+     * this instance variable a reference to the @Stateless session bean UserFacade.
+     */
+    @EJB
+    private CardsFacade cardsFacade;
+
+    /**
+     * The instance variable 'photoFacade' is annotated with the @EJB annotation.
+     * This means that the GlassFish application server, at runtime, will inject in
+     * this instance variable a reference to the @Stateless session bean PhotoFacade.
+     */
+    @EJB
+    private CardPhotosFacade cardPhotosFacade;
 
     public CardsController() {
     }
@@ -43,6 +82,7 @@ public class CardsController implements Serializable {
     private CardsFacade getFacade() {
         return ejbFacade;
     }
+    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -75,19 +115,139 @@ public class CardsController implements Serializable {
 
     public String prepareCreate() {
         current = new Cards();
+        copyFile(file);
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsCreated"));
-            return prepareCreate();
+            if (file.getSize() != 0) {
+                getFacade().create(current);
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsCreated"));
+                message = "";
+                return prepareCreate();
+            } else {
+                message = "You need to upload a file first!";
+                return "";
+            }
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            e.printStackTrace();
+            //JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+    }
+    
+        public FacesMessage copyFile(UploadedFile file) {
+        try {
+            deletePhoto();
+            
+            InputStream in = file.getInputstream();
+            
+            File tempFile = inputStreamToFile(in, Constants.TEMP_FILE);
+            in.close();
+
+            FacesMessage resultMsg;
+
+
+            Cards card = cardsFacade.findById(current.getId());
+
+            // Insert photo record into database
+            String extension = file.getContentType();
+            extension = extension.startsWith("image/") ? extension.subSequence(6, extension.length()).toString() : "png";
+            List<CardPhotos> photoList = cardPhotosFacade.findPhotosByCardID(card.getId());
+            if (!photoList.isEmpty()) {
+                cardPhotosFacade.remove(photoList.get(0));
+            }
+
+            cardPhotosFacade.create(new CardPhotos(extension, card));
+            CardPhotos photo = cardPhotosFacade.findPhotosByCardID(card.getId()).get(0);
+            in = file.getInputstream();
+            File uploadedFile = inputStreamToFile(in, photo.getFilename());
+            saveThumbnail(uploadedFile, photo);
+            resultMsg = new FacesMessage("Success!", "File Successfully Uploaded!");
+            return resultMsg;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new FacesMessage("Upload failure!",
+            "There was a problem reading the image file. Please try again with a new photo file.");
+    }
+
+    private File inputStreamToFile(InputStream inputStream, String childName)
+            throws IOException {
+        // Read in the series of bytes from the input stream
+        byte[] buffer = new byte[inputStream.available()];
+        inputStream.read(buffer);
+
+        // Write the series of bytes on file.
+        File targetFile = new File(Constants.ROOT_DIRECTORY, childName);
+
+        OutputStream outStream;
+        outStream = new FileOutputStream(targetFile);
+        outStream.write(buffer);
+        outStream.close();
+
+        // Save reference to the current image.
+        return targetFile;
+    }
+
+    private void saveThumbnail(File inputFile, CardPhotos inputPhoto) {
+        try {
+            BufferedImage original = ImageIO.read(inputFile);
+            BufferedImage thumbnail = Scalr.resize(original, Constants.THUMBNAIL_SZ);
+            ImageIO.write(thumbnail, inputPhoto.getExtension(),
+                new File(Constants.ROOT_DIRECTORY, inputPhoto.getThumbnailName()));
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        public void deletePhoto() {
+        FacesMessage resultMsg;
+
+        Cards card = cardsFacade.findById(current.getId());
+
+        List<CardPhotos> photoList = cardPhotosFacade.findPhotosByCardID(card.getId());
+        if (photoList.isEmpty()) {
+            resultMsg = new FacesMessage("Error", "You do not have a photo to delete.");
+        } else {
+            CardPhotos photo = photoList.get(0);
+            try {
+                Files.deleteIfExists(Paths.get(photo.getFilePath()));
+                Files.deleteIfExists(Paths.get(photo.getThumbnailFilePath()));
+                
+                Files.deleteIfExists(Paths.get(Constants.ROOT_DIRECTORY+"tmp_file"));
+                 
+                cardPhotosFacade.remove(photo);
+            } catch (IOException ex) {
+                Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            resultMsg = new FacesMessage("Success", "Photo successfully deleted!");
+        }
+        FacesContext.getCurrentInstance().addMessage(null, resultMsg);
+    }
+    
+    //Fileupload controlling
+        // Returns the uploaded file
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    // Obtains the uploaded file
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+
+    // Returns the message
+    public String getMessage() {
+        return message;
+    }
+
+    // Obtains the message
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String prepareEdit() {
