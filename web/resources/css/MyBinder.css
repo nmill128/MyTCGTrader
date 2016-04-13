@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 12, 2016, 7:18:36 PM
+    Author     : Erik
+*/
+
+.card-preview {
+    max-height: 40px;
+    width:auto;
+}
+
+.action-icon-trash{
+    color:red;
+    margin-left:10px;
+}
+
+.action-icon-pencil{
+    color:blue;
+}
+
+.binder-table td, .binder-table th {
+    text-align: center;
+    margin: auto auto auto auto;
+}
+
+.binder {
+    max-height:400px;
+    overflow:scroll;
+}
