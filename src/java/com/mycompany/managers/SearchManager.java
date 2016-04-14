@@ -25,7 +25,9 @@ public class SearchManager implements Serializable {
     @EJB
     private CardsFacade cardsFacade;
     
-    
+    public SearchManager(){
+        
+    }
     
     public String getSearchString() {
         return searchString;
