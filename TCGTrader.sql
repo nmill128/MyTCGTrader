@@ -23,24 +23,26 @@ CREATE TABLE Users
 
 CREATE TABLE Cards
 (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     cardName VARCHAR(255) NOT NULL,
     cardCondition VARCHAR(255) NOT NULL,
     edition VARCHAR(255) NOT NULL,
-    cardValue INT NOT NULL,
+    cardValue FLOAT NOT NULL,
     notes VARCHAR(255),
-    date_added VARCHAR(255) NOT NULL,
+    date_added DATE NOT NULL,
     user_id INT NOT NULL,
+    PRIMARY KEY(id),
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Wants
 (
-    id INT PRIMARY KEY NOT NULL,
+    id INT NOT NULL,
     cardName VARCHAR(255) NOT NULL,
     cardCondition VARCHAR(255) NOT NULL,
-    cardValue INT NOT NULL,
+    cardValue FLOAT NOT NULL,
     user_id INT NOT NULL,
+    PRIMARY KEY(id),
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
@@ -50,12 +52,22 @@ CREATE TABLE Trades
 	id INT NOT NULL AUTO_INCREMENT,
 	creator_id INT NOT NULL,
 	reciever_id INT NOT NULL,
-	ccards_id VARCHAR(255) NOT NULL,
-	rcards_id VARCHAR(255) NOT NULL,
-    offer_date VARCHAR(255) NOT NULL,
+    offer_date DATE NOT NULL,
     parent_offer VARCHAR(255),
 	approved BOOLEAN NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    FOREIGN KEY(creator_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY(reciever_id) REFERENCES Users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE TradeCards
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    cardID INT NOT NULL,
+    tradeID INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(cardID) REFERENCES Cards(id) ON DELETE CASCADE,
+    FOREIGN KEY(tradeID) REFERENCES Trades(id) ON DELETE CASCADE
 );
 
 /* The Photo table contains attributes of interest of a card's photo. */
