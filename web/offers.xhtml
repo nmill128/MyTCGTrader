@@ -19,7 +19,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr id="dayumDan">
                                         <td>Dan</td>
                                         <td>05/01/2016</td>
                                     </tr>
@@ -58,11 +58,13 @@
                             </table>
                         </div>
                         <div class="col-md-9">
-                            <h2 class="centerText">Current Offer</h2>
-                            <section>
+                            <section id="initialTrade">
+                                <h2 class="centerText">Current Offer</h2>
                                 <div class="input-group">
                                     <span class="input-group-addon" >Make a Trade Offer To</span>
-                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" />
+                                    <h:form>
+                                        <h:inputText  styleClass="form-control" value=" "/>
+                                    </h:form>
                                 </div>
                                 <br />
                                 <div class="row">
@@ -88,25 +90,12 @@
                                     <div class="col-md-6 card">
                                         <h3>User's Cards</h3>
                                         <hr />
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Nettle Sentinel</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Heritage Druid</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Cavern of Soul</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Llanowar Elves</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Shaman of the Pack</label>
-                                        </div>
+
                                     </div>
+                                </div>
                             </section>
-                            <section>
-                                <p>Making trade to User</p>
+                            <section id="selectingTradeSection" style="display:none">
+                                <h2 class="centerText">Current Offer</h2>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-6 card">
@@ -129,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 card">
-                                        <h3>User's Cards</h3>
+                                        <h3>Dan's Cards</h3>
                                         <hr />
                                         <div class="checkbox">
                                             <label><input type="checkbox" value=""/>Nettle Sentinel</label>
@@ -147,12 +136,95 @@
                                             <label><input type="checkbox" value=""/>Shaman of the Pack</label>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h:commandButton  styleClass="btn btn-primary btn-lg btn-block sendOfferButton"  value="Send Offer"/>
+                                    </div>
+                                </div>
+                            </section>
+                            <section id="barteringCardSection" style="display:none;">
+                                <h2 class="centerText">Trade with Dan</h2>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6 card">
+                                        <h3>My Cards</h3>
+                                        <hr />
+                                        <div >
+                                            Snapcaster Mage
+                                        </div>
+                                        <div >
+                                            Jace, the Mind Sculptor
+                                        </div>
+                                        <div >
+                                            Lilliana of the Veil
+                                        </div>
+                                        <div >
+                                            Siege Rhino
+                                        </div>
+                                        <div >
+                                            Sensei's Diving Top
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 card">
+                                        <h3>Dan's Cards</h3>
+                                        <hr />
+                                        <div >
+                                            Nettle Sentinel
+                                        </div>
+                                        <div >
+                                            Heritage Druid
+                                        </div>
+                                        <div >
+                                            Cavern of Soul
+                                        </div>
+                                        <div >
+                                            Llanowar Elves
+                                        </div>
+                                        <div >
+                                            Shaman of the Pack
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  value="Accept"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  value="Reject"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  value="Counter Offer"/>
+                                    </div>
+                                </div>
                             </section>
                         </div>
                     </div>
                 </div>
+                <script>
+                    $('.acceptRejectButton').click(trade);
+                    $('#dayumDan').click(trade);
+                    $('.sendOfferButton').click(offer);
 
-                </div>
+                    $('.form-control').keypress(function (e) {
+                        if (e.which == 13) {
+                            $('#initialTrade').hide();
+                            $('#selectingTradeSection').show();
+                            return false;
+                        }
+                    });
+
+
+                    function offer() {
+                        $('#selectingTradeSection').hide();
+                        $('#barteringCardSection').show();
+                    }
+                    function trade() {
+                        $('#initialTrade').hide();
+                        $('#selectingTradeSection').show();
+                        $('#barteringCardSection').hide();
+                    }
+                </script>
             </ui:define>
         </ui:composition>
     </h:body>
