@@ -6,6 +6,7 @@ package com.mycompany.managers;
 
 import com.mycompany.entitypackage.Cards;
 import com.mycompany.sessionBeanPackage.CardsFacade;
+import com.mycompany.sessionBeanPackage.UsersFacade;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -21,9 +22,13 @@ import javax.inject.Named;
 public class SearchManager implements Serializable {
     private String searchString;
     private List<Cards> searchResults = null;
+    private int searchType = 0;
     
     @EJB
     private CardsFacade cardsFacade;
+    
+    @EJB
+    private UsersFacade usersFacade;
     
     public SearchManager(){
         
@@ -45,9 +50,29 @@ public class SearchManager implements Serializable {
         this.searchResults = searchResults;
     }
     
+    public int getSearchType() {
+        return searchType;
+    }
+    
+    public void setSearchType(int searchType) {
+        this.searchType = searchType;
+    }
     
     public void searchCardsByName() {
-        System.out.println("Searching for cards");
-        searchResults = cardsFacade.findByName(searchString);
+        switch (searchType) {
+            case 0:
+                searchResults = cardsFacade.findByName(searchString);
+                List<Cards> userCards = cardsFacade.findByOwnerName(searchString);
+                searchResults.addAll(userCards);
+                break;
+            case 1:
+                searchResults = cardsFacade.findByName(searchString);
+                break;
+            case 2:
+                searchResults = cardsFacade.findByOwnerName(searchString);
+                break;
+            default:
+                break;
+        }
     }
 }

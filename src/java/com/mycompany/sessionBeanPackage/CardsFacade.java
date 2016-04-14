@@ -46,10 +46,13 @@ public class CardsFacade extends AbstractFacade<Cards> {
     
     
     public List<Cards> findByName(String name) {
-        Query query = em.createQuery("SELECT c FROM Cards c");
-        //query.setParameter(":name", name);
-        System.out.println("Searching for " + name);
-        return query.getResultList();
+        return em.createQuery("SELECT c FROM Cards c WHERE c.cardName LIKE :cardName").
+                setParameter("cardName", "%" + name + "%").getResultList();
+    }
+    
+    public List<Cards> findByOwnerName(String name) {
+        return em.createQuery("SELECT c from Cards c, Users u WHERE u.username LIKE :username AND c.userId.id = u.id").
+                setParameter("username", "%" + name + "%").getResultList();
     }
     
 }
