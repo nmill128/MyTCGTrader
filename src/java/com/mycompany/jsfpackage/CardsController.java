@@ -126,10 +126,10 @@ public class CardsController implements Serializable {
                 copyFile(file);
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsCreated"));
                 message = "";
-                return prepareCreate();
+                return "MyBinder";
             } else {
                 message = "You need to upload a file first!";
-                return "";
+                return "MyBinder";
             }
         } catch (Exception e) {
             e.printStackTrace();
