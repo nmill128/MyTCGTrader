@@ -9,49 +9,35 @@
         <ui:composition template="template/commonLayout.xhtml">
             <ui:define name="content">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="input-group" id="adv-search">
-                                <h:form>
-                                    <h:inputText  styleClass="form-control" value="#{searchManager.searchString}" />
-                                    <div class="input-group-btn">
-                                        <div class="btn-group" role="group">
-                                            <div class="dropdown dropdown-lg">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                    <div class="form-horizontal" >
-                                                        <div class="form-group">
-                                                            <label for="filter">Filter by</label>
-                                                            <h:selectOneMenu styleClass="form-control" value="#{searchManager.searchType}">
-                                                            <!--<select class="form-control">-->
-                                                                <f:selectItem itemValue="0" itemLabel="All Criteria" />
-                                                                <f:selectItem itemValue="1" itemLabel="Card Name" />
-                                                                <f:selectItem itemValue="2" itemLabel="Username" />
-                                                            </h:selectOneMenu>
-                                                        </div>
-                                                        <!--                                                    
-                                                        <div class="form-group">
-                                                            <label for="contain">Author</label>
-                                                            <input class="form-control" type="text" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="contain">Contains the words</label>
-                                                            <input class="form-control" type="text" />
-                                                        </div>
-                                                        -->
-                                                        <!--<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <h:commandButton  styleClass="btn btn-primary" action="#{searchManager.searchCardsByName}" value="Search"/>
-                                        </div>
-                                    </div>
-                                </h:form>
+                    <h:form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Search</label>
+                                <h:inputText  styleClass="form-control" value="#{searchManager.searchString}" />
+                                <div class="form-group">
+
+                                </div>
+
                             </div>
+                            <div class="col-md-4">
+                                <label>Filter by</label>
+                                <h:selectOneMenu styleClass="form-control" value="#{searchManager.searchType}">
+                                    <!--<select class="form-control">-->
+                                    <f:selectItem itemValue="0" itemLabel="All Criteria" />
+                                    <f:selectItem itemValue="1" itemLabel="Card Name" />
+                                    <f:selectItem itemValue="2" itemLabel="Username" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <h:commandButton  styleClass="btn btn-primary" action="#{searchManager.searchCardsByName}" value="Search"/>
+
+                            </div>
+
                         </div>
-                    </div>
+                    </h:form>
                 </div>
-                
+
 
                 <div id="searchTable" class="container" style="">
                     <div class="row col-md-12 custyle">
@@ -97,13 +83,12 @@
                         </table>
                     </div>
                 </div>
-                <!--<script>
-                    $('#searchButton').click(function () {
-                        $('#searchTable').show();
-                    });
-                </script>-->
-                            <h:form>
-            </h:form>
+                <script>
+                    $(document)
+                            .on('click', '.dropdown-menu', function (e) {
+                                e.stopPropagation();
+                            });
+                </script>
             </ui:define>
         </ui:composition>
     </h:body>
