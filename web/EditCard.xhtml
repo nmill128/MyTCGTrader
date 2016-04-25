@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCardsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCardsLabel_cardName}" for="cardName" />
+                    <h:inputText id="cardName" value="#{cardsController.selected.cardName}" title="#{bundle.EditCardsTitle_cardName}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_cardName}"/>
+                    <h:outputLabel value="#{bundle.EditCardsLabel_cardCondition}" for="cardCondition" />
+                    <h:inputText id="cardCondition" value="#{cardsController.selected.cardCondition}" title="#{bundle.EditCardsTitle_cardCondition}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_cardCondition}"/>
+                    <h:outputLabel value="#{bundle.EditCardsLabel_edition}" for="edition" />
+                    <h:inputText id="edition" value="#{cardsController.selected.edition}" title="#{bundle.EditCardsTitle_edition}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_edition}"/>
+                    <h:outputLabel value="#{bundle.EditCardsLabel_cardValue}" for="cardValue" />
+                    <h:inputText id="cardValue" value="#{cardsController.selected.cardValue}" title="#{bundle.EditCardsTitle_cardValue}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_cardValue}"/>
+                    <h:outputLabel value="#{bundle.EditCardsLabel_notes}" for="notes" />
+                    <h:inputText id="notes" value="#{cardsController.selected.notes}" title="#{bundle.EditCardsTitle_notes}" />
+                    <h:outputLabel value="#{bundle.EditCardsLabel_dateAdded}" for="dateAdded" />
+                    <h:inputText id="dateAdded" value="#{cardsController.selected.dateAdded}" title="#{bundle.EditCardsTitle_dateAdded}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_dateAdded}"/>
+                    <h:outputLabel value="#{bundle.EditCardsLabel_userId}" for="userId" />
+                    <h:selectOneMenu id="userId" value="#{cardsController.selected.userId}" title="#{bundle.EditCardsTitle_userId}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_userId}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <p:growl id="messages" showDetail="true" redisplay="false"/>
+                    <h:outputLabel value="Card Image" for="upload"/>
+                    <p:fileUpload id="upload" value="#{cardsController.file}" mode="simple" />
+                    <h:outputText value="#{cardsController.message}" />
+                </h:panelGrid>
+                <h:commandLink action="#{cardsController.update}" value="#{bundle.EditCardsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCardsViewLink}"/>
+                <br />
+                <h:commandLink action="#{cardsController.prepareList}" value="#{bundle.EditCardsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCardsIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
