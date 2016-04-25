@@ -55,4 +55,41 @@ public class CardsFacade extends AbstractFacade<Cards> {
                 setParameter("username", "%" + name + "%").getResultList();
     }
     
+    public List<Cards> findByAdvancedCriteria(String cardName, String userName, String edition, String value, int valueType) {
+        if (cardName.equals("") && userName.equals("") && edition.equals("") && value.equals("")) {
+            System.out.println("Blank search");
+            return em.createQuery("SELECT c FROM Cards c").getResultList();
+        }
+        String searchCriteria = "";
+        if (!cardName.equals("")) {
+            searchCriteria = searchCriteria + "c.cardName LIKE '" + cardName + "'";
+        }
+        if (!userName.equals("")) {
+            if (!searchCriteria.equals("")) { searchCriteria = searchCriteria + " AND "; }
+            searchCriteria = searchCriteria + "u.username LIKE '" + userName + "' AND c.userId.id = u.id";
+        }
+        if (!edition.equals("")) {
+            if (!searchCriteria.equals("")) { searchCriteria = searchCriteria + " AND "; }
+            searchCriteria = searchCriteria + "c.edition LIKE '" + edition + "'";
+        }
+        if (!value.equals("")) {
+            if (!searchCriteria.equals("")) { searchCriteria = searchCriteria + " AND "; }
+            switch (valueType) {
+                case 0:
+                    searchCriteria = searchCriteria + "c.cardValue = " + value;
+                    break;
+                case 1:
+                    searchCriteria = searchCriteria + "c.cardValue < " + value;
+                    break;
+                case 2:
+                    searchCriteria = searchCriteria + "c.cardValue > " + value;
+                    break;
+                default:
+                    break;
+            }
+        }
+        System.out.println(searchCriteria);
+        return em.createQuery("SELECT DISTINCT c FROM Cards c, Users u WHERE " + searchCriteria).getResultList();
+    }
+    
 }
