@@ -203,7 +203,7 @@ public class CardsController implements Serializable {
         }
     }
     
-        public void deletePhoto() {
+    public void deletePhoto() {
         FacesMessage resultMsg;
 
         Cards card = cardsFacade.findById(current.getId());
@@ -255,6 +255,11 @@ public class CardsController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
+    
+    public String binderEdit(int id) {
+        current = (Cards) cardsFacade.findById(id);
+        return "EditCard";
+    }
 
     public String update() {
         try {
@@ -275,6 +280,14 @@ public class CardsController implements Serializable {
         recreateModel();
         return "List";
     }
+    
+    public String binderDestroy(int id) {
+        
+        current = (Cards) cardsFacade.findById(id);
+        performDestroy();
+        return "MyBinder";
+    }
+    
 
     public String destroyAndView() {
         performDestroy();
