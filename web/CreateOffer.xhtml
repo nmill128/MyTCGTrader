@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="offers.xhtml">
+            <ui:define name="offer">
+                <h2 class="centerText">Create Offer</h2>
+                <div class="input-group">
+                    <span class="input-group-addon" >Make a Trade Offer To</span>
+                    <h:form >
+                        <h:inputText  styleClass="form-control" value="#{binderManager.offerUser}"/>
+                        <h:commandButton action="#{binderManager.populateOfferUser()}" value="Select"></h:commandButton>
+                    </h:form>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6 card">
+                        <h3>My Cards</h3>
+                        <h:form>
+                            <h:selectManyCheckbox value="#{binderManager.checks}">
+                                <div class="checkbox">
+                                    <f:selectItems value="#{binderManager.checksValue}" />
+                                </div>
+                            </h:selectManyCheckbox>
+                        </h:form>
+                    </div>
+                    <div class="col-md-6 card">
+                        <h3>User's Cards</h3>
+                        <hr />
+
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
