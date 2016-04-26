@@ -28,45 +28,29 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTradesTitle_creatorId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.creatorId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTradesTitle_recieverId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.recieverId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTradesTitle_ccardsId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.ccardsId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTradesTitle_rcardsId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.rcardsId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTradesTitle_offerDate}"/>
                             </f:facet>
-                            <h:outputText value="#{item.offerDate}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTradesTitle_parentOffer}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.parentOffer}"/>
+                            <h:outputText value="#{item.offerDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTradesTitle_approved}"/>
                             </f:facet>
                             <h:outputText value="#{item.approved}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_completed}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.completed}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTradesTitle_parentOfferId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.parentOfferId}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

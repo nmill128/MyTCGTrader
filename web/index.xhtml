@@ -17,37 +17,52 @@
             <ui:include src="template/preHeader.xhtml"/>
         </ui:insert>
         <div class="container-fluid">
-        <div align="center">
-            <h:form class="form-signin">
-                <div align="center" style="width:50%; margin:0 auto;">
-                    <div class="panel panel-default col-xs-12 binder">
-                        <table class="table profile-table">
-                            <tr>
-                                <td><h:outputLabel styleClass="outputLabel" for="loginname" value="Username: " /></td>
-                                <td><h:inputText class="form-control" id="loginname" value="#{loginManager.username}"/></td>
-                            </tr>
-                            <tr>
-                                <td><h:outputLabel styleClass="outputLabel" for="password" value="Password: " /></td>
-                                <td><h:inputSecret class="form-control"  id="password" value="#{loginManager.password}"/></td>
-                            </tr>
-                        </table>
+            <div align="center">
+                <h:form class="form-signin">
+                    <div align="center" style="width:50%; margin:0 auto;">
+                        <div class="panel panel-default col-xs-12 binder">
+                            <table class="table profile-table">
+                                <tr>
+                                    <td><h:outputLabel styleClass="outputLabel" for="loginname" value="Username: " /></td>
+                                    <td><h:inputText class="form-control" id="loginname" value="#{loginManager.username}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><h:outputLabel styleClass="outputLabel" for="password" value="Password: " /></td>
+                                    <td><h:inputSecret class="form-control"  id="password" value="#{loginManager.password}"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <fieldset style="width:50%; margin:0 auto;">
+                            <h:commandButton id="login"  action="#{loginManager.loginUser()}" value="Login" styleClass="buttonText"/>
+                            <h:commandButton id="create"  action="#{loginManager.createUser()}" value="Create" styleClass="buttonText"/>
+                            <h:commandButton id="retrieve"  action="#{loginManager.resetPassword()}" value="Forgot Password" styleClass="buttonText"/>                
+                        </fieldset>  
                     </div>
-                    <br />
-                    <fieldset style="width:50%; margin:0 auto;">
-                        <h:commandButton id="login"  action="#{loginManager.loginUser()}" value="Login" styleClass="buttonText"/>
-                        <h:commandButton id="create"  action="#{loginManager.createUser()}" value="Create" styleClass="buttonText"/>
-                        <h:commandButton id="retrieve"  action="#{loginManager.resetPassword()}" value="Forgot Password" styleClass="buttonText"/>                
-                    </fieldset>  
-                </div>
-                <br/>
-                <h:outputLabel value ="#{loginManager.errorMessage}" />  
-            </h:form>
-        </div>
+                    <br/>
+                    <h:outputLabel value ="#{loginManager.errorMessage}" />  
+                </h:form>
+            </div>
         </div>
         <ui:insert name="footer">
             <ui:include src="template/footer.xhtml"/>
         </ui:insert>
+        <br />
+        <h:link outcome="/tradecards/List" value="Show All Tradecards Items"/>
+        <br />
+        <h:link outcome="/tradecomments/List" value="Show All Tradecomments Items"/>
+        <br />
+        <h:link outcome="/trades/List" value="Show All Trades Items"/>
+        <br />
+        <h:link outcome="/tradecomments/List" value="Show All Tradecomments Items"/>
+        <br />
+        <h:link outcome="/trades/List" value="Show All Trades Items"/>
     </h:body>
+
+
+
+
+
 
 
 

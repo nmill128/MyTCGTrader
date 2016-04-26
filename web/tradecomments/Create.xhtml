@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTradecommentsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTradecommentsLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{tradecommentsController.selected.id}" title="#{bundle.CreateTradecommentsTitle_id}" required="true" requiredMessage="#{bundle.CreateTradecommentsRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateTradecommentsLabel_string}" for="string" />
+                    <h:inputText id="string" value="#{tradecommentsController.selected.string}" title="#{bundle.CreateTradecommentsTitle_string}" required="true" requiredMessage="#{bundle.CreateTradecommentsRequiredMessage_string}"/>
+                    <h:outputLabel value="#{bundle.CreateTradecommentsLabel_tradeID}" for="tradeID" />
+                    <h:selectOneMenu id="tradeID" value="#{tradecommentsController.selected.tradeID}" title="#{bundle.CreateTradecommentsTitle_tradeID}" required="true" requiredMessage="#{bundle.CreateTradecommentsRequiredMessage_tradeID}">
+                        <f:selectItems value="#{tradesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tradecommentsController.create}" value="#{bundle.CreateTradecommentsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tradecommentsController.prepareList}" value="#{bundle.CreateTradecommentsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTradecommentsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

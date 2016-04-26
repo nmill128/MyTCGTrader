@@ -17,20 +17,18 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditTradesLabel_id}" for="id" />
                     <h:inputText id="id" value="#{tradesController.selected.id}" title="#{bundle.EditTradesTitle_id}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.EditTradesLabel_creatorId}" for="creatorId" />
-                    <h:inputText id="creatorId" value="#{tradesController.selected.creatorId}" title="#{bundle.EditTradesTitle_creatorId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_creatorId}"/>
-                    <h:outputLabel value="#{bundle.EditTradesLabel_recieverId}" for="recieverId" />
-                    <h:inputText id="recieverId" value="#{tradesController.selected.recieverId}" title="#{bundle.EditTradesTitle_recieverId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_recieverId}"/>
-                    <h:outputLabel value="#{bundle.EditTradesLabel_ccardsId}" for="ccardsId" />
-                    <h:inputText id="ccardsId" value="#{tradesController.selected.ccardsId}" title="#{bundle.EditTradesTitle_ccardsId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_ccardsId}"/>
-                    <h:outputLabel value="#{bundle.EditTradesLabel_rcardsId}" for="rcardsId" />
-                    <h:inputText id="rcardsId" value="#{tradesController.selected.rcardsId}" title="#{bundle.EditTradesTitle_rcardsId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_rcardsId}"/>
                     <h:outputLabel value="#{bundle.EditTradesLabel_offerDate}" for="offerDate" />
-                    <h:inputText id="offerDate" value="#{tradesController.selected.offerDate}" title="#{bundle.EditTradesTitle_offerDate}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_offerDate}"/>
-                    <h:outputLabel value="#{bundle.EditTradesLabel_parentOffer}" for="parentOffer" />
-                    <h:inputText id="parentOffer" value="#{tradesController.selected.parentOffer}" title="#{bundle.EditTradesTitle_parentOffer}" />
+                    <h:inputText id="offerDate" value="#{tradesController.selected.offerDate}" title="#{bundle.EditTradesTitle_offerDate}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_offerDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                     <h:outputLabel value="#{bundle.EditTradesLabel_approved}" for="approved" />
                     <h:inputText id="approved" value="#{tradesController.selected.approved}" title="#{bundle.EditTradesTitle_approved}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_approved}"/>
+                    <h:outputLabel value="#{bundle.EditTradesLabel_completed}" for="completed" />
+                    <h:inputText id="completed" value="#{tradesController.selected.completed}" title="#{bundle.EditTradesTitle_completed}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_completed}"/>
+                    <h:outputLabel value="#{bundle.EditTradesLabel_parentOfferId}" for="parentOfferId" />
+                    <h:selectOneMenu id="parentOfferId" value="#{tradesController.selected.parentOfferId}" title="#{bundle.EditTradesTitle_parentOfferId}" required="true" requiredMessage="#{bundle.EditTradesRequiredMessage_parentOfferId}">
+                        <f:selectItems value="#{tradesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{tradesController.update}" value="#{bundle.EditTradesSaveLink}"/>
                 <br />

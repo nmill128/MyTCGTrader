@@ -49,13 +49,15 @@ CREATE TABLE Wants
 
 CREATE TABLE Trades
 (
-	id INT NOT NULL AUTO_INCREMENT,
-	creator_id INT NOT NULL,
-	reciever_id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    creator_id INT NOT NULL,
+    reciever_id INT NOT NULL,
     offer_date DATE NOT NULL,
-    parent_offer VARCHAR(255),
-	approved BOOLEAN NOT NULL,
+    parent_offer_id INT NOT NULL,
+    approved BOOLEAN NOT NULL,
+    completed BOOLEAN NOT NULL,
     PRIMARY KEY(id),
+    FOREIGN KEY(parent_offer_id) REFERENCES Trades(id),
     FOREIGN KEY(creator_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY(reciever_id) REFERENCES Users(id) ON DELETE CASCADE
 );
@@ -75,7 +77,9 @@ CREATE TABLE TradeComments
     id INT NOT NULL AUTO_INCREMENT,
     tradeID INT NOT NULL,
     string VARCHAR(255) NOT NULL,
+    creator_id INT NOT NULL,
     PRIMARY KEY(id),
+    FOREIGN KEY(creator_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY(tradeID) references Trades(id) ON DELETE CASCADE
 );
 
