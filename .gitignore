@@ -2,3 +2,4 @@
 /builprivate/private.properties/
 nbproject/
 /build/
+web/WEB-INF/glassfish-web.xml

@@ -70,6 +70,15 @@ CREATE TABLE TradeCards
     FOREIGN KEY(tradeID) REFERENCES Trades(id) ON DELETE CASCADE
 );
 
+CREATE TABLE TradeComments
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    tradeID INT NOT NULL,
+    string VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(tradeID) references Trades(id) ON DELETE CASCADE
+);
+
 /* The Photo table contains attributes of interest of a card's photo. */
 CREATE TABLE CardPhotos
 (
