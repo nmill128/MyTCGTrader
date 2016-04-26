@@ -14,7 +14,7 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form enctype="multipart/form-data">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditCardsLabel_cardName}" for="cardName" />
                     <h:inputText id="cardName" value="#{cardsController.selected.cardName}" title="#{bundle.EditCardsTitle_cardName}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_cardName}"/>
@@ -32,17 +32,15 @@
                     <h:selectOneMenu id="userId" value="#{cardsController.selected.userId}" title="#{bundle.EditCardsTitle_userId}" required="true" requiredMessage="#{bundle.EditCardsRequiredMessage_userId}">
                         <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <p:growl id="messages" showDetail="true" redisplay="false"/>
-                    <h:outputLabel value="Card Image" for="upload"/>
+                    <h:outputLabel value="Card Image"/>
+                    <h:graphicImage class="card-preview" value="/FileStorageLocation/#{cardsController.fileName}"/>
+                    <h:outputLabel value="New Image" for="upload"/>
                     <p:fileUpload id="upload" value="#{cardsController.file}" mode="simple" />
                     <h:outputText value="#{cardsController.message}" />
                 </h:panelGrid>
                 <h:commandLink action="#{cardsController.update}" value="#{bundle.EditCardsSaveLink}"/>
                 <br />
                 <br />
-                <h:link outcome="View" value="#{bundle.EditCardsViewLink}"/>
-                <br />
-                <h:commandLink action="#{cardsController.prepareList}" value="#{bundle.EditCardsShowAllLink}" immediate="true"/>
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.EditCardsIndexLink}" />

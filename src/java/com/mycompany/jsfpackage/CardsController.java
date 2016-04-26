@@ -49,6 +49,7 @@ public class CardsController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private UploadedFile file;
+    private String fileName;
     private String message = "";
     
     
@@ -69,6 +70,14 @@ public class CardsController implements Serializable {
     private CardPhotosFacade cardPhotosFacade;
 
     public CardsController() {
+    }
+    
+    public String getFileName(){
+        return fileName;
+    }
+    
+    public void setFileName(String fileName){
+        this.fileName = fileName;
     }
 
     public Cards getSelected() {
@@ -258,14 +267,17 @@ public class CardsController implements Serializable {
     
     public String binderEdit(int id) {
         current = (Cards) cardsFacade.findById(id);
+        CardPhotos photo = cardPhotosFacade.findPhotosByCardID(current.getId()).get(0);
+        setFileName(photo.getThumbnailName());
         return "EditCard";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
+            copyFile(file);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsUpdated"));
-            return "View";
+            return "MyBinder";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

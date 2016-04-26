@@ -95,12 +95,17 @@ public class WantsController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
+    
+    public String binderEdit(int id) {
+        current = (Wants) getFacade().find(id);
+        return "EditWant";
+    }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("WantsUpdated"));
-            return "View";
+            return "MyBinder";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -114,6 +119,12 @@ public class WantsController implements Serializable {
         recreatePagination();
         recreateModel();
         return "List";
+    }
+    
+    public String binderDestroy(int id) {
+        current = (Wants) getFacade().find(id);
+        performDestroy();
+        return "MyBinder";
     }
 
     public String destroyAndView() {

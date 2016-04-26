@@ -5,7 +5,6 @@
  */
 package com.mycompany.sessionBeanPackage;
 
-import com.mycompany.entitypackage.UserPhotos;
 import com.mycompany.entitypackage.Wants;
 import java.util.List;
 import javax.ejb.Stateless;
