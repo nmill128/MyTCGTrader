@@ -3,3 +3,4 @@
 nbproject/
 /build/
 web/WEB-INF/glassfish-web.xml
+src/java/com/mycompany/managers/Constants.java

@@ -24,6 +24,12 @@ public class SearchManager implements Serializable {
     private List<Cards> searchResults = null;
     private int searchType = 0;
     
+    private String cardName;
+    private String username;
+    private String value;
+    private String edition;
+    private int valueType;
+    
     @EJB
     private CardsFacade cardsFacade;
     
@@ -58,6 +64,54 @@ public class SearchManager implements Serializable {
         this.searchType = searchType;
     }
     
+    public String getCardName() {
+        return cardName;
+    }
+    
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+    
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public String getValue() {
+        return value;
+    }
+    
+    public void setValue(String value) {
+        this.value = value;
+    }
+    
+    public String getEdition() {
+        return edition;
+    }
+    
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+    
+    public int getValueType() {
+        return valueType;
+    }
+    
+    public void setValueType(int valueType) {
+        this.valueType = valueType;
+    }
+    
+    public String toAdvancedSearch() {
+        return "AdvancedSearch";
+    }
+    
+    public String toBasicSearch() {
+        return "search";
+    }
+    
     public void searchCardsByName() {
         switch (searchType) {
             case 0:
@@ -74,5 +128,9 @@ public class SearchManager implements Serializable {
             default:
                 break;
         }
+    }
+    
+    public void advancedSearch() {
+        searchResults = cardsFacade.findByAdvancedCriteria(cardName, username, edition, value, valueType);
     }
 }

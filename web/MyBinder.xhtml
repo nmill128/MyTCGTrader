@@ -48,8 +48,8 @@ and open the template in the editor.
                                     <td>#{entry.card.edition}</td>
                                     <td>#{entry.card.cardValue}$</td>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
+                                        <h:commandLink styleClass="" action="#{cardsController.binderEdit(entry.card.id)}"><span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span></h:commandLink>
+                                        <h:commandLink styleClass="" action="#{cardsController.binderDestroy(entry.card.id)}"><span class="glyphicon glyphicon-trash action-icon-trash" aria-hidden="true"></span></h:commandLink>
                                     </td>
                                 </tr>
                                 </ui:repeat>
@@ -80,8 +80,8 @@ and open the template in the editor.
                                     <td class="td-center">#{want.cardCondition}</td>
                                     <td class="td-center">#{want.cardValue}$</td>
                                     <td class="td-center">
-                                        <span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span>
-                                        <span class="glyphicon glyphicon-trash  action-icon-trash" aria-hidden="true"></span>
+                                        <h:commandLink styleClass="" action="#{wantsController.binderEdit(want.id)}"><span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span></h:commandLink>
+                                        <h:commandLink styleClass="" action="#{wantsController.binderDestroy(want.id)}"><span class="glyphicon glyphicon-trash action-icon-trash" aria-hidden="true"></span></h:commandLink>
                                     </td>
                                 </tr>
                                 </ui:repeat>

@@ -59,40 +59,9 @@
                         </div>
                         <div class="col-md-9">
                             <section id="initialTrade">
-                                <h2 class="centerText">Current Offer</h2>
-                                <div class="input-group">
-                                    <span class="input-group-addon" >Make a Trade Offer To</span>
-                                    <h:form>
-                                        <h:inputText  styleClass="form-control" value=" "/>
-                                    </h:form>
-                                </div>
-                                <br />
-                                <div class="row">
-                                    <div class="col-md-6 card">
-                                        <h3>My Cards</h3>
-                                        <hr />
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Snapcaster Mage</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Jace, the Mind Sculptor</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Lilliana of the Veil</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Siege Rhino</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value=""/>Sensei's Diving Top</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 card">
-                                        <h3>User's Cards</h3>
-                                        <hr />
-
-                                    </div>
-                                </div>
+                                <ui:insert name="offer">
+                                    
+                                </ui:insert>
                             </section>
                             <section id="selectingTradeSection" style="display:none">
                                 <h2 class="centerText">Current Offer</h2>
@@ -203,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                <script>
+                <!--<script>
                     $('.acceptRejectButton').click(trade);
                     $('#dayumDan').click(trade);
                     $('.sendOfferButton').click(offer);
@@ -226,7 +195,7 @@
                         $('#selectingTradeSection').show();
                         $('#barteringCardSection').hide();
                     }
-                </script>
+                </script>-->
 
             </ui:define>
         </ui:composition>
