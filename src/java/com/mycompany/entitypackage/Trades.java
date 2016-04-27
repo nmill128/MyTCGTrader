@@ -1,40 +1,45 @@
 /*
- * Created by Nicholas Miller on 2016.04.12  * 
- * Copyright © 2016 Nicholas Miller. All rights reserved. * 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.mycompany.entitypackage;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author nmiller
+ * @author Erik
  */
 @Entity
-@Table(name = "Trades")
+@Table(name = "trades")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Trades.findAll", query = "SELECT t FROM Trades t"),
     @NamedQuery(name = "Trades.findById", query = "SELECT t FROM Trades t WHERE t.id = :id"),
-    @NamedQuery(name = "Trades.findByCreatorId", query = "SELECT t FROM Trades t WHERE t.creatorId = :creatorId"),
-    @NamedQuery(name = "Trades.findByRecieverId", query = "SELECT t FROM Trades t WHERE t.recieverId = :recieverId"),
-    @NamedQuery(name = "Trades.findByCcardsId", query = "SELECT t FROM Trades t WHERE t.ccardsId = :ccardsId"),
-    @NamedQuery(name = "Trades.findByRcardsId", query = "SELECT t FROM Trades t WHERE t.rcardsId = :rcardsId"),
     @NamedQuery(name = "Trades.findByOfferDate", query = "SELECT t FROM Trades t WHERE t.offerDate = :offerDate"),
-    @NamedQuery(name = "Trades.findByParentOffer", query = "SELECT t FROM Trades t WHERE t.parentOffer = :parentOffer"),
-    @NamedQuery(name = "Trades.findByApproved", query = "SELECT t FROM Trades t WHERE t.approved = :approved")})
+    @NamedQuery(name = "Trades.findByApproved", query = "SELECT t FROM Trades t WHERE t.approved = :approved"),
+    @NamedQuery(name = "Trades.findByCompleted", query = "SELECT t FROM Trades t WHERE t.completed = :completed")})
 public class Trades implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,34 +50,24 @@ public class Trades implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "creator_id")
-    private int creatorId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "reciever_id")
-    private int recieverId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "ccards_id")
-    private String ccardsId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "rcards_id")
-    private String rcardsId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
     @Column(name = "offer_date")
-    private String offerDate;
-    @Size(max = 255)
-    @Column(name = "parent_offer")
-    private String parentOffer;
+    @Temporal(TemporalType.DATE)
+    private Date offerDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "approved")
     private boolean approved;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "completed")
+    private boolean completed;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tradeID")
+    private Collection<Tradecomments> tradecommentsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentOfferId")
+    private Collection<Trades> tradesCollection;
+    @JoinColumn(name = "parent_offer_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Trades parentOfferId;
 
     public Trades() {
     }
@@ -81,14 +76,11 @@ public class Trades implements Serializable {
         this.id = id;
     }
 
-    public Trades(Integer id, int creatorId, int recieverId, String ccardsId, String rcardsId, String offerDate, boolean approved) {
+    public Trades(Integer id, Date offerDate, boolean approved, boolean completed) {
         this.id = id;
-        this.creatorId = creatorId;
-        this.recieverId = recieverId;
-        this.ccardsId = ccardsId;
-        this.rcardsId = rcardsId;
         this.offerDate = offerDate;
         this.approved = approved;
+        this.completed = completed;
     }
 
     public Integer getId() {
@@ -99,52 +91,12 @@ public class Trades implements Serializable {
         this.id = id;
     }
 
-    public int getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(int creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    public int getRecieverId() {
-        return recieverId;
-    }
-
-    public void setRecieverId(int recieverId) {
-        this.recieverId = recieverId;
-    }
-
-    public String getCcardsId() {
-        return ccardsId;
-    }
-
-    public void setCcardsId(String ccardsId) {
-        this.ccardsId = ccardsId;
-    }
-
-    public String getRcardsId() {
-        return rcardsId;
-    }
-
-    public void setRcardsId(String rcardsId) {
-        this.rcardsId = rcardsId;
-    }
-
-    public String getOfferDate() {
+    public Date getOfferDate() {
         return offerDate;
     }
 
-    public void setOfferDate(String offerDate) {
+    public void setOfferDate(Date offerDate) {
         this.offerDate = offerDate;
-    }
-
-    public String getParentOffer() {
-        return parentOffer;
-    }
-
-    public void setParentOffer(String parentOffer) {
-        this.parentOffer = parentOffer;
     }
 
     public boolean getApproved() {
@@ -153,6 +105,40 @@ public class Trades implements Serializable {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    public boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    @XmlTransient
+    public Collection<Tradecomments> getTradecommentsCollection() {
+        return tradecommentsCollection;
+    }
+
+    public void setTradecommentsCollection(Collection<Tradecomments> tradecommentsCollection) {
+        this.tradecommentsCollection = tradecommentsCollection;
+    }
+
+    @XmlTransient
+    public Collection<Trades> getTradesCollection() {
+        return tradesCollection;
+    }
+
+    public void setTradesCollection(Collection<Trades> tradesCollection) {
+        this.tradesCollection = tradesCollection;
+    }
+
+    public Trades getParentOfferId() {
+        return parentOfferId;
+    }
+
+    public void setParentOfferId(Trades parentOfferId) {
+        this.parentOfferId = parentOfferId;
     }
 
     @Override

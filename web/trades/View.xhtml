@@ -17,20 +17,16 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewTradesLabel_id}"/>
                     <h:outputText value="#{tradesController.selected.id}" title="#{bundle.ViewTradesTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewTradesLabel_creatorId}"/>
-                    <h:outputText value="#{tradesController.selected.creatorId}" title="#{bundle.ViewTradesTitle_creatorId}"/>
-                    <h:outputText value="#{bundle.ViewTradesLabel_recieverId}"/>
-                    <h:outputText value="#{tradesController.selected.recieverId}" title="#{bundle.ViewTradesTitle_recieverId}"/>
-                    <h:outputText value="#{bundle.ViewTradesLabel_ccardsId}"/>
-                    <h:outputText value="#{tradesController.selected.ccardsId}" title="#{bundle.ViewTradesTitle_ccardsId}"/>
-                    <h:outputText value="#{bundle.ViewTradesLabel_rcardsId}"/>
-                    <h:outputText value="#{tradesController.selected.rcardsId}" title="#{bundle.ViewTradesTitle_rcardsId}"/>
                     <h:outputText value="#{bundle.ViewTradesLabel_offerDate}"/>
-                    <h:outputText value="#{tradesController.selected.offerDate}" title="#{bundle.ViewTradesTitle_offerDate}"/>
-                    <h:outputText value="#{bundle.ViewTradesLabel_parentOffer}"/>
-                    <h:outputText value="#{tradesController.selected.parentOffer}" title="#{bundle.ViewTradesTitle_parentOffer}"/>
+                    <h:outputText value="#{tradesController.selected.offerDate}" title="#{bundle.ViewTradesTitle_offerDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
                     <h:outputText value="#{bundle.ViewTradesLabel_approved}"/>
                     <h:outputText value="#{tradesController.selected.approved}" title="#{bundle.ViewTradesTitle_approved}"/>
+                    <h:outputText value="#{bundle.ViewTradesLabel_completed}"/>
+                    <h:outputText value="#{tradesController.selected.completed}" title="#{bundle.ViewTradesTitle_completed}"/>
+                    <h:outputText value="#{bundle.ViewTradesLabel_parentOfferId}"/>
+                    <h:outputText value="#{tradesController.selected.parentOfferId}" title="#{bundle.ViewTradesTitle_parentOfferId}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{tradesController.destroyAndView}" value="#{bundle.ViewTradesDestroyLink}"/>

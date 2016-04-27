@@ -16,6 +16,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Named(value = "binderManager")
 @SessionScoped
@@ -28,8 +30,49 @@ public class BinderManager implements Serializable{
     private Users user;
     List<Wants> wants;
     List<Entry> entries; 
+    int[] checks;
+    int[] otherChecks;
+    private String offerUser;
     
-    public class Entry{
+    private Map<String,Object> checksValue;
+    private Map<String,Object> otherChecksValue;
+    
+    public String getOfferUser(){
+        return offerUser;
+    }
+    
+    public void setOfferUser(String u){
+        this.offerUser = u;
+    }
+    
+    public String populateOfferUser(){
+        Users oUser = (Users) userFacade.findByUsername(this.offerUser);
+        if(oUser != null && !oUser.getId().equals(user.getId())){
+            return "CreateOfferUser";
+        }
+        return "CreateOffer";
+    }
+
+    public Map<String,Object> getChecksValue() {
+            checksValue = new LinkedHashMap();
+            List<Cards> cards = cardsFacade.findCardsByUserID(getLoggedInUser().getId());
+            for (Cards card : cards){
+                checksValue.put(card.getCardName(), card.getId()); //label, value
+            }
+            return checksValue;
+    }
+    
+    public Map<String,Object> getOtherChecksValue() {
+            otherChecksValue = new LinkedHashMap();
+            Users oUser = (Users) userFacade.findByUsername(this.offerUser);
+            List<Cards> cards = cardsFacade.findCardsByUserID(oUser.getId());
+            for (Cards card : cards){
+                otherChecksValue.put(card.getCardName(), card.getId()); //label, value
+            }
+            return otherChecksValue;
+    }
+    
+    public class Entry implements Serializable{
         private CardPhotos photo;
         private Cards card;
         
@@ -63,6 +106,21 @@ public class BinderManager implements Serializable{
         }
     }
     
+    public int[] getChecks(){
+        return checks;
+    }
+    
+    public void setChecks(int[] checks){
+        this.checks = checks;
+    }
+    
+    public int[] getOtherChecks(){
+        return otherChecks;
+    }
+    
+    public void setOtherChecks(int[] checks){
+        this.otherChecks = checks;
+    }
     
       /**
     * The instance variable 'userFacade' is annotated with the @EJB annotation.
@@ -91,7 +149,7 @@ public class BinderManager implements Serializable{
     }
     
     public List<Entry> getEntries(){
-        List<Cards> cards = cardsFacade.findCardsByUserID(user.getId());
+        List<Cards> cards = cardsFacade.findCardsByUserID(getLoggedInUser().getId());
         List<Entry> entriesReturn = new ArrayList(0);
         for(Cards card : cards){
             List<CardPhotos> photos = cardPhotosFacade.findPhotosByCardID(card.getId());
