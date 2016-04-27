@@ -9,6 +9,7 @@ import com.mycompany.managers.Constants;
 import com.mycompany.managers.FileManager;
 import com.mycompany.sessionBeanPackage.CardsFacade;
 import com.mycompany.sessionBeanPackage.CardPhotosFacade;
+import com.mycompany.sessionBeanPackage.UsersFacade;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -68,6 +69,9 @@ public class CardsController implements Serializable {
      */
     @EJB
     private CardPhotosFacade cardPhotosFacade;
+    
+    @EJB
+    private UsersFacade userFacade;
 
     public CardsController() {
     }
@@ -131,6 +135,7 @@ public class CardsController implements Serializable {
     public String create() {
         try {
             if (file.getSize() != 0) {
+                current.setUserId(userFacade.find(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user_id")));
                 getFacade().create(current);
                 copyFile(file);
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsCreated"));

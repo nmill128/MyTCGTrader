@@ -11,38 +11,77 @@
             <h:outputText value="#{bundle.CreateCardsTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
+            <div class="container-fluid">
+        <div align="center" style="width:50%; margin:0 auto;">
             <h:form enctype="multipart/form-data">
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateCardsLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{cardsController.selected.id}" title="#{bundle.CreateCardsTitle_id}" required="true" requiredMessage="#{bundle.CreateCardsRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.CreateCardsLabel_cardName}" for="cardName" />
-                    <h:inputText id="cardName" value="#{cardsController.selected.cardName}" title="#{bundle.CreateCardsTitle_cardName}" required="true" requiredMessage="#{bundle.CreateCardsRequiredMessage_cardName}"/>
-                    <h:outputLabel value="#{bundle.CreateCardsLabel_cardCondition}" for="cardCondition" />
-                    <h:inputText id="cardCondition" value="#{cardsController.selected.cardCondition}" title="#{bundle.CreateCardsTitle_cardCondition}" required="true" requiredMessage="#{bundle.CreateCardsRequiredMessage_cardCondition}"/>
-                    <h:outputLabel value="#{bundle.CreateCardsLabel_edition}" for="edition" />
-                    <h:inputText id="edition" value="#{cardsController.selected.edition}" title="#{bundle.CreateCardsTitle_edition}" required="true" requiredMessage="#{bundle.CreateCardsRequiredMessage_edition}"/>
-                    <h:outputLabel value="#{bundle.CreateCardsLabel_cardValue}" for="cardValue" />
-                    <h:inputText id="cardValue" value="#{cardsController.selected.cardValue}" title="#{bundle.CreateCardsTitle_cardValue}" required="true" requiredMessage="#{bundle.CreateCardsRequiredMessage_cardValue}"/>
-                    <h:outputLabel value="#{bundle.CreateCardsLabel_notes}" for="notes" />
-                    <h:inputText id="notes" value="#{cardsController.selected.notes}" title="#{bundle.CreateCardsTitle_notes}" />
-                    <h:outputLabel value="#{bundle.CreateCardsLabel_dateAdded}" for="dateAdded" />
-                    <h:inputText id="dateAdded" value="#{cardsController.selected.dateAdded}" title="#{bundle.CreateCardsTitle_dateAdded}" required="true" requiredMessage="#{bundle.CreateCardsRequiredMessage_dateAdded}"/>
-                    <h:outputLabel value="#{bundle.CreateCardsLabel_userId}" for="userId" />
-                    <h:selectOneMenu id="userId" value="#{cardsController.selected.userId}" title="#{bundle.CreateCardsTitle_userId}" required="true" requiredMessage="#{bundle.CreateCardsRequiredMessage_userId}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <p:growl id="messages" showDetail="true" redisplay="false"/>
-                    <h:outputLabel value="Card Image" for="upload"/>
-                    <p:fileUpload id="upload" value="#{cardsController.file}" mode="simple" />
-                    <h:outputText value="#{cardsController.message}" />
-                    <br/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{cardsController.create}" value="#{bundle.CreateCardsSaveLink}" />
+                <h2 class="form-signin-heading">New Card</h2>
+                <br/>
+                
+                <div class="panel panel-default col-xs-12">
+                <p:messages id="msgs" />
+
+                <table class="table profile-table">
+                    <tr>
+                        <td><p:outputLabel for="cardName" value="Card Name" /></td>
+                        <td><h:inputText id="cardName" value="#{cardsController.selected.cardName}" 
+                                 required="true" label="Card Name">
+                            </h:inputText></td>
+                        <td><p:message for="cardName" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
+                        <td><h:selectOneMenu id="cardCondition" styleClass="form-control" value="#{cardsController.selected.cardCondition}">
+                                    <!--<select class="form-control">-->
+                                    <f:selectItem itemValue="New" itemLabel="New" />
+                                    <f:selectItem itemValue="Excellent" itemLabel="Excellent" />
+                                    <f:selectItem itemValue="Very Good" itemLabel="Very Good" />
+                                    <f:selectItem itemValue="Good" itemLabel="Good" />
+                                    <f:selectItem itemValue="Poor" itemLabel="Poor" />
+                                    <f:selectItem itemValue="Very Poor" itemLabel="Very Poor" />
+                                </h:selectOneMenu></td>
+                        <td><p:message for="cardCondition" display="icon" /></td>                
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="edition" value="Edition" /></td>
+                        <td><h:inputText id="edition" value="#{cardsController.selected.edition}" 
+                                 required="true" label="Edition">
+                            </h:inputText></td>
+                        <td><p:message for="edition" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="value" value="Value" /></td>
+                        <td><h:inputText id="value" value="#{cardsController.selected.cardValue}" 
+                                 required="true" label="Value">
+                            </h:inputText></td>
+                        <td><p:message for="value" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="notes" value="Notes" /></td>
+                        <td><h:inputText id="notes" value="#{cardsController.selected.notes}" 
+                                         label="Notes" /></td>
+                        <td><p:message for="notes" display="icon" /></td>
+                    </tr>
+                    <tr>
+                        <td><p:outputLabel for="dateAdded" value="Date Added" /></td>
+                        <td><h:inputText id="dateAdded" value="#{cardsController.selected.dateAdded}" 
+                                 required="true" label="dateAdded">
+                            </h:inputText></td>
+                        <td><p:message for="dateAdded" display="icon" /></td>                  
+                    </tr>
+                    <tr>
+                        <td><h:outputLabel value="Card Image" for="upload"/></td>
+                        <td><p:fileUpload id="upload" value="#{cardsController.file}" mode="simple" /></td>
+                    </tr>
+                </table>
+            </div>
+            <h:outputLabel id="error" value="#{cardsController.message}"  />
+            <br/>
+            <h:commandButton id="add" 
+                             action="#{cardsController.create()}" value="Add" />   
+            <h:button id="cancel" outcome="index" value="Cancel" />
             </h:form>
+        </div>
+        </div>
         </ui:define>
     </ui:composition>
 
