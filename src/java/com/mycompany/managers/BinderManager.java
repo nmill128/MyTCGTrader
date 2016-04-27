@@ -40,18 +40,31 @@ public class BinderManager implements Serializable {
     private int[] otherChecks;
     private String offerUser;
     private List<Trades> currOffers;
+    private List<Trades> pastOffers;
     private Trades currentOffer;
+    private Integer parentId = null;
 
     private Map<String, Object> checksValue;
     private Map<String, Object> otherChecksValue;
+    
+    
 
     public List<Trades> getCurrOffers(){
-        setCurrOffers(tradesFacade.findTradesByUserId(getLoggedInUser().getId()));
+        setCurrOffers(tradesFacade.findCurrTradesByUserId(getLoggedInUser().getId()));
         return this.currOffers;
     }
     
     public void setCurrOffers(List<Trades> offers){
         this.currOffers = offers;
+    }
+    
+    public List<Trades> getPastOffers(){
+        setPastOffers(tradesFacade.findPastTradesByUserId(getLoggedInUser().getId()));
+        return this.pastOffers;
+    }
+    
+    public void setPastOffers(List<Trades> offers){
+        this.pastOffers = offers;
     }
     
     public Trades getCurrentOffer() {
@@ -122,8 +135,6 @@ public class BinderManager implements Serializable {
     }
 
     public String submitOffer() {
-        System.out.println(Arrays.toString(checks));
-        System.out.println(Arrays.toString(otherChecks));
         if (checks.length == 0 || otherChecks.length == 0) {
             return "CreateOfferUser";
         }
@@ -162,6 +173,90 @@ public class BinderManager implements Serializable {
         this.currentOffer.setApproved(true);
         tradesFacade.edit(currentOffer);
         return "CurrentOffer";
+    }
+    
+    public String completeOffer(){
+        this.currentOffer.setCompleted(true);
+        tradesFacade.edit(currentOffer);
+        return "CurrentOffer";
+    }
+    
+    public String cancelOffer(){
+        List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(this.currentOffer.getId());
+        for(Tradecards tc : tradecards){
+            tradecardsFacade.remove(tc);
+        }
+        tradesFacade.remove(currentOffer);
+        return "CreateOffer";
+    }
+    
+    public String createCounterOffer(){
+        if(this.currentOffer.getCreatorId().getId().equals(getLoggedInUser().getId())){
+            this.offerUser = this.currentOffer.getRecieverId().getUsername();
+        } else {
+            this.offerUser = this.currentOffer.getCreatorId().getUsername();
+        }
+        List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(this.currentOffer.getId());
+        int uCounter = 0;
+        int oCounter = 0;
+        for(Tradecards tc : tradecards){
+            if(tc.getCardID().getUserId().getId().equals(getLoggedInUser().getId())){
+                uCounter++;
+            } else {
+                oCounter++;
+            }
+        }
+        int[] uChecks = new int[uCounter];
+        int[] oChecks = new int[oCounter];
+        uCounter = 0;
+        oCounter = 0;
+        for(Tradecards tc : tradecards){
+            if(tc.getCardID().getUserId().getId().equals(getLoggedInUser().getId())){
+                uChecks[uCounter] = tc.getCardID().getId();
+                uCounter++;
+            } else {
+                oChecks[oCounter] = tc.getCardID().getId();
+                oCounter++;
+            }
+        }
+        setChecks(uChecks);
+        setOtherChecks(oChecks);
+        return "CounterOffer";
+    }
+    
+    public String submitCounterOffer(){
+        if (checks.length == 0 || otherChecks.length == 0) {
+            return "CreateOfferUser";
+        }
+        Date now = new Date();
+        Trades newTrade = new Trades();
+        newTrade.setApproved(false);
+        newTrade.setCompleted(false);
+        newTrade.setParentOfferId(this.currentOffer);
+        newTrade.setOfferTimestamp(now);
+        newTrade.setCreatorId(getLoggedInUser());
+        newTrade.setRecieverId(userFacade.findByUsername(offerUser));
+        try {
+            tradesFacade.create(newTrade);
+            Trades tradeId = tradesFacade.findByDate(newTrade.getOfferTimestamp());
+            for(int cardId : checks){
+                Tradecards tc = new Tradecards();
+                tc.setTradeID(tradeId);
+                tc.setCardID(cardsFacade.find(cardId));
+                tradecardsFacade.create(tc);
+            }
+            for(int cardId : otherChecks){
+                Tradecards tc = new Tradecards();
+                tc.setTradeID(tradeId);
+                tc.setCardID(cardsFacade.find(cardId));
+                tradecardsFacade.create(tc);
+            }
+            this.setCurrentOffer(tradeId);
+            return "CurrentOffer";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public class Entry implements Serializable {

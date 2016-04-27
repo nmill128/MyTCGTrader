@@ -42,18 +42,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Dan</td>
-                                            <td>04/01/2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Daniel</td>
-                                            <td>04/01/2015</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vans</td>
-                                            <td>04/01/2014</td>
-                                        </tr>
+                                        <ui:repeat value="#{binderManager.pastOffers}" var="offer">
+                                            <tr onclick="document.getElementsByClassName('offerButton#{offer.id}')[0].click()">
+                                                    <td>
+                                                        <h:outputLabel value="#{offer.recieverId.username}" rendered="#{offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
+                                                        <h:outputLabel value="#{offer.creatorId.username}" rendered="#{not offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
+                                                    </td>
+                                                    <td>#{offer.offerTimestamp}</td>
+                                            </tr>
+                                            <h:commandButton  style="display:none;"  styleClass="offerButton#{offer.id}" action="#{binderManager.viewCurrentOffer(offer.id)}"></h:commandButton>
+                                        </ui:repeat>
                                     </tbody>
                                 </table>
                             </h:form>

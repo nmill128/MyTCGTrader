@@ -41,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Trades.findById", query = "SELECT t FROM Trades t WHERE t.id = :id"),
     @NamedQuery(name = "Trades.findByOfferTimestamp", query = "SELECT t FROM Trades t WHERE t.offerTimestamp = :offerTimestamp"),
     @NamedQuery(name = "Trades.findByApproved", query = "SELECT t FROM Trades t WHERE t.approved = :approved"),
-    @NamedQuery(name = "Trades.findTradesByUserId", query = "SELECT t FROM Trades t WHERE t.creatorId.id = :creatorId OR t.recieverId.id = :recieverId"),
+    @NamedQuery(name = "Trades.findCurrTradesByUserId", query = "SELECT t FROM Trades t WHERE (t.creatorId.id = :creatorId OR t.recieverId.id = :recieverId) AND t.completed=false"),
+    @NamedQuery(name = "Trades.findPastTradesByUserId", query = "SELECT t FROM Trades t WHERE (t.creatorId.id = :creatorId OR t.recieverId.id = :recieverId) AND t.completed=true"),
     @NamedQuery(name = "Trades.findByCompleted", query = "SELECT t FROM Trades t WHERE t.completed = :completed")})
 public class Trades implements Serializable {
 

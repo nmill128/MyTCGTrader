@@ -38,8 +38,14 @@ public class TradesFacade extends AbstractFacade<Trades> {
                 .getResultList().get(0);
     }
 
-    public List<Trades> findTradesByUserId(Integer id) {
-        return (List<Trades>) em.createNamedQuery("Trades.findTradesByUserId")
+    public List<Trades> findCurrTradesByUserId(Integer id) {
+        return (List<Trades>) em.createNamedQuery("Trades.findCurrTradesByUserId")
+                .setParameter("creatorId", id)
+                .setParameter("recieverId",id)
+                .getResultList();
+    }
+    public List<Trades> findPastTradesByUserId(Integer id) {
+        return (List<Trades>) em.createNamedQuery("Trades.findPastTradesByUserId")
                 .setParameter("creatorId", id)
                 .setParameter("recieverId",id)
                 .getResultList();
