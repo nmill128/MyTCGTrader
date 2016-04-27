@@ -115,17 +115,18 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                 <h:outputLabel id="error" value="#{accountManager.statusMessage}"  />
                 <br/>
                 <h:commandButton id="submit"
-                                 action="#{accountManager.updateAccount()}" value="Submit" />
+                                 action="#{accountManager.updateAccount()}" value="Save Changed" styleClass="btn btn-primary"/>
                 
                 <!-- Delete Account Button -->
                 <h:commandButton id="delete"
                                  action="#{accountManager.deleteAccount()}"                                
                                  value="Delete Account"
+                                 styleClass="btn btn-primary"
                                  onclick="return confirm('Are you sure you want to delete your account permanently?')">
                     <f:actionListener binding="#{fileManager.deletePhoto()}" />
                 </h:commandButton>
                 
-                <h:button id="cancel" outcome="Profile" value="Cancel" />
+                <h:button id="cancel" outcome="Profile" value="Go Back" styleClass="btn btn-secondary" />
             </h:form>
         </div>
         </div>
