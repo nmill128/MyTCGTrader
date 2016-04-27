@@ -40,6 +40,9 @@ public class Tradecards implements Serializable {
     @JoinColumn(name = "tradeID", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Trades tradeID;
+    @JoinColumn(name = "cardID", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Cards cardID;
 
     public Tradecards() {
     }
@@ -62,6 +65,14 @@ public class Tradecards implements Serializable {
 
     public void setTradeID(Trades tradeID) {
         this.tradeID = tradeID;
+    }
+    
+    public Cards getCardID() {
+        return cardID;
+    }
+
+    public void setCardID(Cards cardID) {
+        this.cardID = cardID;
     }
 
     @Override
