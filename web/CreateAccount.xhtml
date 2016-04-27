@@ -128,7 +128,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                     <tr>
                         <td><p:outputLabel for="password" value="Password:" /></td>
                         <td><h:inputSecret id="password" value="#{accountManager.password}" 
-                                required="true" label="Password">
+                                required="true" label="Password" >
                         <f:validator validatorId="passwordValidator" /> 
                             </h:inputSecret></td>
                         <td><p:message for="password" display="icon" /></td>
@@ -145,8 +145,8 @@ Copyright © 2016 Matt Morrison. All rights reserved.
             <h:outputLabel id="error" value="#{accountManager.statusMessage}"  />
             <br/>
             <h:commandButton id="submit" 
-                             action="#{accountManager.createAccount()}" value="Submit" />   
-            <h:button id="cancel" outcome="index" value="Cancel" />
+                             action="#{accountManager.createAccount()}" value="Submit" styleClass="btn btn-primary"/>   
+            <h:button id="cancel" outcome="index" value="Cancel" styleClass="btn btn-secondary"/>
             </h:form>
         </div>
         </div>

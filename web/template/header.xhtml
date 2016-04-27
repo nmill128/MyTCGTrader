@@ -33,10 +33,12 @@ Copyright © 2016 Christopher Lai. All rights reserved.
                             <li><a href="CreateOffer.xhtml">Offers</a></li>
                             <li><a href="search.xhtml">Search</a></li>
                             <li><a href="Profile.xhtml">Profile</a></li>
+                            <li>
+                                <h:form>
+                                    <h:commandButton value="Log Out" action="#{accountManager.logout()}"  styleClass="btn btn-primary" style="margin-top: 7px;"/>
+                                </h:form>
+                            </li>
                         </ul>
-                        <form class="navbar-form navbar-right">
-                            <input type="text" class="form-control" placeholder="Search..." />
-                        </form>
                     </div>
 
                 </div>
