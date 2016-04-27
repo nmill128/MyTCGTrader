@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:body>
@@ -10,7 +11,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3">
-                            <h2>Your Trade Offer</h2>
+                            <h2>Your Trade Offers</h2>
                             <table class="table highlightTable">
                                 <thead>
                                     <tr>
@@ -19,21 +20,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr id="dayumDan">
-                                        <td>Dan</td>
-                                        <td>05/01/2016</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Daniel</td>
-                                        <td>05/01/2016</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vans</td>
-                                        <td>05/01/2016</td>
-                                    </tr>
+                                    <ui:repeat value="#{binderManager.currOffers}" var="offer">
+                                        <tr>
+                                            <td>
+                                                <h:outputLabel value="#{offer.recieverId.username}" rendered="#{offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
+                                                <h:outputLabel value="#{offer.creatorId.username}" rendered="#{not offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
+                                            </td>
+                                            <td>#{offer.offerTimestamp}</td>
+                                        </tr>
+                                    </ui:repeat>
                                 </tbody>
                             </table>
-                            <h2>Past Trade Offer</h2>
+                            <h2>Past Trade Offers</h2>
                             <table class="table highlightTable">
                                 <thead>
                                     <tr>
@@ -60,7 +58,7 @@
                         <div class="col-md-9">
                             <section id="initialTrade">
                                 <ui:insert name="offer">
-                                    
+
                                 </ui:insert>
                             </section>
                             <section id="selectingTradeSection" style="display:none">

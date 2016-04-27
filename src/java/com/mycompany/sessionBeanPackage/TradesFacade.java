@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Date;
+import java.util.List;
 import java.sql.Timestamp;
 
 /**
@@ -30,13 +31,18 @@ public class TradesFacade extends AbstractFacade<Trades> {
     public TradesFacade() {
         super(Trades.class);
     }
-    
+
     public Trades findByDate(Date date) {
-        System.out.println("Times: " + new Timestamp(date.getTime()));
-        System.out.println(date);
         return (Trades) em.createNamedQuery("Trades.findByOfferTimestamp")
                 .setParameter("offerTimestamp", new Timestamp(date.getTime()))
                 .getResultList().get(0);
     }
-    
+
+    public List<Trades> findTradesByUserId(Integer id) {
+        return (List<Trades>) em.createNamedQuery("Trades.findTradesByUserId")
+                .setParameter("creatorId", id)
+                .setParameter("recieverId",id)
+                .getResultList();
+    }
+
 }

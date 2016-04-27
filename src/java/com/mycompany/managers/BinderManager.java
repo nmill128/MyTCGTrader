@@ -39,10 +39,20 @@ public class BinderManager implements Serializable {
     int[] checks;
     int[] otherChecks;
     private String offerUser;
+    List<Trades> currOffers;
 
     private Map<String, Object> checksValue;
     private Map<String, Object> otherChecksValue;
 
+    public List<Trades> getCurrOffers(){
+        setCurrOffers(tradesFacade.findTradesByUserId(getLoggedInUser().getId()));
+        return this.currOffers;
+    }
+    
+    public void setCurrOffers(List<Trades> offers){
+        this.currOffers = offers;
+    }
+    
     public String getOfferUser() {
         return offerUser;
     }
