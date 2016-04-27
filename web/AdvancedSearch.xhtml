@@ -31,15 +31,23 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                                 <div class="form-group"></div>
                             </div>
                             <div class="col-md-3">
-                                <label>Value</label>
-                                <h:selectOneMenu styleClass="form-control" value="#{searchManager.valueType}">
-                                    <!--<select class="form-control">-->
-                                    <f:selectItem itemValue="0" itemLabel="Equals" />
-                                    <f:selectItem itemValue="1" itemLabel="Less than" />
-                                    <f:selectItem itemValue="2" itemLabel="Greather than" />
-                                </h:selectOneMenu>
-                                <h:inputText styleClass="form-control" value="#{searchManager.value}" />
-                                <div class="form-group"></div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Price</label>
+                                        <h:selectOneMenu styleClass="form-control" value="#{searchManager.valueType}">
+                                            <!--<select class="form-control">-->
+                                            <f:selectItem itemValue="0" itemLabel="Equals" />
+                                            <f:selectItem itemValue="1" itemLabel="Less than" />
+                                            <f:selectItem itemValue="2" itemLabel="Greather than" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>$</label>
+                                        <h:inputText styleClass="form-control" value="#{searchManager.value}" />
+                                        <div class="form-group"></div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3">
                                 <br />

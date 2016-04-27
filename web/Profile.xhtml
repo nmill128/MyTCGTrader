@@ -30,8 +30,8 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                           class="img-rounded col-md-3 block-image"></h:graphicImage>
                           <br />
                     <h2> #{profileViewManager.loggedInUser.firstName} #{profileViewManager.loggedInUser.lastName} </h2>
-                    <h:button value="Edit Profile"  outcome="EditAccount"/>
-                    <h:button value="Change Photo"  outcome="EditPhoto"/>
+                    <h:button value="Edit Profile"  outcome="EditAccount" styleClass="btn btn-primary"/>
+                    <h:button value="Change Photo"  outcome="EditPhoto" styleClass="btn btn-primary"/>
                     <h:commandButton value="Log Out" action="#{accountManager.logout()}" />
                 <br/>
                 <br/>
