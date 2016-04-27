@@ -13,7 +13,9 @@ html {
     position: relative;
     min-height: 100%;
 }
-
+body{
+    background-color: #fafafa !important;
+}
 .footer {
     position: absolute;
     bottom: 0;
@@ -91,10 +93,10 @@ html {
 }
 
 .card {
-/*    background-color: #fff;
-    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);
-    -webkit-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);*/
+    /*    background-color: #fff;
+        box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);*/
     border: 1px solid #607D8B;
     overflow-y: auto;
     height: 300px;
@@ -111,4 +113,105 @@ html {
 
 .block-image{
     display:block;
+}
+
+/* Index Style
+-------------------------------------------------- */
+.container.indexImageContainer{
+    position: relative;
+    padding: 0;
+}
+#indexImage{
+    background-image: url("/MyTCGTrader/resources/images/magicBinder.JPG");
+    width: 100%;
+    height: 90vh;
+    min-height: 500px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+#indexImage:after {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    opacity: 1;
+}
+#indexImageText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 42px;
+    color: white;
+}
+#indexImageText span{
+    font-size: 24px;
+}
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.featurette-image {
+    width: 400px;
+    height: 400px;
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
+
+#singlebutton{
+    padding: 15px 35px;
+    font-size: 24px;
 }
