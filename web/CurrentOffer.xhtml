@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="offers.xhtml">
+            <ui:define name="offer">
+                <h2 class="centerText">Current Offer</h2>
+                
+                <br />
+                <h:form>
+                    <div class="row">
+                        <div class="col-md-6 card">
+                            <h3>My Cards</h3>
+                            <ui:repeat value="#{binderManager.currentOffer.userCards}" var="card">
+                                <h:commandLink value="#{card.cardName}" action="CurrentOffer"></h:commandLink>
+                            </ui:repeat>
+                        </div>
+                        <div class="col-md-6 card">
+                            <h3>#{binderManager.offerUser}'s Cards</h3>
+                            <ui:repeat value="#{binderManager.currentOffer.otherCards}" var="card">
+                                <h:commandLink value="#{card.cardName}" action="CurrentOffer"></h:commandLink>
+                            </ui:repeat>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  action="#{binderManager.acceptOffer}" value="Accept" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  action="#{binderManager.cancelOffer}" value="Cancel" rendered="#{binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id) and (not (binderManager.currentOffer.approved))}"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  action="#{binderManager.completeOffer}" value="Trade Completed" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  value="Reject" action="#{binderManager.cancelOffer}" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
+                            <h:outputLabel value="Offer has been accepted.  Shipping details in email" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"></h:outputLabel>
+                            <h:outputLabel value="Offer has been completed." rendered="#{(binderManager.currentOffer.completed)}"></h:outputLabel>
+                        </div>
+                        <div class="col-md-4">
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton" action="#{binderManager.createCounterOffer}"  value="Counter Offer" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id))  and (not (binderManager.currentOffer.approved))}"/>
+                        </div>
+                    </div>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
