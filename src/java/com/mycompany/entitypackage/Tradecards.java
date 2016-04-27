@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tradecards.findAll", query = "SELECT t FROM Tradecards t"),
+    @NamedQuery(name = "Tradecards.findByTradeId", query = "SELECT t FROM Tradecards t WHERE t.tradeID.id = :tradeId"),
     @NamedQuery(name = "Tradecards.findById", query = "SELECT t FROM Tradecards t WHERE t.id = :id")})
 public class Tradecards implements Serializable {
 

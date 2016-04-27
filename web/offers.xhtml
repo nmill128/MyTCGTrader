@@ -11,49 +11,52 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3">
-                            <h2>Your Trade Offers</h2>
-                            <table class="table highlightTable">
-                                <thead>
-                                    <tr>
-                                        <th>Trader</th>
-                                        <th>Offer Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <ui:repeat value="#{binderManager.currOffers}" var="offer">
+                            <h:form>
+                                <h2>Your Trade Offers</h2>
+                                <table class="table highlightTable">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <h:outputLabel value="#{offer.recieverId.username}" rendered="#{offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
-                                                <h:outputLabel value="#{offer.creatorId.username}" rendered="#{not offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
-                                            </td>
-                                            <td>#{offer.offerTimestamp}</td>
+                                            <th>Trader</th>
+                                            <th>Offer Date</th>
                                         </tr>
-                                    </ui:repeat>
-                                </tbody>
-                            </table>
-                            <h2>Past Trade Offers</h2>
-                            <table class="table highlightTable">
-                                <thead>
-                                    <tr>
-                                        <th>Trader</th>
-                                        <th>Offer Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Dan</td>
-                                        <td>04/01/2016</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Daniel</td>
-                                        <td>04/01/2015</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vans</td>
-                                        <td>04/01/2014</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{binderManager.currOffers}" var="offer">
+                                            <tr onclick="document.getElementsByClassName('offerButton#{offer.id}')[0].click()">
+                                                    <td>
+                                                        <h:outputLabel value="#{offer.recieverId.username}" rendered="#{offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
+                                                        <h:outputLabel value="#{offer.creatorId.username}" rendered="#{not offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
+                                                    </td>
+                                                    <td>#{offer.offerTimestamp}</td>
+                                            </tr>
+                                            <h:commandButton  style="display:none;"  styleClass="offerButton#{offer.id}" action="#{binderManager.viewCurrentOffer(offer.id)}"></h:commandButton>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                                <h2>Past Trade Offers</h2>
+                                <table class="table highlightTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Trader</th>
+                                            <th>Offer Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Dan</td>
+                                            <td>04/01/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Daniel</td>
+                                            <td>04/01/2015</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vans</td>
+                                            <td>04/01/2014</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </h:form>
                         </div>
                         <div class="col-md-9">
                             <section id="initialTrade">

@@ -34,12 +34,13 @@ import java.util.ResourceBundle;
 public class BinderManager implements Serializable {
 
     private Users user;
-    List<Wants> wants;
-    List<Entry> entries;
-    int[] checks;
-    int[] otherChecks;
+    private List<Wants> wants;
+    private List<Entry> entries;
+    private int[] checks;
+    private int[] otherChecks;
     private String offerUser;
-    List<Trades> currOffers;
+    private List<Trades> currOffers;
+    private Trades currentOffer;
 
     private Map<String, Object> checksValue;
     private Map<String, Object> otherChecksValue;
@@ -51,6 +52,38 @@ public class BinderManager implements Serializable {
     
     public void setCurrOffers(List<Trades> offers){
         this.currOffers = offers;
+    }
+    
+    public Trades getCurrentOffer() {
+        return currentOffer;
+    }
+
+    public void setCurrentOffer(Trades t) {
+        this.currentOffer = t;
+        List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(this.currentOffer.getId());
+        List<Cards> userCards = new ArrayList();
+        List<Cards> otherCards = new ArrayList();
+        if(this.currentOffer.getCreatorId().getId().equals(user.getId())){
+            setOfferUser(userFacade.find(this.currentOffer.getRecieverId().getId()).getUsername());
+        } else {
+            setOfferUser(userFacade.find(this.currentOffer.getCreatorId().getId()).getUsername());            
+        }
+        for(Tradecards tc : tradecards){
+            Cards card = cardsFacade.find(tc.getCardID().getId());
+            if(card.getUserId().getId().equals(user.getId())){
+                userCards.add(card);
+            } else {
+                otherCards.add(card);
+            }
+        }
+        this.currentOffer.setUserCards(userCards);
+        this.currentOffer.setOtherCards(otherCards);       
+    }
+    
+    public String viewCurrentOffer(Integer id){
+        Trades trade = tradesFacade.find(id);
+        setCurrentOffer(trade);
+        return "CurrentOffer";
     }
     
     public String getOfferUser() {
@@ -123,6 +156,12 @@ public class BinderManager implements Serializable {
             return null;
         }
 
+    }
+    
+    public String acceptOffer(){
+        this.currentOffer.setApproved(true);
+        tradesFacade.edit(currentOffer);
+        return "CurrentOffer";
     }
 
     public class Entry implements Serializable {

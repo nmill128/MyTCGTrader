@@ -9,6 +9,7 @@ import com.mycompany.entitypackage.Tradecards;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  *
@@ -27,6 +28,12 @@ public class TradecardsFacade extends AbstractFacade<Tradecards> {
 
     public TradecardsFacade() {
         super(Tradecards.class);
+    }
+    
+    public List<Tradecards> findTradecardsByTradeId(Integer id) {
+        return (List<Tradecards>) em.createNamedQuery("Tradecards.findByTradeId")
+                .setParameter("tradeId", id)
+                .getResultList();
     }
     
 }

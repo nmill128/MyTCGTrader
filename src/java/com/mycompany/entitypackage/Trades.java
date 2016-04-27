@@ -8,6 +8,7 @@ package com.mycompany.entitypackage;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -75,6 +77,10 @@ public class Trades implements Serializable {
     @JoinColumn(name = "reciever_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Users recieverId;
+    @Transient 
+    private List<Cards> userCards;
+    @Transient 
+    private List<Cards> otherCards;
 
     public Trades() {
     }
@@ -122,6 +128,7 @@ public class Trades implements Serializable {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+    
 
     @XmlTransient
     public Collection<Tradecomments> getTradecommentsCollection() {
@@ -188,6 +195,22 @@ public class Trades implements Serializable {
     @Override
     public String toString() {
         return "com.mycompany.entitypackage.Trades[ id=" + id + " ]";
+    }
+    
+    public List<Cards> getUserCards(){
+        return this.userCards;
+    }
+    
+    public void setUserCards(List<Cards> cards){
+        this.userCards = cards;
+    }
+    
+    public List<Cards> getOtherCards(){
+        return this.otherCards;
+    }
+    
+    public void setOtherCards(List<Cards> cards){
+        this.otherCards = cards;
     }
     
 }
