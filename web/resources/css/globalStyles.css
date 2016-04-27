@@ -7,7 +7,7 @@ Copyright © 2016 Christopher Lai. All rights reserved.
     Author     : chrislai
 */
 
-/* Sticky footer styles
+/* General Style
 -------------------------------------------------- */
 html {
     position: relative;
@@ -16,14 +16,7 @@ html {
 body{
     background-color: #F5F3EE !important;
 }
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #F5F3EE;
-}
+
 #content{
     min-height: 69vh;
 }
@@ -31,6 +24,15 @@ body{
 select[size].form-control{
     height: 34px;
 }
+.knowledgeBase{
+    margin:40px auto;
+    max-width:650px;
+    line-height:1.6;
+    font-size:18px;
+    color:#444;
+    padding: 0 15px 35px 15px;
+}
+.knowledgeBase h1,.knowledgeBase h2,.knowledgeBase h3{line-height:1.2}
 /* Dropdown Style
 -------------------------------------------------- */
 .dropdown.dropdown-lg .dropdown-menu {
@@ -135,7 +137,7 @@ select[size].form-control{
     min-height: 500px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    
+
 }
 #indexImage:after {
     content: '\A';
@@ -164,14 +166,14 @@ select[size].form-control{
 ------------------------- */
 
 .featurette-divider {
-  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    margin: 80px 0; /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
 .featurette-heading {
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -1px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
 }
 .featurette-image {
     width: 400px;
@@ -182,40 +184,40 @@ select[size].form-control{
 -------------------------------------------------- */
 
 @media (min-width: 768px) {
-  /* Navbar positioning foo */
-  .navbar-wrapper {
-    margin-top: 20px;
-  }
-  .navbar-wrapper .container {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-  .navbar-wrapper .navbar {
-    padding-right: 0;
-    padding-left: 0;
-  }
+    /* Navbar positioning foo */
+    .navbar-wrapper {
+        margin-top: 20px;
+    }
+    .navbar-wrapper .container {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .navbar-wrapper .navbar {
+        padding-right: 0;
+        padding-left: 0;
+    }
 
-  /* The navbar becomes detached from the top, so we round the corners */
-  .navbar-wrapper .navbar {
-    border-radius: 4px;
-  }
+    /* The navbar becomes detached from the top, so we round the corners */
+    .navbar-wrapper .navbar {
+        border-radius: 4px;
+    }
 
-  /* Bump up size of carousel content */
-  .carousel-caption p {
-    margin-bottom: 20px;
-    font-size: 21px;
-    line-height: 1.4;
-  }
+    /* Bump up size of carousel content */
+    .carousel-caption p {
+        margin-bottom: 20px;
+        font-size: 21px;
+        line-height: 1.4;
+    }
 
-  .featurette-heading {
-    font-size: 50px;
-  }
+    .featurette-heading {
+        font-size: 50px;
+    }
 }
 
 @media (min-width: 992px) {
-  .featurette-heading {
-    margin-top: 120px;
-  }
+    .featurette-heading {
+        margin-top: 120px;
+    }
 }
 
 #singlebutton{
