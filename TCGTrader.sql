@@ -53,7 +53,7 @@ CREATE TABLE Trades
     creator_id INT NOT NULL,
     reciever_id INT NOT NULL,
     offer_date DATE NOT NULL,
-    parent_offer_id INT NOT NULL,
+    parent_offer_id INT,
     approved BOOLEAN NOT NULL,
     completed BOOLEAN NOT NULL,
     PRIMARY KEY(id),
