@@ -309,4 +309,6 @@ select[size].form-control{
     max-height:50px;
     max-width:50px;
     display:inline;
+    margin-right: 15px;
+    margin-bottom: 10px;
 }
