@@ -64,7 +64,7 @@ and open the template in the editor.
                         <ui:repeat value="#{binderManager.comments}" var="comment">
                             <div class="row">
                                 <div class="col-sm-1">
-                                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+                                    <h:graphicImage styleClass="img-responsive user-photo" value="/FileStorageLocation/#{binderManager.getUserPhotoFileName(comment.creatorId)}" ></h:graphicImage>
 
                                 </div><!-- /col-sm-1 -->
 
