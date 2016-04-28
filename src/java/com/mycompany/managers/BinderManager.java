@@ -112,6 +112,12 @@ public class BinderManager implements Serializable {
         }
         return "CreateOffer";
     }
+    
+    public String tradeWith(){
+        this.offerUser = user.getUsername();
+        populateOfferUser();
+        return "CreateOfferUser";
+    }
 
     public Map<String, Object> getChecksValue() {
         checksValue = new LinkedHashMap();
@@ -367,7 +373,7 @@ public class BinderManager implements Serializable {
     }
 
     public List<Entry> getEntries() {
-        List<Cards> cards = cardsFacade.findCardsByUserID(getLoggedInUser().getId());
+        List<Cards> cards = cardsFacade.findCardsByUserID(getUser().getId());
         List<Entry> entriesReturn = new ArrayList(0);
         for (Cards card : cards) {
             List<CardPhotos> photos = cardPhotosFacade.findPhotosByCardID(card.getId());
@@ -392,6 +398,9 @@ public class BinderManager implements Serializable {
      * @return the user
      */
     public Users getUser() {
+        if(user==null){
+            this.user = getLoggedInUser();
+        }
         return user;
     }
 
@@ -464,6 +473,11 @@ public class BinderManager implements Serializable {
             String password = "csd@VT(S16)";                                      // specify your password here
             return new PasswordAuthentication(username, password);
         }
+    }
+
+    public String viewUserBinder(Users user) {
+            this.user = user;
+        return "OtherBinder";
     }
 
 }

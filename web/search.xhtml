@@ -51,15 +51,19 @@
                                     <th>My Value</th>
                                 </tr>
                                 <tbody>
-                                    <ui:repeat value="#{searchManager.searchResults}" var="card">
-                                        <tr>
-                                            <td class="td-center">#{card.cardName}</td>
-                                            <td class="td-center">#{card.userId.username}</td>
-                                            <td class="td-center">#{card.edition}</td>
-                                            <td class="td-center">#{card.cardCondition}</td>
-                                            <td class="td-center">#{card.cardValue}$</td>
-                                        </tr>
-                                    </ui:repeat>
+                                    <h:form>
+                                        <ui:repeat value="#{searchManager.searchResults}" var="card">
+                                            <tr>
+                                                <td class="td-center"><h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}"></h:commandLink></td>
+                                                <td class="td-center">
+                                                    <h:commandLink value="#{card.userId.username}" action="#{binderManager.viewUserBinder(card.userId)}"></h:commandLink>
+                                                </td>
+                                                <td class="td-center">#{card.edition}</td>
+                                                <td class="td-center">#{card.cardCondition}</td>
+                                                <td class="td-center">#{card.cardValue}$</td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </h:form>
                                 </tbody>
                             </thead>
                         </table>
