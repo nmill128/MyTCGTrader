@@ -274,8 +274,11 @@ public class CardsController implements Serializable {
     
     public String binderEdit(int id) {
         current = (Cards) cardsFacade.findById(id);
-        CardPhotos photo = cardPhotosFacade.findPhotosByCardID(current.getId()).get(0);
-        setFileName(photo.getThumbnailName());
+        List<CardPhotos> photos = cardPhotosFacade.findPhotosByCardID(current.getId());
+        if (photos.size() > 0) {
+            CardPhotos photo = photos.get(0);
+            setFileName(photo.getThumbnailName());
+        }
         return "EditCard";
     }
 
