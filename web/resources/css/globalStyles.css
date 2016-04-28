@@ -19,6 +19,7 @@ body{
 
 #content{
     min-height: 69vh;
+    padding: 0 25px;
 }
 
 select[size].form-control{
@@ -245,6 +246,11 @@ select[size].form-control{
 .buttonMargin{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+.buttonRightPadding{
+    padding-right: 15px;
+    padding-bottom: 15px;
+    height: 50px;
 }
 .user-photo{
     border-radius: 50%;
