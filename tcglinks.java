@@ -42,7 +42,7 @@ public void createSCLink(String cardName){
 
 public void createCFLink(String cardName){
 	String[] tokens = cardName.split(" ");
-	String result = ""
+	String result = "";
 	for(int i = 0; i<tokens.length(); i++){
 		if (result.equals("")){
 			result+=tokens[i];

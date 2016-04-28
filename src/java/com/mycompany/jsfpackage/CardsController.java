@@ -52,35 +52,36 @@ public class CardsController implements Serializable {
     private UploadedFile file;
     private String fileName;
     private String message = "";
-    
-    
-        /**
+
+    /**
      * The instance variable 'userFacade' is annotated with the @EJB annotation.
-     * This means that the GlassFish application server, at runtime, will inject in
-     * this instance variable a reference to the @Stateless session bean UserFacade.
+     * This means that the GlassFish application server, at runtime, will inject
+     * in this instance variable a reference to the @Stateless session bean
+     * UserFacade.
      */
     @EJB
     private CardsFacade cardsFacade;
 
     /**
-     * The instance variable 'photoFacade' is annotated with the @EJB annotation.
-     * This means that the GlassFish application server, at runtime, will inject in
-     * this instance variable a reference to the @Stateless session bean PhotoFacade.
+     * The instance variable 'photoFacade' is annotated with the @EJB
+     * annotation. This means that the GlassFish application server, at runtime,
+     * will inject in this instance variable a reference to the @Stateless
+     * session bean PhotoFacade.
      */
     @EJB
     private CardPhotosFacade cardPhotosFacade;
-    
+
     @EJB
     private UsersFacade userFacade;
 
     public CardsController() {
     }
-    
-    public String getFileName(){
+
+    public String getFileName() {
         return fileName;
     }
-    
-    public void setFileName(String fileName){
+
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
@@ -95,7 +96,6 @@ public class CardsController implements Serializable {
     private CardsFacade getFacade() {
         return ejbFacade;
     }
-    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -126,6 +126,13 @@ public class CardsController implements Serializable {
         return "View";
     }
 
+    public String binderView(Integer id) {
+        current = (Cards) getFacade().find(id);
+        CardPhotos photo = cardPhotosFacade.findPhotosByCardID(current.getId()).get(0);
+        setFileName(photo.getThumbnailName());
+        return "ViewCard";
+    }
+
     public String prepareCreate() {
         current = new Cards();
         selectedItemIndex = -1;
@@ -151,18 +158,17 @@ public class CardsController implements Serializable {
             return null;
         }
     }
-    
-        public FacesMessage copyFile(UploadedFile file) {
+
+    public FacesMessage copyFile(UploadedFile file) {
         try {
             deletePhoto();
-            
+
             InputStream in = file.getInputstream();
-            
+
             File tempFile = inputStreamToFile(in, Constants.TEMP_FILE);
             in.close();
 
             FacesMessage resultMsg;
-
 
             Cards card = cardsFacade.findById(current.getId());
 
@@ -185,7 +191,7 @@ public class CardsController implements Serializable {
             e.printStackTrace();
         }
         return new FacesMessage("Upload failure!",
-            "There was a problem reading the image file. Please try again with a new photo file.");
+                "There was a problem reading the image file. Please try again with a new photo file.");
     }
 
     private File inputStreamToFile(InputStream inputStream, String childName)
@@ -211,12 +217,12 @@ public class CardsController implements Serializable {
             BufferedImage original = ImageIO.read(inputFile);
             BufferedImage thumbnail = Scalr.resize(original, Constants.THUMBNAIL_SZ);
             ImageIO.write(thumbnail, inputPhoto.getExtension(),
-                new File(Constants.ROOT_DIRECTORY, inputPhoto.getThumbnailName()));
+                    new File(Constants.ROOT_DIRECTORY, inputPhoto.getThumbnailName()));
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void deletePhoto() {
         FacesMessage resultMsg;
 
@@ -230,9 +236,9 @@ public class CardsController implements Serializable {
             try {
                 Files.deleteIfExists(Paths.get(photo.getFilePath()));
                 Files.deleteIfExists(Paths.get(photo.getThumbnailFilePath()));
-                
-                Files.deleteIfExists(Paths.get(Constants.ROOT_DIRECTORY+"tmp_file"));
-                 
+
+                Files.deleteIfExists(Paths.get(Constants.ROOT_DIRECTORY + "tmp_file"));
+
                 cardPhotosFacade.remove(photo);
             } catch (IOException ex) {
                 Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,9 +248,9 @@ public class CardsController implements Serializable {
         }
         FacesContext.getCurrentInstance().addMessage(null, resultMsg);
     }
-    
+
     //Fileupload controlling
-        // Returns the uploaded file
+    // Returns the uploaded file
     public UploadedFile getFile() {
         return file;
     }
@@ -269,7 +275,7 @@ public class CardsController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
-    
+
     public String binderEdit(int id) {
         current = (Cards) cardsFacade.findById(id);
         CardPhotos photo = cardPhotosFacade.findPhotosByCardID(current.getId()).get(0);
@@ -297,14 +303,13 @@ public class CardsController implements Serializable {
         recreateModel();
         return "List";
     }
-    
+
     public String binderDestroy(int id) {
-        
+
         current = (Cards) cardsFacade.findById(id);
         performDestroy();
         return "MyBinder";
     }
-    
 
     public String destroyAndView() {
         performDestroy();
@@ -420,6 +425,46 @@ public class CardsController implements Serializable {
             }
         }
 
+    }
+
+    //Outside link generators
+    public String createTCGPLink(String cardName) {
+        String[] tokens = cardName.split(" ");
+        String result = "";
+        for (int i = 0; i < tokens.length; i++) {
+            if (result.equals("")) {
+                result += tokens[i];
+            } else {
+                result += "%20" + tokens[i];
+            }
+        }
+        return "http://shop.tcgplayer.com/productcatalog/product/show?newSearch=false&ProductType=All&IsProductNameExact=false&ProductName=" + result;
+    }
+
+    public String createSCLink(String cardName) {
+        String[] tokens = cardName.split(" ");
+        String result = "";
+        for (int i = 0; i < tokens.length; i++) {
+            if (result.equals("")) {
+                result += tokens[i];
+            } else {
+                result += "+" + tokens[i];
+            }
+        }
+        return "http://sales.starcitygames.com/search.php?substring=" + result + "&go.x=25&go.y=5&go=GO&t_all=All&start_date=2010-01-29&end_date=2012-04-22&order_1=finish&limit=25&action=Show%2BDecks&card_qty%5B1%5D=1";
+    }
+
+    public String createCFLink(String cardName) {
+        String[] tokens = cardName.split(" ");
+        String result = "";
+        for (int i = 0; i < tokens.length; i++) {
+            if (result.equals("")) {
+                result += tokens[i];
+            } else {
+                result += "+" + tokens[i];
+            }
+        }
+        return "http://store.channelfireball.com/products/search?query=" + result;
     }
 
 }

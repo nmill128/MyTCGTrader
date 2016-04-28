@@ -168,6 +168,7 @@ public class BinderManager implements Serializable {
         }
 
     }
+   
     
     public String acceptOffer(){
         this.currentOffer.setApproved(true);
@@ -187,7 +188,20 @@ public class BinderManager implements Serializable {
             tradecardsFacade.remove(tc);
         }
         tradesFacade.remove(currentOffer);
+        cancelOffer(this.currentOffer.getParentOfferId());
+        currentOffer = null;
         return "CreateOffer";
+    }
+    
+    public void cancelOffer(Trades offer){
+        if(offer != null){
+            List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(offer.getId());
+            for(Tradecards tc : tradecards){
+                tradecardsFacade.remove(tc);
+            }
+            tradesFacade.remove(offer);
+            cancelOffer(offer.getParentOfferId());
+        }
     }
     
     public String createCounterOffer(){

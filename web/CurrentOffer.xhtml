@@ -24,13 +24,13 @@ and open the template in the editor.
                         <div class="col-md-6 card">
                             <h3>My Cards</h3>
                             <ui:repeat value="#{binderManager.currentOffer.userCards}" var="card">
-                                <h:commandLink value="#{card.cardName}" action="CurrentOffer"></h:commandLink>
+                                <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}"></h:commandLink>
                             </ui:repeat>
                         </div>
                         <div class="col-md-6 card">
                             <h3>#{binderManager.offerUser}'s Cards</h3>
                             <ui:repeat value="#{binderManager.currentOffer.otherCards}" var="card">
-                                <h:commandLink value="#{card.cardName}" action="CurrentOffer"></h:commandLink>
+                                <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}"></h:commandLink>
                             </ui:repeat>
 
                         </div>
@@ -43,13 +43,15 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  value="Reject" action="#{binderManager.cancelOffer}" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
-                            <h:outputLabel value="Offer has been accepted.  Shipping details in email" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"></h:outputLabel>
-                            <h:outputLabel value="Offer has been completed." rendered="#{(binderManager.currentOffer.completed)}"></h:outputLabel>
+                            <h:outputLabel value="This offer has been accepted.  Shipping details in email" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"></h:outputLabel>
+                            <h:outputLabel value="This offer has been completed." rendered="#{(binderManager.currentOffer.completed)}"></h:outputLabel>
                         </div>
                         <div class="col-md-4">
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton" action="#{binderManager.createCounterOffer}"  value="Counter Offer" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id))  and (not (binderManager.currentOffer.approved))}"/>
                         </div>
                     </div>
+                    <h:commandLink action="#{binderManager.viewCurrentOffer(binderManager.currentOffer.parentOfferId.id)}" value="This is a counter offer - View previous offer" rendered="#{not (binderManager.currentOffer.parentOfferId eq null)}" ></h:commandLink>
+
 
                 </h:form>
             </ui:define>
