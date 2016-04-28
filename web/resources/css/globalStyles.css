@@ -304,3 +304,9 @@ select[size].form-control{
 .input-group-addon:first-child{
     border-right: 1px #CCCCCC solid !important;
 }
+
+.selectItemImg {
+    max-height:50px;
+    max-width:50px;
+    display:inline;
+}

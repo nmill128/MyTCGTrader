@@ -129,8 +129,11 @@ public class CardsController implements Serializable {
 
     public String binderView(Integer id) {
         current = (Cards) getFacade().find(id);
-        CardPhotos photo = cardPhotosFacade.findPhotosByCardID(current.getId()).get(0);
-        setFileName(photo.getThumbnailName());
+        List<CardPhotos> photos = cardPhotosFacade.findPhotosByCardID(current.getId());
+        if (!photos.isEmpty()) {
+            CardPhotos photo = photos.get(0);
+            setFileName(photo.getThumbnailName());
+        }
         return "ViewCard";
     }
 

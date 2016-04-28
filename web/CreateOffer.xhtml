@@ -37,21 +37,12 @@ and open the template in the editor.
                         <hr/>
                         <div class="scrollable">
                             <h:form styleClass="createOfferList ">
-                                <div class="checkbox">
-                                    <h:selectManyCheckbox value="#{binderManager.checks}">
+                                <h:selectManyCheckbox value="#{binderManager.checks}">
+                                    <div class="checkbox">
                                         <f:selectItems  value="#{binderManager.checksValue}" />
-                                    </h:selectManyCheckbox>
-                                </div>
-                                <div class="imageList">
-                                    <div class="col-sm-1">
-                                        <h:graphicImage styleClass="img-responsive user-photo" value="/FileStorageLocation/2_thumbnail.jpeg}" ></h:graphicImage>
+                                    </div>
+                                </h:selectManyCheckbox>
 
-                                    </div><!-- /col-sm-1 -->
-                                    <div class="col-sm-1">
-                                        <h:graphicImage styleClass="img-responsive user-photo" value="/FileStorageLocation/2_thumbnail.jpeg}" ></h:graphicImage>
-
-                                    </div><!-- /col-sm-1 -->
-                                </div>
                             </h:form>
                         </div>
                     </div>
