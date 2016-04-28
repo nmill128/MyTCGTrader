@@ -515,8 +515,12 @@ public class BinderManager implements Serializable {
     }
     
     public String getUserPhotoFileName(Users u){
-        UserPhotos up = this.userPhotosFacade.findPhotosByUserID(u.getId()).get(0);
-        return up.getThumbnailName();
+        List<UserPhotos> userPhotos = this.userPhotosFacade.findPhotosByUserID(u.getId());
+        if(!userPhotos.isEmpty()){
+            return userPhotos.get(0).getThumbnailName();
+        }
+        return "userPhotos/defaultUserPhoto.png";
+
     }
 
     public String getCardPhotoFileName(Cards c){
