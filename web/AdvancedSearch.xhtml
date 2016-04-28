@@ -27,7 +27,14 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                             </div>
                             <div class="col-md-2">
                                 <label>Condition</label>
-                                <h:inputText styleClass="form-control" value="#{searchManager.edition}" />
+                                <h:selectOneMenu styleClass="form-control" value="#{searchManager.cardCondition}">
+                                    <f:selectItem itemValue="" itemLabel="Any" />
+                                    <f:selectItem itemValue="Mint" itemLabel="Mint" />
+                                    <f:selectItem itemValue="Slightly Played" itemLabel="Slightly Played" />
+                                    <f:selectItem itemValue="Moderately Played" itemLabel="Moderately Played" />
+                                    <f:selectItem itemValue="Heavily Played" itemLabel="Heavily Played" />
+                                    <f:selectItem itemValue="Damaged" itemLabel="Damaged" />
+                                </h:selectOneMenu>
                                 <div class="form-group"></div>
                             </div>
                             <div class="col-md-3">

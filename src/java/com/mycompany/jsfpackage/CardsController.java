@@ -20,6 +20,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -136,9 +137,10 @@ public class CardsController implements Serializable {
         try {
             if (file.getSize() != 0) {
                 current.setUserId(userFacade.find(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user_id")));
+                current.setDateAdded(new java.sql.Date(new Date().getTime()).toString());
                 getFacade().create(current);
                 copyFile(file);
-                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsCreated"));
+                //JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsCreated"));
                 message = "";
                 return "MyBinder";
             } else {

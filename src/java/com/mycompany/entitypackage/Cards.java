@@ -6,6 +6,7 @@
 package com.mycompany.entitypackage;
 
 import java.io.Serializable;
+import java.sql.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -64,7 +65,7 @@ public class Cards implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "cardValue")
-    private int cardValue;
+    private float cardValue;
     @Size(max = 255)
     @Column(name = "notes")
     private String notes;
@@ -125,11 +126,11 @@ public class Cards implements Serializable {
         this.edition = edition;
     }
 
-    public int getCardValue() {
+    public float getCardValue() {
         return cardValue;
     }
 
-    public void setCardValue(int cardValue) {
+    public void setCardValue(float cardValue) {
         this.cardValue = cardValue;
     }
 
@@ -146,7 +147,7 @@ public class Cards implements Serializable {
     }
 
     public void setDateAdded(String dateAdded) {
-        this.dateAdded = dateAdded;
+        this.dateAdded = (dateAdded);
     }
 
     public Users getUserId() {

@@ -8,13 +8,12 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.CreateCardsTitle}"></h:outputText>
+            <h:outputText value="New Card"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <div class="container-fluid">
         <div align="center" style="width:50%; margin:0 auto;">
             <h:form enctype="multipart/form-data">
-                <h2 class="form-signin-heading">New Card</h2>
                 <br/>
                 
                 <div class="panel panel-default col-xs-12">
@@ -32,12 +31,11 @@
                         <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
                         <td><h:selectOneMenu id="cardCondition" styleClass="form-control" value="#{cardsController.selected.cardCondition}">
                                     <!--<select class="form-control">-->
-                                    <f:selectItem itemValue="New" itemLabel="New" />
-                                    <f:selectItem itemValue="Excellent" itemLabel="Excellent" />
-                                    <f:selectItem itemValue="Very Good" itemLabel="Very Good" />
-                                    <f:selectItem itemValue="Good" itemLabel="Good" />
-                                    <f:selectItem itemValue="Poor" itemLabel="Poor" />
-                                    <f:selectItem itemValue="Very Poor" itemLabel="Very Poor" />
+                                    <f:selectItem itemValue="Mint" itemLabel="Mint" />
+                                    <f:selectItem itemValue="Slightly Played" itemLabel="Slightly Played" />
+                                    <f:selectItem itemValue="Moderately Played" itemLabel="Moderatly Played" />
+                                    <f:selectItem itemValue="Heavily Played" itemLabel="Heavily Played" />
+                                    <f:selectItem itemValue="Damaged" itemLabel="Damaged" />
                                 </h:selectOneMenu></td>
                         <td><p:message for="cardCondition" display="icon" /></td>                
                     </tr>
@@ -62,14 +60,7 @@
                         <td><p:message for="notes" display="icon" /></td>
                     </tr>
                     <tr>
-                        <td><p:outputLabel for="dateAdded" value="Date Added" /></td>
-                        <td><h:inputText id="dateAdded" value="#{cardsController.selected.dateAdded}" 
-                                 required="true" label="dateAdded">
-                            </h:inputText></td>
-                        <td><p:message for="dateAdded" display="icon" /></td>                  
-                    </tr>
-                    <tr>
-                        <td><h:outputLabel value="Card Image" for="upload"/></td>
+                        <td><p:outputLabel value="Card Image" for="upload"/></td>
                         <td><p:fileUpload id="upload" value="#{cardsController.file}" mode="simple" /></td>
                     </tr>
                 </table>
