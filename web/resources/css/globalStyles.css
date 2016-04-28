@@ -224,3 +224,28 @@ select[size].form-control{
     padding: 15px 45px; 
     font-size: 24px;
 }
+
+/* CreateOffer CSS
+-------------------------------------------------- */
+.CreateOfferTop{
+    
+}
+.createOfferList{
+    
+}
+
+.createOfferList td{
+    display: block;
+}
+
+.whiteBackground{
+    background-color: white;
+}
+
+.buttonMargin{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.user-photo{
+    border-radius: 50%;
+}

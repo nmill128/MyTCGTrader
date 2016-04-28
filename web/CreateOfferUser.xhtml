@@ -25,8 +25,9 @@ and open the template in the editor.
                     </h:form>
                 </div>
                 <br />
-                <h:form>
-                    <div class="row">
+                
+                <h:form styleClass="createOfferList">
+                    <div class="row whiteBackground">
                         <div class="col-md-6 card">
                             <h3>My Cards</h3>
                             <h:selectManyCheckbox value="#{binderManager.checks}">
@@ -47,7 +48,7 @@ and open the template in the editor.
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block sendOfferButton" action="#{binderManager.submitOffer()}" value="Send Offer"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block sendOfferButton buttonMargin" action="#{binderManager.submitOffer()}" value="Send Offer"/>
                         </div>
                     </div>
                 </h:form>

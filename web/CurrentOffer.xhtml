@@ -17,7 +17,7 @@ and open the template in the editor.
         <ui:composition template="offers.xhtml">
             <ui:define name="offer">
                 <h2 class="centerText">Current Offer</h2>
-                
+
                 <br />
                 <h:form>
                     <div class="row">
@@ -52,6 +52,67 @@ and open the template in the editor.
                     </div>
                     <h:commandLink action="#{binderManager.viewCurrentOffer(binderManager.currentOffer.parentOfferId.id)}" value="This is a counter offer - View previous offer" rendered="#{not (binderManager.currentOffer.parentOfferId eq null)}" ></h:commandLink>
 
+                    <div class="comment">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3>User Comment Example</h3>
+                            </div><!-- /col-sm-12 -->
+                        </div><!-- /row -->
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+
+                            </div><!-- /col-sm-1 -->
+
+                            <div class="col-sm-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                    </div>
+                                    <div class="panel-body">
+                                        Panel content
+                                    </div><!-- /panel-body -->
+                                </div><!-- /panel panel-default -->
+                            </div><!-- /col-sm-5 -->
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+
+                            </div><!-- /col-sm-1 -->
+
+                            <div class="col-sm-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                    </div>
+                                    <div class="panel-body">
+                                        Panel content
+                                    </div><!-- /panel-body -->
+                                </div><!-- /panel panel-default -->
+                            </div><!-- /col-sm-5 -->
+                        </div><!-- /row -->
+                        
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+
+                            </div><!-- /col-sm-1 -->
+
+                            <div class="col-sm-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                    </div>
+                                    <div class="panel-body">
+                                        Panel content
+                                    </div><!-- /panel-body -->
+                                </div><!-- /panel panel-default -->
+                            </div><!-- /col-sm-5 -->
+                        </div><!-- /row -->
+
+                    </div>
 
                 </h:form>
             </ui:define>
