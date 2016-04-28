@@ -292,10 +292,10 @@ public class CardsController implements Serializable {
         try {
             getFacade().edit(current);
             copyFile(file);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsUpdated"));
+            //JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsUpdated"));
             return "MyBinder";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            //JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
