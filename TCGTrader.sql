@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS Wants,Trades,CardPhotos,UserPhotos,Users,Cards;
+DROP TABLE IF EXISTS Tradecomments, Tradecards,Wants,Trades,CardPhotos,UserPhotos,Cards, Users;
 
 CREATE TABLE Users
 (
@@ -52,7 +52,7 @@ CREATE TABLE Trades
     id INT NOT NULL AUTO_INCREMENT,
     creator_id INT NOT NULL,
     reciever_id INT NOT NULL,
-    offer_date DATE NOT NULL,
+    offer_timestamp DATE NOT NULL,
     parent_offer_id INT,
     approved BOOLEAN NOT NULL,
     completed BOOLEAN NOT NULL,
