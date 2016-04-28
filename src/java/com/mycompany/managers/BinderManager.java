@@ -11,7 +11,6 @@ import com.mycompany.entitypackage.Cards;
 import com.mycompany.entitypackage.CardPhotos;
 import com.mycompany.entitypackage.Trades;
 import com.mycompany.entitypackage.Tradecards;
-import com.mycompany.jsfpackage.util.JsfUtil;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -21,9 +20,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.ResourceBundle;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.*;
 
 @Named(value = "binderManager")
 @SessionScoped
@@ -46,27 +46,25 @@ public class BinderManager implements Serializable {
 
     private Map<String, Object> checksValue;
     private Map<String, Object> otherChecksValue;
-    
-    
 
-    public List<Trades> getCurrOffers(){
+    public List<Trades> getCurrOffers() {
         setCurrOffers(tradesFacade.findCurrTradesByUserId(getLoggedInUser().getId()));
         return this.currOffers;
     }
-    
-    public void setCurrOffers(List<Trades> offers){
+
+    public void setCurrOffers(List<Trades> offers) {
         this.currOffers = offers;
     }
-    
-    public List<Trades> getPastOffers(){
+
+    public List<Trades> getPastOffers() {
         setPastOffers(tradesFacade.findPastTradesByUserId(getLoggedInUser().getId()));
         return this.pastOffers;
     }
-    
-    public void setPastOffers(List<Trades> offers){
+
+    public void setPastOffers(List<Trades> offers) {
         this.pastOffers = offers;
     }
-    
+
     public Trades getCurrentOffer() {
         return currentOffer;
     }
@@ -76,29 +74,29 @@ public class BinderManager implements Serializable {
         List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(this.currentOffer.getId());
         List<Cards> userCards = new ArrayList();
         List<Cards> otherCards = new ArrayList();
-        if(this.currentOffer.getCreatorId().getId().equals(user.getId())){
+        if (this.currentOffer.getCreatorId().getId().equals(user.getId())) {
             setOfferUser(userFacade.find(this.currentOffer.getRecieverId().getId()).getUsername());
         } else {
-            setOfferUser(userFacade.find(this.currentOffer.getCreatorId().getId()).getUsername());            
+            setOfferUser(userFacade.find(this.currentOffer.getCreatorId().getId()).getUsername());
         }
-        for(Tradecards tc : tradecards){
+        for (Tradecards tc : tradecards) {
             Cards card = cardsFacade.find(tc.getCardID().getId());
-            if(card.getUserId().getId().equals(user.getId())){
+            if (card.getUserId().getId().equals(user.getId())) {
                 userCards.add(card);
             } else {
                 otherCards.add(card);
             }
         }
         this.currentOffer.setUserCards(userCards);
-        this.currentOffer.setOtherCards(otherCards);       
+        this.currentOffer.setOtherCards(otherCards);
     }
-    
-    public String viewCurrentOffer(Integer id){
+
+    public String viewCurrentOffer(Integer id) {
         Trades trade = tradesFacade.find(id);
         setCurrentOffer(trade);
         return "CurrentOffer";
     }
-    
+
     public String getOfferUser() {
         return offerUser;
     }
@@ -149,18 +147,21 @@ public class BinderManager implements Serializable {
         try {
             tradesFacade.create(newTrade);
             Trades tradeId = tradesFacade.findByDate(newTrade.getOfferTimestamp());
-            for(int cardId : checks){
+            for (int cardId : checks) {
                 Tradecards tc = new Tradecards();
                 tc.setTradeID(tradeId);
                 tc.setCardID(cardsFacade.find(cardId));
                 tradecardsFacade.create(tc);
             }
-            for(int cardId : otherChecks){
+            for (int cardId : otherChecks) {
                 Tradecards tc = new Tradecards();
                 tc.setTradeID(tradeId);
                 tc.setCardID(cardsFacade.find(cardId));
                 tradecardsFacade.create(tc);
             }
+            String message = "A new Trade offer has been submitted from " + tradeId.getCreatorId().getUsername() + ". Please log on to MyTCGTrader to view the details of this offer.";
+            String subject = "New Trade Offer from " + tradeId.getCreatorId().getUsername();
+            sendMail(subject, message, tradeId.getRecieverId().getEmail());
             return "CreateOfferUser";
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,44 +169,49 @@ public class BinderManager implements Serializable {
         }
 
     }
-   
-    
-    public String acceptOffer(){
+
+    public String acceptOffer() {
         this.currentOffer.setApproved(true);
         tradesFacade.edit(currentOffer);
+        String message = "Your trade offer has been accepted by " + currentOffer.getRecieverId().getUsername() + ". Please log on to MyTCGTrader to view the details of this offer and discuss the logistics of the trade via comments.";
+        String subject = currentOffer.getRecieverId().getUsername() + " ACCEPTED your offer";
+        sendMail(subject, message, currentOffer.getCreatorId().getEmail());
         return "CurrentOffer";
     }
-    
-    public String completeOffer(){
+
+    public String completeOffer() {
         this.currentOffer.setCompleted(true);
         tradesFacade.edit(currentOffer);
         return "CurrentOffer";
     }
-    
-    public String cancelOffer(){
+
+    public String cancelOffer() {
         List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(this.currentOffer.getId());
-        for(Tradecards tc : tradecards){
+        for (Tradecards tc : tradecards) {
             tradecardsFacade.remove(tc);
         }
         tradesFacade.remove(currentOffer);
         cancelOffer(this.currentOffer.getParentOfferId());
         currentOffer = null;
+        String message = "Your trade offer has been canceled by " + currentOffer.getCreatorId().getUsername() + ". The offer no longer exists.";
+        String subject = currentOffer.getCreatorId().getUsername() + "CANCELED thier offer";
+        sendMail(subject, message, currentOffer.getRecieverId().getEmail());
         return "CreateOffer";
     }
-    
-    public void cancelOffer(Trades offer){
-        if(offer != null){
+
+    public void cancelOffer(Trades offer) {
+        if (offer != null) {
             List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(offer.getId());
-            for(Tradecards tc : tradecards){
+            for (Tradecards tc : tradecards) {
                 tradecardsFacade.remove(tc);
             }
             tradesFacade.remove(offer);
             cancelOffer(offer.getParentOfferId());
         }
     }
-    
-    public String createCounterOffer(){
-        if(this.currentOffer.getCreatorId().getId().equals(getLoggedInUser().getId())){
+
+    public String createCounterOffer() {
+        if (this.currentOffer.getCreatorId().getId().equals(getLoggedInUser().getId())) {
             this.offerUser = this.currentOffer.getRecieverId().getUsername();
         } else {
             this.offerUser = this.currentOffer.getCreatorId().getUsername();
@@ -213,8 +219,8 @@ public class BinderManager implements Serializable {
         List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(this.currentOffer.getId());
         int uCounter = 0;
         int oCounter = 0;
-        for(Tradecards tc : tradecards){
-            if(tc.getCardID().getUserId().getId().equals(getLoggedInUser().getId())){
+        for (Tradecards tc : tradecards) {
+            if (tc.getCardID().getUserId().getId().equals(getLoggedInUser().getId())) {
                 uCounter++;
             } else {
                 oCounter++;
@@ -224,8 +230,8 @@ public class BinderManager implements Serializable {
         int[] oChecks = new int[oCounter];
         uCounter = 0;
         oCounter = 0;
-        for(Tradecards tc : tradecards){
-            if(tc.getCardID().getUserId().getId().equals(getLoggedInUser().getId())){
+        for (Tradecards tc : tradecards) {
+            if (tc.getCardID().getUserId().getId().equals(getLoggedInUser().getId())) {
                 uChecks[uCounter] = tc.getCardID().getId();
                 uCounter++;
             } else {
@@ -237,8 +243,8 @@ public class BinderManager implements Serializable {
         setOtherChecks(oChecks);
         return "CounterOffer";
     }
-    
-    public String submitCounterOffer(){
+
+    public String submitCounterOffer() {
         if (checks.length == 0 || otherChecks.length == 0) {
             return "CreateOfferUser";
         }
@@ -253,19 +259,23 @@ public class BinderManager implements Serializable {
         try {
             tradesFacade.create(newTrade);
             Trades tradeId = tradesFacade.findByDate(newTrade.getOfferTimestamp());
-            for(int cardId : checks){
+            for (int cardId : checks) {
                 Tradecards tc = new Tradecards();
                 tc.setTradeID(tradeId);
                 tc.setCardID(cardsFacade.find(cardId));
                 tradecardsFacade.create(tc);
             }
-            for(int cardId : otherChecks){
+            for (int cardId : otherChecks) {
                 Tradecards tc = new Tradecards();
                 tc.setTradeID(tradeId);
                 tc.setCardID(cardsFacade.find(cardId));
                 tradecardsFacade.create(tc);
             }
             this.setCurrentOffer(tradeId);
+
+            String message = "Your trade offer has been reviewed by " + currentOffer.getCreatorId().getUsername() + "and a counter offer has been submitted.  Please log on to MyTCGTrader to view the details of this new offer.";
+            String subject = currentOffer.getCreatorId().getUsername() + "created a counter offer";
+            sendMail(subject, message, currentOffer.getRecieverId().getEmail());
             return "CurrentOffer";
         } catch (Exception e) {
             e.printStackTrace();
@@ -349,7 +359,7 @@ public class BinderManager implements Serializable {
     private com.mycompany.sessionBeanPackage.CardPhotosFacade cardPhotosFacade;
     @EJB
     private com.mycompany.sessionBeanPackage.TradesFacade tradesFacade;
-        @EJB
+    @EJB
     private com.mycompany.sessionBeanPackage.TradecardsFacade tradecardsFacade;
 
     public BinderManager() {
@@ -408,6 +418,52 @@ public class BinderManager implements Serializable {
         user = getLoggedInUser();
         wants = wantsFacade.findWantsByUserID(user.getId());
         return "MyBinder";
+    }
+
+    public int sendMail(String subject, String message, String to) {
+        try {
+            if (false) {
+                Properties props = System.getProperties();
+                // -- Attaching to default Session, or we could start a new one --
+                props.put("mail.transport.protocol", "smtp");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.host", "smtp.gmail.com");
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.port", "587");
+                Authenticator auth = new SMTPAuthenticator();
+                Session session = Session.getInstance(props, auth);
+                // -- Create a new message --
+                Message msg = new MimeMessage(session);
+                // -- Set the FROM and TO fields --
+                msg.setFrom(new InternetAddress("mytcgtrader@gmail.com"));
+                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+                msg.setSubject(subject);
+                msg.setText(message);
+                // -- Set some other header information --
+                msg.setHeader("MyMail", "Mr. XYZ");
+                msg.setSentDate(new Date());
+                // -- Send the message --
+                Transport.send(msg);
+                System.out.println("Message sent to" + to + " OK.");
+            }
+            return 0;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Exception " + ex);
+            return -1;
+        }
+    }
+
+// Also include an inner class that is used for authentication purposes
+    private class SMTPAuthenticator extends javax.mail.Authenticator {
+
+        @Override
+        public PasswordAuthentication getPasswordAuthentication() {
+            String username = "mytcgtrader@gmail.com";           // specify your email id here (sender's email id)
+            String password = "csd@VT(S16)";                                      // specify your password here
+            return new PasswordAuthentication(username, password);
+        }
     }
 
 }
