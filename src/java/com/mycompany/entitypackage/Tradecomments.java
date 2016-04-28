@@ -6,6 +6,7 @@
 package com.mycompany.entitypackage;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,7 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Tradecomments.findAll", query = "SELECT t FROM Tradecomments t"),
     @NamedQuery(name = "Tradecomments.findById", query = "SELECT t FROM Tradecomments t WHERE t.id = :id"),
-    @NamedQuery(name = "Tradecomments.findByString", query = "SELECT t FROM Tradecomments t WHERE t.string = :string")})
+    @NamedQuery(name = "Tradecomments.findByString", query = "SELECT t FROM Tradecomments t WHERE t.string = :string"),
+    @NamedQuery(name = "Tradecomments.findCommentsByTradeId", query = "SELECT t FROM Tradecomments t WHERE t.tradeID.id = :tradeID"),
+    @NamedQuery(name = "Tradecomments.findByCreateDate", query = "SELECT t FROM Tradecomments t WHERE t.createDate = :createDate")})
 public class Tradecomments implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,9 +50,17 @@ public class Tradecomments implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "string")
     private String string;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "create_date")
+    @Temporal(TemporalType.DATE)
+    private Date createDate;
     @JoinColumn(name = "tradeID", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Trades tradeID;
+    @JoinColumn(name = "creator_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Users creatorId;
 
     public Tradecomments() {
     }
@@ -56,9 +69,10 @@ public class Tradecomments implements Serializable {
         this.id = id;
     }
 
-    public Tradecomments(Integer id, String string) {
+    public Tradecomments(Integer id, String string, Date createDate) {
         this.id = id;
         this.string = string;
+        this.createDate = createDate;
     }
 
     public Integer getId() {
@@ -69,12 +83,12 @@ public class Tradecomments implements Serializable {
         this.id = id;
     }
 
-    public String getString() {
-        return string;
+    public Users getCreatorId() {
+        return creatorId;
     }
 
-    public void setString(String string) {
-        this.string = string;
+    public void setCreatorId(Users creatorId) {
+        this.creatorId = creatorId;
     }
 
     public Trades getTradeID() {
@@ -83,6 +97,22 @@ public class Tradecomments implements Serializable {
 
     public void setTradeID(Trades tradeID) {
         this.tradeID = tradeID;
+    }
+
+    public String getString() {
+        return string;
+    }
+
+    public void setString(String string) {
+        this.string = string;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     @Override
@@ -109,5 +139,5 @@ public class Tradecomments implements Serializable {
     public String toString() {
         return "com.mycompany.entitypackage.Tradecomments[ id=" + id + " ]";
     }
-    
+
 }

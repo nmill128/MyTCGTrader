@@ -19,8 +19,10 @@
                     <h:outputText value="#{tradecommentsController.selected.id}" title="#{bundle.ViewTradecommentsTitle_id}"/>
                     <h:outputText value="#{bundle.ViewTradecommentsLabel_string}"/>
                     <h:outputText value="#{tradecommentsController.selected.string}" title="#{bundle.ViewTradecommentsTitle_string}"/>
-                    <h:outputText value="#{bundle.ViewTradecommentsLabel_tradeID}"/>
-                    <h:outputText value="#{tradecommentsController.selected.tradeID}" title="#{bundle.ViewTradecommentsTitle_tradeID}"/>
+                    <h:outputText value="#{bundle.ViewTradecommentsLabel_createDate}"/>
+                    <h:outputText value="#{tradecommentsController.selected.createDate}" title="#{bundle.ViewTradecommentsTitle_createDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{tradecommentsController.destroyAndView}" value="#{bundle.ViewTradecommentsDestroyLink}"/>

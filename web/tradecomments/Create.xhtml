@@ -19,10 +19,10 @@
                     <h:inputText id="id" value="#{tradecommentsController.selected.id}" title="#{bundle.CreateTradecommentsTitle_id}" required="true" requiredMessage="#{bundle.CreateTradecommentsRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.CreateTradecommentsLabel_string}" for="string" />
                     <h:inputText id="string" value="#{tradecommentsController.selected.string}" title="#{bundle.CreateTradecommentsTitle_string}" required="true" requiredMessage="#{bundle.CreateTradecommentsRequiredMessage_string}"/>
-                    <h:outputLabel value="#{bundle.CreateTradecommentsLabel_tradeID}" for="tradeID" />
-                    <h:selectOneMenu id="tradeID" value="#{tradecommentsController.selected.tradeID}" title="#{bundle.CreateTradecommentsTitle_tradeID}" required="true" requiredMessage="#{bundle.CreateTradecommentsRequiredMessage_tradeID}">
-                        <f:selectItems value="#{tradesController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateTradecommentsLabel_createDate}" for="createDate" />
+                    <h:inputText id="createDate" value="#{tradecommentsController.selected.createDate}" title="#{bundle.CreateTradecommentsTitle_createDate}" required="true" requiredMessage="#{bundle.CreateTradecommentsRequiredMessage_createDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{tradecommentsController.create}" value="#{bundle.CreateTradecommentsSaveLink}" />

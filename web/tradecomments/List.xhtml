@@ -34,9 +34,11 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTradecommentsTitle_tradeID}"/>
+                                <h:outputText value="#{bundle.ListTradecommentsTitle_createDate}"/>
                             </f:facet>
-                            <h:outputText value="#{item.tradeID}"/>
+                            <h:outputText value="#{item.createDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

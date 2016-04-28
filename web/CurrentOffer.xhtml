@@ -55,62 +55,29 @@ and open the template in the editor.
                     <div class="comment">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h3>User Comment Example</h3>
+                                <h3>Offer Comments</h3>
                             </div><!-- /col-sm-12 -->
                         </div><!-- /row -->
-                        <div class="row">
-                            <div class="col-sm-1">
-                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 
-                            </div><!-- /col-sm-1 -->
+                        <ui:repeat value="#{binderManager.comments}" var="comment">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 
-                            <div class="col-sm-11">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
-                                    </div><!-- /panel-body -->
-                                </div><!-- /panel panel-default -->
-                            </div><!-- /col-sm-5 -->
-                        </div>
+                                </div><!-- /col-sm-1 -->
 
-                        <div class="row">
-                            <div class="col-sm-1">
-                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-
-                            </div><!-- /col-sm-1 -->
-
-                            <div class="col-sm-11">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
-                                    </div><!-- /panel-body -->
-                                </div><!-- /panel panel-default -->
-                            </div><!-- /col-sm-5 -->
-                        </div><!-- /row -->
-
-                        <div class="row">
-                            <div class="col-sm-1">
-                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-
-                            </div><!-- /col-sm-1 -->
-
-                            <div class="col-sm-11">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
-                                    </div><!-- /panel-body -->
-                                </div><!-- /panel panel-default -->
-                            </div><!-- /col-sm-5 -->
-                        </div><!-- /row -->
+                                <div class="col-sm-11">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <strong>#{comment.creatorId.username}</strong> <span class="text-muted">commented on #{comment.createDate}</span>
+                                        </div>
+                                        <div class="panel-body">
+                                            #{comment.string}
+                                        </div><!-- /panel-body -->
+                                    </div><!-- /panel panel-default -->
+                                </div><!-- /col-sm-5 -->
+                            </div>
+                        </ui:repeat>
 
                         <div class="row">
                             <div class="panel panel-default">
@@ -118,10 +85,10 @@ and open the template in the editor.
                                     <strong>Write a comment</strong>
                                 </div>
                                 <div class="panel-body">
-                                    <textarea class="form-control" rows="5"></textarea>
+                                    <h:inputTextarea value="#{binderManager.commentMessage}" cols="5" ></h:inputTextarea>
                                 </div>
                                 <div class="buttonRightPadding">
-                                     <input type="button" class="btn-primary btn col-md-offset-11 col-md-1" value="Submit"/>
+                                    <h:commandButton styleClass="btn-primary btn col-md-offset-11 col-md-1" action="#{binderManager.createComment()}" value="Submit"></h:commandButton>
                                 </div>
                             </div>
                         </div>

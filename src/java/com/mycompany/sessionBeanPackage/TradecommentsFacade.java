@@ -9,6 +9,7 @@ import com.mycompany.entitypackage.Tradecomments;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  *
@@ -27,6 +28,12 @@ public class TradecommentsFacade extends AbstractFacade<Tradecomments> {
 
     public TradecommentsFacade() {
         super(Tradecomments.class);
+    }
+    
+    public List<Tradecomments> findCommentsByTradeId(Integer tradeID) {
+        return (List<Tradecomments>) em.createNamedQuery("Tradecomments.findCommentsByTradeId")
+                .setParameter("tradeID", tradeID)
+                .getResultList();
     }
     
 }
