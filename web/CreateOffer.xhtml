@@ -32,16 +32,18 @@ and open the template in the editor.
                 </div>
                 <br />
                 <div class="row whiteBackground">
-                    <div class="col-md-6 card">
+                    <div class="col-md-6 card cardFirst">
                         <h3>My Cards</h3>
                         <hr/>
-                        <h:form styleClass="createOfferList">
-                            <h:selectManyCheckbox value="#{binderManager.checks}">
-                                <div class="checkbox">
-                                    <f:selectItems  value="#{binderManager.checksValue}" />
-                                </div>
-                            </h:selectManyCheckbox>
-                        </h:form>
+                        <div class="scrollable">
+                            <h:form styleClass="createOfferList ">
+                                <h:selectManyCheckbox value="#{binderManager.checks}">
+                                    <div class="checkbox">
+                                        <f:selectItems  value="#{binderManager.checksValue}" />
+                                    </div>
+                                </h:selectManyCheckbox>
+                            </h:form>
+                        </div>
                     </div>
                     <div class="col-md-6 card">
                         <h3>User's Cards</h3>

@@ -17,12 +17,19 @@ and open the template in the editor.
         <ui:composition template="offers.xhtml">
             <ui:define name="offer">
                 <h2 class="centerText">Create Offer</h2>
-                <div class="input-group">
-                    <span class="input-group-addon" >Make a Trade Offer To</span>
-                    <h:form >
-                        <h:inputText  styleClass="form-control" value="#{binderManager.offerUser}"/>
-                        <h:commandButton action="#{binderManager.populateOfferUser()}" value="Select"></h:commandButton>
-                    </h:form>
+               
+                <div class="row">
+                    <div class="input-group CreateOfferTop">
+                        <span class="input-group-addon" >Make a Trade Offer To</span>
+                        <h:form>
+                            <div class="col-md-11">
+                                <h:inputText  styleClass="form-control col-md-8" value="#{binderManager.offerUser}"/>
+                            </div>
+                            <div class="col-md-1">
+                                <h:commandButton action="#{binderManager.populateOfferUser()}" value="Select" styleClass="btn btn-primary"></h:commandButton>
+                            </div>
+                        </h:form>
+                    </div>
                 </div>
                 <br />
                 
@@ -30,14 +37,16 @@ and open the template in the editor.
                     <div class="row whiteBackground">
                         <div class="col-md-6 card">
                             <h3>My Cards</h3>
+                            <hr />
                             <h:selectManyCheckbox value="#{binderManager.checks}">
                                 <div class="checkbox">
                                     <f:selectItems value="#{binderManager.checksValue}" />
                                 </div>
                             </h:selectManyCheckbox>
                         </div>
-                        <div class="col-md-6 card">
+                        <div class="col-md-6 card cardFirst">
                             <h3>#{binderManager.offerUser}'s Cards</h3>
+                            <hr />
                             <h:selectManyCheckbox value="#{binderManager.otherChecks}">
                                 <div class="checkbox">
                                     <f:selectItems value="#{binderManager.otherChecksValue}" />

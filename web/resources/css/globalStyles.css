@@ -108,6 +108,9 @@ select[size].form-control{
     overflow-y: auto;
     height: 300px;
 }
+.card.cardFirst{
+    border-right: none;
+}
 .centerText{
     text-align: center;
 }
@@ -238,7 +241,14 @@ select[size].form-control{
 .createOfferList td{
     display: block;
 }
-
+.createOfferList td input{
+    margin-right: 10px;
+    height: 21px;
+    width: 25px;
+}
+.createOfferList td label{
+    font-size: 25px;
+}
 .whiteBackground{
     background-color: white;
 }
@@ -254,4 +264,7 @@ select[size].form-control{
 }
 .user-photo{
     border-radius: 50%;
+}
+.scrollable{
+    overflow-y: visible;
 }
