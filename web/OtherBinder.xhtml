@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>My Binder</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <ui:insert name="importCraziness">
+            <ui:include src="template/importCraziness.xhtml"/>
+        </ui:insert>
+        <h:outputStylesheet library="css" name="MyBinder.css"/>
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="template/header.xhtml"/>
+        </ui:insert>
+        <div class="container-fluid binder-container">
+            <h1>#{binderManager.user.username}'s Trade Binder</h1>
+            <div class="col-xs-6">
+                <h:form>
+                    <h3>Cards in my Binder</h3>
+                    <div class="panel panel-default col-xs-12 binder">
+                        <table class="table binder-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Condition</th>
+                                    <th>Rarity</th>
+                                    <th>Owners Value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-scroll">
+                                <ui:repeat value="#{binderManager.entries}" var="entry">
+                                <tr>
+                                    <td>
+                                        <h:graphicImage class="card-preview" value="/FileStorageLocation/#{entry.file}"/>
+                                    </td>
+                                    <td>#{entry.card.cardName}</td>
+                                    <td>#{entry.card.cardCondition}</td>
+                                    <td>#{entry.card.edition}</td>
+                                    <td>#{entry.card.cardValue}$</td>
+                                </tr>
+                                </ui:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </h:form>
+            </div>
+            <div class="col-xs-6">
+                <h3>My Wants</h3>
+                <h:form>
+                    <div class="wants-list panel panel-default col-xs-12">
+                        <table class="table binder-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Condition</th>
+                                    <th>My Value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-scroll">
+                                <ui:repeat value="#{binderManager.wants}" var="want">
+                                <tr>
+                                    <td class="td-center">#{want.cardName}</td>
+                                    <td class="td-center">#{want.cardCondition}</td>
+                                    <td class="td-center">#{want.cardValue}$</td>
+                                </tr>
+                                </ui:repeat>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <h:commandButton action="#{binderManager.tradeWith}" value="Trade with #{binderManager.user.username}"></h:commandButton>
+                </h:form>
+            </div>
+        </div>
+        <ui:insert name="footer">
+            <ui:include src="template/footer.xhtml"/>
+        </ui:insert>
+    </h:body>
+</html>
