@@ -19,18 +19,20 @@ and open the template in the editor.
                 <h2 class="centerText">Create Counter Offer</h2>
                 <br />
                 <h:form>
-                    <div class="row">
-                        <div class="col-md-6 card">
+                    <div class="row whiteBackground">
+                        <div class="col-md-6 card firstCard scrollable">
                             <h3>My Cards</h3>
-                            <h:selectManyCheckbox value="#{binderManager.checks}">
+                            <hr />
+                            <h:selectManyCheckbox value="#{binderManager.checks}" styleClass="createOfferList ">
                                 <div class="checkbox">
                                     <f:selectItems value="#{binderManager.checksValue}" />
                                 </div>
                             </h:selectManyCheckbox>
                         </div>
-                        <div class="col-md-6 card">
+                        <div class="col-md-6 card scrollable">
                             <h3>#{binderManager.offerUser}'s Cards</h3>
-                            <h:selectManyCheckbox value="#{binderManager.otherChecks}">
+                            <hr />
+                            <h:selectManyCheckbox value="#{binderManager.otherChecks}" styleClass="createOfferList ">
                                 <div class="checkbox">
                                     <f:selectItems value="#{binderManager.otherChecksValue}" />
                                 </div>
@@ -40,7 +42,7 @@ and open the template in the editor.
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block sendOfferButton" action="#{binderManager.submitCounterOffer()}" value="Send Counter Offer"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block sendOfferButton buttonMargin" action="#{binderManager.submitCounterOffer()}" value="Send Counter Offer" />
                         </div>
                     </div>
                 </h:form>

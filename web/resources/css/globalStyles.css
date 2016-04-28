@@ -268,7 +268,15 @@ select[size].form-control{
 }
 .user-photo{
     border-radius: 50%;
+    height: 90px;
+    width: 90px;
 }
 .scrollable{
     overflow-y: visible;
+}
+
+/* MyBinder CSS
+-------------------------------------------------- */
+.binder,.wants-list{
+    min-height: 250px !important;
 }
