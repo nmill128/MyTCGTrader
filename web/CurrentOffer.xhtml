@@ -71,7 +71,11 @@ and open the template in the editor.
                                 <div class="col-sm-11">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <strong>#{comment.creatorId.username}</strong> <span class="text-muted">commented on #{comment.createDate}</span>
+                                            <strong>#{comment.creatorId.username}</strong> <span class="text-muted">commented on 
+                                                <h:outputLabel value="#{comment.createDate}">
+                                                    <f:convertDateTime pattern="EEE MMM d, yyyy" />
+                                                </h:outputLabel>
+                                            </span>
                                         </div>
                                         <div class="panel-body">
                                             #{comment.string}
