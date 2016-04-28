@@ -286,3 +286,9 @@ select[size].form-control{
 .binder,.wants-list{
     min-height: 250px !important;
 }
+
+.selectItemImg {
+    max-height:50px;
+    max-width:50px;
+    display:inline;
+}
