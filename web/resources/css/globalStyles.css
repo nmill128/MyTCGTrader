@@ -103,7 +103,7 @@ select[size].form-control{
 .list-group-item-primary {
     color: rgb(255, 255, 255);
     background-color: rgb(66, 139, 202);
-}
+} 
 
 .card {
     /*    background-color: #fff;
@@ -134,6 +134,20 @@ select[size].form-control{
     display:block;
 }
 
+.profile-table input{
+    height: 40px;
+    width: 100%;
+    padding: 0 15px;
+   
+}
+.profile-table select{
+     -webkit-appearance: menulist-button;
+     height: 40px !important;
+     width: 100%;
+}
+.profile-table label{
+    line-height: 40px;
+}
 /* Index Style
 -------------------------------------------------- */
 .container.indexImageContainer{
@@ -285,4 +299,8 @@ select[size].form-control{
 -------------------------------------------------- */
 .binder,.wants-list{
     min-height: 250px !important;
+}
+
+.input-group-addon:first-child{
+    border-right: 1px #CCCCCC solid !important;
 }

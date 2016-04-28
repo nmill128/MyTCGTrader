@@ -7,54 +7,53 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="Create Want"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-               <div class="container-fluid">
-        <div align="center" style="width:50%; margin:0 auto;">
-            <h:form enctype="multipart/form-data">
-                <br/>
-                
-                <div class="panel panel-default col-xs-12">
-                <p:messages id="msgs" />
 
-                <table class="table profile-table">
-                    <tr>
-                        <td><p:outputLabel for="cardName" value="Card Name" /></td>
-                        <td><h:inputText id="cardName" value="#{wantsController.selected.cardName}" 
-                                 required="true" label="Card Name">
-                            </h:inputText></td>
-                        <td><p:message for="cardName" display="icon" /></td>
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
-                        <td><h:selectOneMenu id="cardCondition" styleClass="form-control" value="#{wantsController.selected.cardCondition}">
-                                    <!--<select class="form-control">-->
-                                    <f:selectItem itemValue="Mint" itemLabel="Mint" />
-                                    <f:selectItem itemValue="Slightly Played" itemLabel="Slightly Played" />
-                                    <f:selectItem itemValue="Moderately Played" itemLabel="Moderatly Played" />
-                                    <f:selectItem itemValue="Heavily Played" itemLabel="Heavily Played" />
-                                    <f:selectItem itemValue="Damaged" itemLabel="Damaged" />
-                                </h:selectOneMenu></td>
-                        <td><p:message for="cardCondition" display="icon" /></td>                
-                    </tr>
-                    <tr>
-                        <td><p:outputLabel for="value" value="Value" /></td>
-                        <td><h:inputText id="value" value="#{wantsController.selected.cardValue}" 
-                                 required="true" label="Value">
-                            </h:inputText></td>
-                        <td><p:message for="value" display="icon" /></td>
-                    </tr>
-                </table>
+        <ui:define name="body">
+            <div id="content" class="container-fluid">
+                <h1 class="centerText">Add a Card You Want</h1>
+                <div align="center" style="width:50%; margin:0 auto;">
+                    <h:form enctype="multipart/form-data">
+                        <br/>
+
+                        <div class="panel panel-default col-xs-12 panelPadding">
+                            <p:messages id="msgs" />
+
+                            <table class="table profile-table">
+                                <tr>
+                                    <td><p:outputLabel for="cardName" value="Card Name" /></td>
+                                    <td><h:inputText id="cardName" value="#{wantsController.selected.cardName}" 
+                                                     required="true" label="Card Name">
+                                        </h:inputText></td>
+                                    <td><p:message for="cardName" display="icon" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
+                                    <td><h:selectOneMenu id="cardCondition" styleClass="form-control" value="#{wantsController.selected.cardCondition}">
+                                            <!--<select class="form-control">-->
+                                            <f:selectItem itemValue="Mint" itemLabel="Mint" />
+                                            <f:selectItem itemValue="Slightly Played" itemLabel="Slightly Played" />
+                                            <f:selectItem itemValue="Moderately Played" itemLabel="Moderatly Played" />
+                                            <f:selectItem itemValue="Heavily Played" itemLabel="Heavily Played" />
+                                            <f:selectItem itemValue="Damaged" itemLabel="Damaged" />
+                                        </h:selectOneMenu></td>
+                                    <td><p:message for="cardCondition" display="icon" /></td>                
+                                </tr>
+                                <tr>
+                                    <td><p:outputLabel for="value" value="Value" /></td>
+                                    <td><h:inputText id="value" value="#{wantsController.selected.cardValue}" 
+                                                     required="true" label="Value">
+                                        </h:inputText></td>
+                                    <td><p:message for="value" display="icon" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br/>
+                        <h:commandButton id="add" 
+                                         action="#{wantsController.create()}" value="Add" styleClass="btn btn-primary" />   
+                        <h:button id="cancel" outcome="MyBinder" value="Cancel" styleClass="btn btn-secondary" />
+                    </h:form>
+                </div>
             </div>
-            <br/>
-            <h:commandButton id="add" 
-                             action="#{wantsController.create()}" value="Add" styleClass="btn btn-primary" />   
-            <h:button id="cancel" outcome="MyBinder" value="Cancel" styleClass="btn btn-secondary" />
-            </h:form>
-        </div>
-        </div>
         </ui:define>
     </ui:composition>
 
