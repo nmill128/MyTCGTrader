@@ -11,6 +11,7 @@ import com.mycompany.entitypackage.Cards;
 import com.mycompany.entitypackage.CardPhotos;
 import com.mycompany.entitypackage.Trades;
 import com.mycompany.entitypackage.Tradecards;
+import com.mycompany.entitypackage.Tradecomments;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -43,9 +44,38 @@ public class BinderManager implements Serializable {
     private List<Trades> pastOffers;
     private Trades currentOffer;
     private Integer parentId = null;
+    private List<Tradecomments> comments;
+    private String commentMessage;
 
     private Map<String, Object> checksValue;
     private Map<String, Object> otherChecksValue;
+    
+    public List<Tradecomments> getComments() {
+        setComments(tradecommentsFacade.findCommentsByTradeId(this.currentOffer.getId()));
+        return this.comments;
+    }
+
+    public void setComments(List<Tradecomments> comments) {
+        this.comments = comments;
+    }
+    
+    public String getCommentMessage(){
+        return this.commentMessage;
+    }
+    
+    public void setCommentMessage(String cm){
+        this.commentMessage = cm;
+    }
+    
+    public String createComment(){
+        Tradecomments tc = new Tradecomments();
+        tc.setCreatorId(getLoggedInUser());
+        tc.setCreateDate(new Date());
+        tc.setString(getCommentMessage());
+        tc.setTradeID(this.currentOffer);
+        tradecommentsFacade.create(tc);
+        return "CurrentOffer";
+    }
 
     public List<Trades> getCurrOffers() {
         setCurrOffers(tradesFacade.findCurrTradesByUserId(getLoggedInUser().getId()));
@@ -367,6 +397,8 @@ public class BinderManager implements Serializable {
     private com.mycompany.sessionBeanPackage.TradesFacade tradesFacade;
     @EJB
     private com.mycompany.sessionBeanPackage.TradecardsFacade tradecardsFacade;
+        @EJB
+    private com.mycompany.sessionBeanPackage.TradecommentsFacade tradecommentsFacade;
 
     public BinderManager() {
 
@@ -479,5 +511,8 @@ public class BinderManager implements Serializable {
             this.user = user;
         return "OtherBinder";
     }
+    
+    
+    
 
 }
