@@ -246,8 +246,12 @@ select[size].form-control{
     height: 21px;
     width: 25px;
 }
-.createOfferList td label{
+.createOfferList td label, .cardLink{
     font-size: 25px;
+}
+.offerTextfield{
+    width: 100%;
+    min-height: 100px;
 }
 .whiteBackground{
     background-color: white;
