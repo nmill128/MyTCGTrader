@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:body>
@@ -23,11 +23,15 @@
                                     <tbody>
                                         <ui:repeat value="#{binderManager.currOffers}" var="offer">
                                             <tr onclick="document.getElementsByClassName('offerButton#{offer.id}')[0].click()">
-                                                    <td>
-                                                        <h:outputLabel value="#{offer.recieverId.username}" rendered="#{offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
-                                                        <h:outputLabel value="#{offer.creatorId.username}" rendered="#{not offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
-                                                    </td>
-                                                    <td>#{offer.offerTimestamp}</td>
+                                                <td>
+                                                    <h:outputText value="#{offer.recieverId.username}" rendered="#{offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputText>
+                                                    <h:outputText value="#{offer.creatorId.username}" rendered="#{not offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputText>
+                                                </td>
+                                                <td>
+                                                    <h:outputText value="#{offer.offerTimestamp}">
+                                                        <f:convertDateTime pattern="EEE MMM d, yyyy hh:mm" />
+                                                    </h:outputText>
+                                                </td>
                                             </tr>
                                             <h:commandButton  style="display:none;"  styleClass="offerButton#{offer.id}" action="#{binderManager.viewCurrentOffer(offer.id)}"></h:commandButton>
                                         </ui:repeat>
@@ -44,11 +48,15 @@
                                     <tbody>
                                         <ui:repeat value="#{binderManager.pastOffers}" var="offer">
                                             <tr onclick="document.getElementsByClassName('offerButton#{offer.id}')[0].click()">
-                                                    <td>
-                                                        <h:outputLabel value="#{offer.recieverId.username}" rendered="#{offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
-                                                        <h:outputLabel value="#{offer.creatorId.username}" rendered="#{not offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputLabel>
-                                                    </td>
-                                                    <td>#{offer.offerTimestamp}</td>
+                                                <td>
+                                                    <h:outputText value="#{offer.recieverId.username}" rendered="#{offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputText>
+                                                    <h:outputText value="#{offer.creatorId.username}" rendered="#{not offer.creatorId.id.equals(binderManager.loggedInUser.id)}"></h:outputText>
+                                                </td>
+                                                <td>                                                  
+                                                    <h:outputText value="#{offer.offerTimestamp}">
+                                                        <f:convertDateTime pattern="EEE MMM d, yyyy hh:mm" />
+                                                    </h:outputText>
+                                                </td>
                                             </tr>
                                             <h:commandButton  style="display:none;"  styleClass="offerButton#{offer.id}" action="#{binderManager.viewCurrentOffer(offer.id)}"></h:commandButton>
                                         </ui:repeat>
