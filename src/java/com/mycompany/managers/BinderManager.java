@@ -519,4 +519,8 @@ public class BinderManager implements Serializable {
         return up.getThumbnailName();
     }
 
+    public String getCardPhotoFileName(Cards c){
+        CardPhotos cp = this.cardPhotosFacade.findPhotosByCardID(c.getId()).get(0);
+        return cp.getThumbnailName();
+    }
 }
