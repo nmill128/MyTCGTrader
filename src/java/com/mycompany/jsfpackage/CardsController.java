@@ -294,7 +294,9 @@ public class CardsController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            copyFile(file);
+            if(file.getSize() != 0){
+                copyFile(file);
+            }
             //JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsUpdated"));
             return "MyBinder";
         } catch (Exception e) {

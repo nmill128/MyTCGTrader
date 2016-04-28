@@ -80,11 +80,12 @@ public class WantsController implements Serializable {
     public String prepareCreate() {
         current = new Wants();
         selectedItemIndex = -1;
-        return "Create";
+        return "CreateWant";
     }
 
     public String create() {
         try {
+           
             current.setUserId(userFacade.find(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user_id")));
             getFacade().create(current);
             //JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("WantsCreated"));
