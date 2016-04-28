@@ -25,7 +25,10 @@ and open the template in the editor.
                             <h3>My Cards</h3>
                             <hr />
                             <ui:repeat value="#{binderManager.currentOffer.userCards}" var="card">
-                                <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
+                                <div class="row">
+                                    <h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage>
+                                    <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
+                                </div>
                             </ui:repeat>
                         </div>
                         <div class="col-md-6 card scrollable">
