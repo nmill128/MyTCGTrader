@@ -6,7 +6,6 @@
 package com.mycompany.entitypackage;
 
 import java.io.Serializable;
-import java.sql.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;

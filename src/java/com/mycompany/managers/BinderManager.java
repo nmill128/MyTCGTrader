@@ -9,8 +9,10 @@ import com.mycompany.entitypackage.Users;
 import com.mycompany.entitypackage.Wants;
 import com.mycompany.entitypackage.Cards;
 import com.mycompany.entitypackage.CardPhotos;
+import com.mycompany.entitypackage.UserPhotos;
 import com.mycompany.entitypackage.Trades;
 import com.mycompany.entitypackage.Tradecards;
+import com.mycompany.entitypackage.Tradecomments;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -42,10 +44,38 @@ public class BinderManager implements Serializable {
     private List<Trades> currOffers;
     private List<Trades> pastOffers;
     private Trades currentOffer;
-    private Integer parentId = null;
+    private List<Tradecomments> comments;
+    private String commentMessage;
 
     private Map<String, Object> checksValue;
     private Map<String, Object> otherChecksValue;
+
+    public List<Tradecomments> getComments() {
+        setComments(tradecommentsFacade.findCommentsByTradeId(this.currentOffer.getId()));
+        return this.comments;
+    }
+
+    public void setComments(List<Tradecomments> comments) {
+        this.comments = comments;
+    }
+
+    public String getCommentMessage() {
+        return this.commentMessage;
+    }
+
+    public void setCommentMessage(String cm) {
+        this.commentMessage = cm;
+    }
+
+    public String createComment() {
+        Tradecomments tc = new Tradecomments();
+        tc.setCreatorId(getLoggedInUser());
+        tc.setCreateDate(new Date());
+        tc.setString(getCommentMessage());
+        tc.setTradeID(this.currentOffer);
+        tradecommentsFacade.create(tc);
+        return "CurrentOffer";
+    }
 
     public List<Trades> getCurrOffers() {
         setCurrOffers(tradesFacade.findCurrTradesByUserId(getLoggedInUser().getId()));
@@ -111,6 +141,12 @@ public class BinderManager implements Serializable {
             return "CreateOfferUser";
         }
         return "CreateOffer";
+    }
+
+    public String tradeWith() {
+        this.offerUser = user.getUsername();
+        populateOfferUser();
+        return "CreateOfferUser";
     }
 
     public Map<String, Object> getChecksValue() {
@@ -190,12 +226,12 @@ public class BinderManager implements Serializable {
         for (Tradecards tc : tradecards) {
             tradecardsFacade.remove(tc);
         }
-        tradesFacade.remove(currentOffer);
-        cancelOffer(this.currentOffer.getParentOfferId());
-        currentOffer = null;
         String message = "Your trade offer has been canceled by " + currentOffer.getCreatorId().getUsername() + ". The offer no longer exists.";
         String subject = currentOffer.getCreatorId().getUsername() + "CANCELED thier offer";
         sendMail(subject, message, currentOffer.getRecieverId().getEmail());
+        tradesFacade.remove(currentOffer);
+        cancelOffer(this.currentOffer.getParentOfferId());
+        currentOffer = null;
         return "CreateOffer";
     }
 
@@ -357,17 +393,21 @@ public class BinderManager implements Serializable {
 
     @EJB
     private com.mycompany.sessionBeanPackage.CardPhotosFacade cardPhotosFacade;
+       @EJB
+    private com.mycompany.sessionBeanPackage.UserPhotosFacade userPhotosFacade;
     @EJB
     private com.mycompany.sessionBeanPackage.TradesFacade tradesFacade;
     @EJB
     private com.mycompany.sessionBeanPackage.TradecardsFacade tradecardsFacade;
+    @EJB
+    private com.mycompany.sessionBeanPackage.TradecommentsFacade tradecommentsFacade;
 
     public BinderManager() {
 
     }
 
     public List<Entry> getEntries() {
-        List<Cards> cards = cardsFacade.findCardsByUserID(getLoggedInUser().getId());
+        List<Cards> cards = cardsFacade.findCardsByUserID(getUser().getId());
         List<Entry> entriesReturn = new ArrayList(0);
         for (Cards card : cards) {
             List<CardPhotos> photos = cardPhotosFacade.findPhotosByCardID(card.getId());
@@ -392,6 +432,9 @@ public class BinderManager implements Serializable {
      * @return the user
      */
     public Users getUser() {
+        if (user == null) {
+            this.user = getLoggedInUser();
+        }
         return user;
     }
 
@@ -464,6 +507,16 @@ public class BinderManager implements Serializable {
             String password = "csd@VT(S16)";                                      // specify your password here
             return new PasswordAuthentication(username, password);
         }
+    }
+
+    public String viewUserBinder(Users user) {
+        this.user = user;
+        return "OtherBinder";
+    }
+    
+    public String getUserPhotoFileName(Users u){
+        UserPhotos up = this.userPhotosFacade.findPhotosByUserID(u.getId()).get(0);
+        return up.getThumbnailName();
     }
 
 }

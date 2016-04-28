@@ -22,117 +22,117 @@ Copyright © 2016 Matt Morrison. All rights reserved.
         <ui:insert name="header">
             <ui:include src="template/header.xhtml"/>
         </ui:insert>
-        <div class="container-fluid">
-        <div align="center" style="width:50%; margin:0 auto;">
-            <h:form class="form-signin">
-                <h2 class="form-signin-heading">Edit Your Account Information</h2>
-                <br/>
-                <f:event listener="#{accountManager.validateInformation}" type="postValidate"/>
-                <div class="panel panel-default col-xs-12 binder">
- 
-                    <table class="table profile-table">
-                        <tr>
-                            <td><p:outputLabel for="firstName" value="First Name" /></td>
-                            <td><h:inputText id="firstName" value="#{accountManager.selected.firstName}"
-                                     required="true" label="First Name">
-                            <f:validateLength minimum="2" />
-                                </h:inputText></td>
-                            <td><p:message for="firstName" display="icon" /></td>
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="lastName" value="Last Name" /></td>
-                            <td><h:inputText id="lastName" value="#{accountManager.selected.lastName}"
-                                     required="true" label="Last Name">
-                            <f:validateLength minimum="2" />
-                                </h:inputText></td>
-                            <td><p:message for="lastName" display="icon" /></td>
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="address1" value="Address Line 1" /></td>
-                            <td><h:inputText id="address1" value="#{accountManager.selected.address1}" 
-                                     required="true" label="address1">
-                            <f:validateLength minimum="5" />
-                                </h:inputText></td>
-                            <td><p:message for="address1" display="icon" /></td>
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="address2" value="Address Line 2" /></td>
-                            <td><h:inputText id="address2" value="#{accountManager.selected.address2}" 
-                                             label="address2" /></td>
-                            <td><p:message for="address2" display="icon" /></td>
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="city" value="City" /></td>
-                            <td><h:inputText id="city" value="#{accountManager.selected.city}" 
-                                     required="true" label="city">
-                            <f:validateLength minimum="5" />
-                                </h:inputText></td>
-                            <td><p:message for="city" display="icon" /></td>                
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="state" value="State" /></td>
-                            <td><h:selectOneMenu id="state" value="#{accountManager.selected.usState}" required="true">
-                            <f:selectItems value="#{accountManager.listOfStates}" var="state"
-                                           itemLabel="#{state}" itemValue="#{state}" />
-                                </h:selectOneMenu></td>
-                            <td><p:message for="state" display="icon" /></td>
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="zipcode" value="Zip Code" /></td>
-                            <td><h:inputText id="zipcode" value="#{accountManager.selected.zipcode}" 
-                                     required="true" label="Zip Code">
-                            <f:validateLength minimum="5" maximum="5"/>
-                                </h:inputText></td>
-                            <td><p:message for="zipcode" display="icon" /></td>
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="email" value="Email:" /></td>
-                            <td><h:inputText id="email" value="#{accountManager.selected.email}"
-                                     label="Email" required="true">
-                            <f:validateLength minimum="2" />
-                            <f:validator validatorId="emailValidator" /> 
-                                </h:inputText></td>
-                            <td><p:message for="email" display="icon" /></td>
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="password" value="Password:" /></td>
-                            <td><h:inputSecret id="password" value="#{accountManager.selected.password}"
-                                    required="true" label="Password">
-                            <f:validator validatorId="passwordValidator" />
-                                </h:inputSecret></td>
-                            <td><p:message for="password" display="icon" /></td>
-                        </tr>
-                        <tr>
-                            <td><p:outputLabel for="confirmPassword" value="Confirm Password:" /></td>
-                            <td><h:inputSecret id="confirmPassword"
-                                    required="true" label="Confirm Password">
-                            <f:validateLength minimum="3" />
-                                </h:inputSecret></td>
-                            <td><p:message for="confirmPassword" display="icon"/></td>
-                        </tr>
-                    </table>
-                </div>
-                <h:outputLabel id="error" value="#{accountManager.statusMessage}"  />
-                <br/>
-                <h:commandButton id="submit"
-                                 action="#{accountManager.updateAccount()}" value="Save Changed" styleClass="btn btn-primary"/>
-                
-                <!-- Delete Account Button -->
-                <h:commandButton id="delete"
-                                 action="#{accountManager.deleteAccount()}"                                
-                                 value="Delete Account"
-                                 styleClass="btn btn-primary"
-                                 onclick="return confirm('Are you sure you want to delete your account permanently?')">
-                    <f:actionListener binding="#{fileManager.deletePhoto()}" />
-                </h:commandButton>
-                
-                <h:button id="cancel" outcome="Profile" value="Go Back" styleClass="btn btn-secondary" />
-            </h:form>
-        </div>
+        <div id="content" class="container-fluid">
+            <div align="center" style="width:50%; margin:0 auto;">
+                <h:form class="form-signin">
+                    <h2 class="form-signin-heading">Edit Your Account Information</h2>
+                    <br/>
+                    <f:event listener="#{accountManager.validateInformation}" type="postValidate"/>
+                    <div class="panel panel-default col-xs-12 binder">
+
+                        <table class="table profile-table">
+                            <tr>
+                                <td><p:outputLabel for="firstName" value="First Name" /></td>
+                                <td><h:inputText id="firstName" value="#{accountManager.selected.firstName}"
+                                                 required="true" label="First Name">
+                                        <f:validateLength minimum="2" />
+                                    </h:inputText></td>
+                                <td><p:message for="firstName" display="icon" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="lastName" value="Last Name" /></td>
+                                <td><h:inputText id="lastName" value="#{accountManager.selected.lastName}"
+                                                 required="true" label="Last Name">
+                                        <f:validateLength minimum="2" />
+                                    </h:inputText></td>
+                                <td><p:message for="lastName" display="icon" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="address1" value="Address Line 1" /></td>
+                                <td><h:inputText id="address1" value="#{accountManager.selected.address1}" 
+                                                 required="true" label="address1">
+                                        <f:validateLength minimum="5" />
+                                    </h:inputText></td>
+                                <td><p:message for="address1" display="icon" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="address2" value="Address Line 2" /></td>
+                                <td><h:inputText id="address2" value="#{accountManager.selected.address2}" 
+                                                 label="address2" /></td>
+                                <td><p:message for="address2" display="icon" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="city" value="City" /></td>
+                                <td><h:inputText id="city" value="#{accountManager.selected.city}" 
+                                                 required="true" label="city">
+                                        <f:validateLength minimum="5" />
+                                    </h:inputText></td>
+                                <td><p:message for="city" display="icon" /></td>                
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="state" value="State" /></td>
+                                <td><h:selectOneMenu id="state" value="#{accountManager.selected.usState}" required="true">
+                                        <f:selectItems value="#{accountManager.listOfStates}" var="state"
+                                                       itemLabel="#{state}" itemValue="#{state}" />
+                                    </h:selectOneMenu></td>
+                                <td><p:message for="state" display="icon" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="zipcode" value="Zip Code" /></td>
+                                <td><h:inputText id="zipcode" value="#{accountManager.selected.zipcode}" 
+                                                 required="true" label="Zip Code">
+                                        <f:validateLength minimum="5" maximum="5"/>
+                                    </h:inputText></td>
+                                <td><p:message for="zipcode" display="icon" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="email" value="Email:" /></td>
+                                <td><h:inputText id="email" value="#{accountManager.selected.email}"
+                                                 label="Email" required="true">
+                                        <f:validateLength minimum="2" />
+                                        <f:validator validatorId="emailValidator" /> 
+                                    </h:inputText></td>
+                                <td><p:message for="email" display="icon" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="password" value="Password:" /></td>
+                                <td><h:inputSecret id="password" value="#{accountManager.selected.password}"
+                                                   required="true" label="Password">
+                                        <f:validator validatorId="passwordValidator" />
+                                    </h:inputSecret></td>
+                                <td><p:message for="password" display="icon" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel for="confirmPassword" value="Confirm Password:" /></td>
+                                <td><h:inputSecret id="confirmPassword"
+                                                   required="true" label="Confirm Password">
+                                        <f:validateLength minimum="3" />
+                                    </h:inputSecret></td>
+                                <td><p:message for="confirmPassword" display="icon"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h:outputLabel id="error" value="#{accountManager.statusMessage}"  />
+                    <br/>
+                    <h:commandButton id="submit"
+                                     action="#{accountManager.updateAccount()}" value="Update Account" styleClass="btn btn-primary"/>
+
+                    <!-- Delete Account Button -->
+                    <h:commandButton id="delete"
+                                     action="#{accountManager.deleteAccount()}"                                
+                                     value="Delete Account"
+                                     styleClass="btn btn-primary"
+                                     onclick="return confirm('Are you sure you want to delete your account permanently?')">
+                        <f:actionListener binding="#{fileManager.deletePhoto()}" />
+                    </h:commandButton>
+
+                    <h:button id="cancel" outcome="Profile" value="Go Back" styleClass="btn btn-secondary" />
+                </h:form>
+            </div>
         </div>
         <ui:insert name="footer">
             <ui:include src="template/footer.xhtml"/>
         </ui:insert>
     </h:body>
- 
+
 </html>

@@ -17,41 +17,89 @@ and open the template in the editor.
         <ui:composition template="offers.xhtml">
             <ui:define name="offer">
                 <h2 class="centerText">Current Offer</h2>
-                
+
                 <br />
-                <h:form>
-                    <div class="row">
-                        <div class="col-md-6 card">
+                <h:form >
+                    <div class="row whiteBackground">
+                        <div class="col-md-6 card firstCard scrollable">
                             <h3>My Cards</h3>
+                            <hr />
                             <ui:repeat value="#{binderManager.currentOffer.userCards}" var="card">
-                                <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}"></h:commandLink>
+                                <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
                             </ui:repeat>
                         </div>
-                        <div class="col-md-6 card">
+                        <div class="col-md-6 card scrollable">
                             <h3>#{binderManager.offerUser}'s Cards</h3>
+                            <hr />
                             <ui:repeat value="#{binderManager.currentOffer.otherCards}" var="card">
-                                <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}"></h:commandLink>
+                                <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
                             </ui:repeat>
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  action="#{binderManager.acceptOffer}" value="Accept" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
-                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  action="#{binderManager.cancelOffer}" value="Cancel" rendered="#{binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id) and (not (binderManager.currentOffer.approved))}"/>
-                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  action="#{binderManager.completeOffer}" value="Trade Completed" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  action="#{binderManager.acceptOffer}" value="Accept" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  action="#{binderManager.cancelOffer}" value="Cancel" rendered="#{binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id) and (not (binderManager.currentOffer.approved))}"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  action="#{binderManager.completeOffer}" value="Trade Completed" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"/>
                         </div>
                         <div class="col-md-4">
-                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton"  value="Reject" action="#{binderManager.cancelOffer}" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  value="Reject" action="#{binderManager.cancelOffer}" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
                             <h:outputLabel value="This offer has been accepted.  Shipping details in email" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"></h:outputLabel>
                             <h:outputLabel value="This offer has been completed." rendered="#{(binderManager.currentOffer.completed)}"></h:outputLabel>
                         </div>
                         <div class="col-md-4">
-                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton" action="#{binderManager.createCounterOffer}"  value="Counter Offer" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id))  and (not (binderManager.currentOffer.approved))}"/>
+                            <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin" action="#{binderManager.createCounterOffer}"  value="Counter Offer" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id))  and (not (binderManager.currentOffer.approved))}"/>
                         </div>
                     </div>
                     <h:commandLink action="#{binderManager.viewCurrentOffer(binderManager.currentOffer.parentOfferId.id)}" value="This is a counter offer - View previous offer" rendered="#{not (binderManager.currentOffer.parentOfferId eq null)}" ></h:commandLink>
 
+                    <div class="comment">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3>Offer Comments</h3>
+                            </div><!-- /col-sm-12 -->
+                        </div><!-- /row -->
+
+                        <ui:repeat value="#{binderManager.comments}" var="comment">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <h:graphicImage styleClass="img-responsive user-photo" value="/FileStorageLocation/#{binderManager.getUserPhotoFileName(comment.creatorId)}" ></h:graphicImage>
+
+                                </div><!-- /col-sm-1 -->
+
+                                <div class="col-sm-11">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <strong>#{comment.creatorId.username}</strong> <span class="text-muted">commented on 
+                                                <h:outputLabel value="#{comment.createDate}">
+                                                    <f:convertDateTime pattern="EEE MMM d, yyyy" />
+                                                </h:outputLabel>
+                                            </span>
+                                        </div>
+                                        <div class="panel-body">
+                                            #{comment.string}
+                                        </div><!-- /panel-body -->
+                                    </div><!-- /panel panel-default -->
+                                </div><!-- /col-sm-5 -->
+                            </div>
+                        </ui:repeat>
+
+                        <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>Write a comment</strong>
+                                </div>
+                                <div class="panel-body">
+                                    <h:inputTextarea value="#{binderManager.commentMessage}" styleClass="offerTextfield" ></h:inputTextarea>
+                                </div>
+                                <div class="buttonRightPadding">
+                                    <h:commandButton styleClass="btn-primary btn col-md-offset-11 col-md-1" action="#{binderManager.createComment()}" value="Submit"></h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </h:form>
             </ui:define>

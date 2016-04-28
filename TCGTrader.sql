@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS Wants,Trades,CardPhotos,UserPhotos,Users,Cards;
+DROP TABLE IF EXISTS Tradecomments, Tradecards,Wants,Trades,CardPhotos,UserPhotos,Cards, Users;
 
 CREATE TABLE Users
 (
@@ -78,6 +78,7 @@ CREATE TABLE TradeComments
     tradeID INT NOT NULL,
     string VARCHAR(255) NOT NULL,
     creator_id INT NOT NULL,
+    create_date DATE NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(creator_id) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY(tradeID) references Trades(id) ON DELETE CASCADE
