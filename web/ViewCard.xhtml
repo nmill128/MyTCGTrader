@@ -3,74 +3,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="title">
+                #{cardsController.selected.cardName}
+            </ui:define>
+            <ui:define name="body">
+                <div class="container-fluid">
+                    <div align="center" style="width:50%; margin:0 auto;">
+                        <h:form >
+                            <h:graphicImage value="FileStorageLocation/#{cardsController.fileName}" id="profilePic"
+                                            class="img-rounded col-md-3 block-image"></h:graphicImage>
+                            <br/>
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            #{cardsController.selected.cardName}
-        </ui:define>
-        <ui:define name="body">
-            <div class="container-fluid">
-                <div align="center" style="width:50%; margin:0 auto;">
-                    <h:form >
-                        <h:graphicImage value="FileStorageLocation/#{cardsController.fileName}" id="profilePic"
-                                        class="img-rounded col-md-3 block-image"></h:graphicImage>
-                        <br/>
+                            <div class="panel panel-default col-xs-12">
+                                
 
-                        <div class="panel panel-default col-xs-12">
-                            <p:messages id="msgs" />
-
-                            <table class="table profile-table">
-                                <tr>
-                                    <td><p:outputLabel for="cardName" value="Card Name" /></td>
-                                    <td><p:outputLabel id="cardName" value="#{cardsController.selected.cardName}"  /></td>
-                                    <td><p:message for="cardName" display="icon" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
-                                    <td><p:outputLabel id="cardCondition" value="#{cardsController.selected.cardCondition}" /></td>
-                                    <td><p:message for="cardCondition" display="icon" /></td>                
-                                </tr>
-                                <tr>
-                                    <td><p:outputLabel for="edition" value="Edition" /></td>
-                                    <td><p:outputLabel id="edition" value="#{cardsController.selected.edition}" /></td>
-                                    <td><p:message for="edition" display="icon" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p:outputLabel for="value" value="Value" /></td>
-                                    <td><p:outputLabel id="value" value="#{cardsController.selected.cardValue}" /></td>
-                                    <td><p:message for="value" display="icon" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p:outputLabel for="notes" value="Notes" /></td>
-                                    <td><p:outputLabel id="notes" value="#{cardsController.selected.notes}" /></td>
-                                    <td><p:message for="notes" display="icon" /></td>
-                                </tr>
-                                <tr>
-                                    <td><h:outputLabel for="tcg" value="TCG Player Search"/></td>
-                                    <td> <h:outputLink id="tcg" value="#{cardsController.createTCGPLink(cardsController.selected.cardName)}" target="_blank">Link</h:outputLink></td>
-                                    <td><p:message for="tcg" display="icon" /></td>
-                                </tr>
-                                <tr>
-                                    <td><h:outputLabel for="sc" value="Star City Games Search"/></td>
-                                    <td> <h:outputLink id="sc" value="#{cardsController.createSCLink(cardsController.selected.cardName)}" target="_blank">Link</h:outputLink></td>
-                                    <td><p:message for="sc" display="icon" /></td>
-                                </tr>
-                                <tr>
-                                    <td><h:outputLabel for="cf" value="Channel Fireball Search"/></td>
-                                    <td> <h:outputLink id="cf" value="#{cardsController.createCFLink(cardsController.selected.cardName)}" target="_blank">Link</h:outputLink></td>
-                                    <td><p:message for="cf" display="icon" /></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <h:outputLabel id="error" value="#{cardsController.message}"  />
-                        <br/>  
-                        <input type="button" id="cancel" onclick="history.go(-1);" value="Cancel" styleClass="btn btn-secondary" />
-                    </h:form>
+                                <table class="table profile-table">
+                                    <tr>
+                                        <td><p:outputLabel for="cardName" value="Card Name" /></td>
+                                        <td><p:outputLabel id="cardName" value="#{cardsController.selected.cardName}"  /></td>
+                                        <td><p:message for="cardName" display="icon" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
+                                        <td><p:outputLabel id="cardCondition" value="#{cardsController.selected.cardCondition}" /></td>
+                                        <td><p:message for="cardCondition" display="icon" /></td>                
+                                    </tr>
+                                    <tr>
+                                        <td><p:outputLabel for="edition" value="Edition" /></td>
+                                        <td><p:outputLabel id="edition" value="#{cardsController.selected.edition}" /></td>
+                                        <td><p:message for="edition" display="icon" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p:outputLabel for="value" value="Value" /></td>
+                                        <td><p:outputLabel id="value" value="#{cardsController.selected.cardValue}" /></td>
+                                        <td><p:message for="value" display="icon" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p:outputLabel for="notes" value="Notes" /></td>
+                                        <td><p:outputLabel id="notes" value="#{cardsController.selected.notes}" /></td>
+                                        <td><p:message for="notes" display="icon" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h:outputLabel for="tcg" value="TCG Player Search"/></td>
+                                        <td> <h:outputLink id="tcg" value="#{cardsController.createTCGPLink(cardsController.selected.cardName)}" target="_blank">Link</h:outputLink></td>
+                                        <td><p:message for="tcg" display="icon" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h:outputLabel for="sc" value="Star City Games Search"/></td>
+                                        <td> <h:outputLink id="sc" value="#{cardsController.createSCLink(cardsController.selected.cardName)}" target="_blank">Link</h:outputLink></td>
+                                        <td><p:message for="sc" display="icon" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h:outputLabel for="cf" value="Channel Fireball Search"/></td>
+                                        <td> <h:outputLink id="cf" value="#{cardsController.createCFLink(cardsController.selected.cardName)}" target="_blank">Link</h:outputLink></td>
+                                        <td><p:message for="cf" display="icon" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <h:outputLabel id="error" value="#{cardsController.message}"  />
+                            <br/>  
+                            <input type="button" id="cancel" onclick="history.go(-1);" value="Cancel" styleClass="btn btn-secondary" />
+                        </h:form>
+                    </div>
                 </div>
-            </div>
-        </ui:define>
-    </ui:composition>
-
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>
