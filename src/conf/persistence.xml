@@ -3,6 +3,9 @@
   <persistence-unit name="MyTCGTraderPU" transaction-type="JTA">
     <jta-data-source>java:app/jdbc/MyTCGTraderDB</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+        <property name="javax.persistence.jdbc.user" value="root"/>
+        <property name="javax.persistence.jdbc.password" value="csd@VT(S16)"/>
+    </properties>
   </persistence-unit>
 </persistence>

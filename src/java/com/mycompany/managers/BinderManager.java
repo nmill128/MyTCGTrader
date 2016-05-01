@@ -393,7 +393,7 @@ public class BinderManager implements Serializable {
 
     @EJB
     private com.mycompany.sessionBeanPackage.CardPhotosFacade cardPhotosFacade;
-       @EJB
+    @EJB
     private com.mycompany.sessionBeanPackage.UserPhotosFacade userPhotosFacade;
     @EJB
     private com.mycompany.sessionBeanPackage.TradesFacade tradesFacade;
@@ -465,30 +465,29 @@ public class BinderManager implements Serializable {
 
     public int sendMail(String subject, String message, String to) {
         try {
-            if (false) {
-                Properties props = System.getProperties();
-                // -- Attaching to default Session, or we could start a new one --
-                props.put("mail.transport.protocol", "smtp");
-                props.put("mail.smtp.starttls.enable", "true");
-                props.put("mail.smtp.host", "smtp.gmail.com");
-                props.put("mail.smtp.auth", "true");
-                props.put("mail.smtp.port", "587");
-                Authenticator auth = new SMTPAuthenticator();
-                Session session = Session.getInstance(props, auth);
-                // -- Create a new message --
-                Message msg = new MimeMessage(session);
-                // -- Set the FROM and TO fields --
-                msg.setFrom(new InternetAddress("mytcgtrader@gmail.com"));
-                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
-                msg.setSubject(subject);
-                msg.setText(message);
-                // -- Set some other header information --
-                msg.setHeader("MyMail", "Mr. XYZ");
-                msg.setSentDate(new Date());
-                // -- Send the message --
-                Transport.send(msg);
-                System.out.println("Message sent to" + to + " OK.");
-            }
+            Properties props = System.getProperties();
+            // -- Attaching to default Session, or we could start a new one --
+            props.put("mail.transport.protocol", "smtp");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "587");
+            Authenticator auth = new SMTPAuthenticator();
+            Session session = Session.getInstance(props, auth);
+            // -- Create a new message --
+            Message msg = new MimeMessage(session);
+            // -- Set the FROM and TO fields --
+            msg.setFrom(new InternetAddress("mytcgtrader@gmail.com"));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+            msg.setSubject(subject);
+            msg.setText(message);
+            // -- Set some other header information --
+            msg.setHeader("MyMail", "Mr. XYZ");
+            msg.setSentDate(new Date());
+            // -- Send the message --
+            Transport.send(msg);
+            System.out.println("Message sent to" + to + " OK.");
+
             return 0;
 
         } catch (Exception ex) {
@@ -513,17 +512,17 @@ public class BinderManager implements Serializable {
         this.user = user;
         return "OtherBinder";
     }
-    
-    public String getUserPhotoFileName(Users u){
+
+    public String getUserPhotoFileName(Users u) {
         List<UserPhotos> userPhotos = this.userPhotosFacade.findPhotosByUserID(u.getId());
-        if(!userPhotos.isEmpty()){
+        if (!userPhotos.isEmpty()) {
             return userPhotos.get(0).getThumbnailName();
         }
         return "userPhotos/defaultUserPhoto.png";
 
     }
 
-    public String getCardPhotoFileName(Cards c){
+    public String getCardPhotoFileName(Cards c) {
         CardPhotos cp = this.cardPhotosFacade.findPhotosByCardID(c.getId()).get(0);
         return cp.getThumbnailName();
     }
