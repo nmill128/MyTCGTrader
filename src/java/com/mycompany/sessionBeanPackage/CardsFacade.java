@@ -55,9 +55,8 @@ public class CardsFacade extends AbstractFacade<Cards> {
                 setParameter("username", "%" + name + "%").getResultList();
     }
     
-    public List<Cards> findByAdvancedCriteria(String cardName, String userName, String edition, String value, int valueType) {
-        if (cardName.equals("") && userName.equals("") && edition.equals("") && value.equals("")) {
-            System.out.println("Blank search");
+    public List<Cards> findByAdvancedCriteria(String cardName, String userName, int edition, String value, int valueType) {
+        if (cardName.equals("") && userName.equals("") && edition != 0 && value.equals("")) {
             return em.createQuery("SELECT c FROM Cards c").getResultList();
         }
         String searchCriteria = "";
@@ -68,9 +67,27 @@ public class CardsFacade extends AbstractFacade<Cards> {
             if (!searchCriteria.equals("")) { searchCriteria = searchCriteria + " AND "; }
             searchCriteria = searchCriteria + "u.username LIKE '" + userName + "' AND c.userId.id = u.id";
         }
-        if (!edition.equals("")) {
+        if (edition != 0) {
             if (!searchCriteria.equals("")) { searchCriteria = searchCriteria + " AND "; }
-            searchCriteria = searchCriteria + "c.edition LIKE '" + edition + "'";
+            switch (edition) {
+                case 1:
+                    searchCriteria = searchCriteria + "c.cardCondition LIKE 'Mint'";
+                    break;
+                case 2:
+                    searchCriteria = searchCriteria + "c.cardCondition LIKE 'Lightly Played'";
+                    break;
+                case 3:
+                    searchCriteria = searchCriteria + "c.cardCondition LIKE 'Moderately Played'";
+                    break;
+                case 4:
+                    searchCriteria = searchCriteria + "c.cardCondition LIKE 'Heavily Played'";
+                    break;
+                case 5:
+                    searchCriteria = searchCriteria + "c.cardCondition LIKE 'Damaged'";
+                    break;
+                default:
+                    break;
+            }
         }
         if (!value.equals("")) {
             if (!searchCriteria.equals("")) { searchCriteria = searchCriteria + " AND "; }

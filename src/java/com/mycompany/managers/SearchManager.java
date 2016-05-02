@@ -29,7 +29,7 @@ public class SearchManager implements Serializable {
     private String value;
     private String edition;
     private int valueType;
-    private String cardCondition;
+    private int cardCondition;
     
     @EJB
     private CardsFacade cardsFacade;
@@ -97,11 +97,11 @@ public class SearchManager implements Serializable {
         this.edition = edition;
     }
     
-    public String getCardCondition() {
+    public int getCardCondition() {
         return cardCondition;
     }
     
-    public void setCardCondition(String cardCondition) {
+    public void setCardCondition(int cardCondition) {
         this.cardCondition = cardCondition;
     }
     
@@ -140,6 +140,6 @@ public class SearchManager implements Serializable {
     }
     
     public void advancedSearch() {
-        searchResults = cardsFacade.findByAdvancedCriteria(cardName, username, edition, value, valueType);
+        searchResults = cardsFacade.findByAdvancedCriteria(cardName, username, cardCondition, value, valueType);
     }
 }
