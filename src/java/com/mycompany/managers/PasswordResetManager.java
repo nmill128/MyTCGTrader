@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Named;
 
+
 @Named(value = "passwordResetManager")
 @SessionScoped
 /**
@@ -38,22 +39,42 @@ public class PasswordResetManager implements Serializable{
     @EJB
     private UsersFacade userFacade;
 
+    /**
+     * gets the username
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * sets the username
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * gets message
+     * @return
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * sets message
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
         
+    /**
+     * checks to see if username exists then moves to secuirtyQuestion
+     * @return redirect
+     */
     public String usernameSubmit() {
         Users user = userFacade.findByUsername(username);
         if (user == null) {
@@ -66,6 +87,10 @@ public class PasswordResetManager implements Serializable{
         }
     }
     
+    /**
+     * Checks to see if answer is correct
+     * @return redirect
+     */
     public String securityquestionSubmit() {
         Users user = userFacade.findByUsername(username);
         if (user.getSecurityAnswer().equals(answer)) {
@@ -78,19 +103,35 @@ public class PasswordResetManager implements Serializable{
         }
     }
     
+    /**
+     * gets security q
+     * @return
+     */
     public String getSecurityQuestion() {
         int question = userFacade.findByUsername(username).getSecurityQuestion();
         return Constants.QUESTIONS[question];
     }
 
+    /**
+     * gets answer
+     * @return
+     */
     public String getAnswer() {
         return answer;
     }
 
+    /**
+     * sets answer 
+     * @param answer
+     */
     public void setAnswer(String answer) {
         this.answer = answer;
     }
 
+    /**
+     * validates new password
+     * @param event
+     */
     public void validateInformation(ComponentSystemEvent event) {
         FacesContext fc = FacesContext.getCurrentInstance();
 
@@ -118,14 +159,26 @@ public class PasswordResetManager implements Serializable{
         }   
     }   
 
+    /**
+     * get password
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * set password
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
     
+    /**
+     * redirects and prepares reset password
+     * @return
+     */
     public String resetPassword() {
         if (message.equals("")) {
             message = "";
