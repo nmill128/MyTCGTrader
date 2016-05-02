@@ -21,15 +21,19 @@ and open the template in the editor.
                 <br />
 
                 <h:form >
+                    <!-- takes to parent offer if one exists -->
                     <h:commandLink action="#{binderManager.viewCurrentOffer(binderManager.currentOffer.parentOfferId.id)}" value="View Previous Offer" styleClass="btn btn-primary marginBot" rendered="#{not (binderManager.currentOffer.parentOfferId eq null)}" ></h:commandLink>
 
+                    <!-- current offer details box-->
                     <div class="row whiteBackground">
                         <div class="col-md-6 card firstCard scrollable">
                             <h3>My Cards</h3>
                             <hr />
                             <div class="scrollableX">
+                                <!-- iterates over a list of the cards owned by the loggedin user -->
                                 <ui:repeat value="#{binderManager.currentOffer.userCards}" var="card">
                                     <div style="margin-bottom: 15px">
+                                        <!-- image and link to view the card -->
                                         <h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage>
                                         <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
                                     </div>
@@ -40,10 +44,11 @@ and open the template in the editor.
                             <h3>#{binderManager.offerUser}'s Cards</h3>
                             <hr />
                             <div class="scrollableX">
+                                <!-- iterates over a list of the cards owned by the other user involved in this deal -->
                                 <ui:repeat value="#{binderManager.currentOffer.otherCards}" var="card">
                                     <div style="margin-bottom: 15px;">
+                                        <!-- image and link to view the card -->
                                         <h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage>
-
                                         <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
                                     </div>
                                 </ui:repeat>
@@ -51,25 +56,29 @@ and open the template in the editor.
 
                         </div>
                     </div>
+                    <!-- status messages on wether the offer has been accepted or completed, Only one if any is rendered do the logic-->
                     <div class="row">
                         <h:outputLabel value="This offer has been accepted.  Shipping details in email" styleClass="panel panel-default offerMsg" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"></h:outputLabel>
                         <h:outputLabel value="This offer has been completed." styleClass="panel panel-default offerMsg" rendered="#{(binderManager.currentOffer.completed)}"></h:outputLabel>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
+                            <!-- Displays only 1 if any and controlled by rendered logic -->
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  action="#{binderManager.acceptOffer}" value="Accept" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  action="#{binderManager.cancelOffer}" value="Cancel" rendered="#{binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id) and (not (binderManager.currentOffer.approved))}"/>
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  action="#{binderManager.completeOffer}" value="Trade Completed" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"/>
                         </div>
                         <div class="col-md-4">
+                            <!-- Only displays if user is the reciever -->
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  value="Reject" action="#{binderManager.cancelOffer}" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
 
                         </div>
                         <div class="col-md-4">
+                            <!-- Only displays if user is the reciever -->
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin" action="#{binderManager.createCounterOffer}"  value="Counter Offer" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id))  and (not (binderManager.currentOffer.approved))}"/>
                         </div>
                     </div>
-
+                    <!-- Begin comment section -->
                     <div class="comment">
                         <div class="row">
                             <div class="col-sm-12">
@@ -77,6 +86,7 @@ and open the template in the editor.
                             </div><!-- /col-sm-12 -->
                         </div><!-- /row -->
 
+                        <!-- iterates over a list of comments on this current trade -->
                         <ui:repeat value="#{binderManager.comments}" var="comment">
                             <div class="row">
                                 <div class="col-sm-1">
@@ -100,7 +110,7 @@ and open the template in the editor.
                                 </div><!-- /col-sm-5 -->
                             </div>
                         </ui:repeat>
-
+                        <!-- for new comment -->
                         <div class="row">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
