@@ -291,6 +291,7 @@ public class TradecommentsController implements Serializable {
     /**
      * make this into an actual controller class for jsf so that it
      * can be used effectively
+     */
     @FacesConverter(forClass = Tradecomments.class)
     public static class TradecommentsControllerConverter implements Converter {
 
