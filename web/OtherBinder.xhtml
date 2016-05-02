@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
+
+This file is very similar to the MyBinder except it is for viewing other user's
+binders.  It is the same basic html except no action icons and a trade with button
+added at the top.  
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -20,14 +23,16 @@ and open the template in the editor.
         <ui:insert name="header">
             <ui:include src="template/header.xhtml"/>
         </ui:insert>
+        
         <div id="content" class="container-fluid binder-container">
-            <h1>
-                <h:graphicImage styleClass="img-responsive binder-user-photo" value="/FileStorageLocation/#{binderManager.getUserPhotoFileName(binderManager.user)}" ></h:graphicImage>#{binderManager.user.username}'s Trade Binder            
-                
-                <h:commandButton action="#{binderManager.tradeWith}" styleClass="btn btn-primary" value="Trade"></h:commandButton>
-</h1>
-
-
+            <h:form>
+                <!-- UserPhoto username and trade with this user button -->
+                <h1>
+                    <h:graphicImage styleClass="img-responsive binder-user-photo" value="/FileStorageLocation/#{binderManager.getUserPhotoFileName(binderManager.user)}" ></h:graphicImage>#{binderManager.user.username}'s Trade Binder            
+                    <h:commandButton action="#{binderManager.tradeWith}" styleClass="btn btn-primary" value="Trade with this user"></h:commandButton>
+                </h1>
+            </h:form>
+            <!-- this users cards for trade half of the binder -->
             <div class="col-xs-6">
                 <h:form>
                     <h3>Cards in my Binder</h3>
@@ -43,6 +48,7 @@ and open the template in the editor.
                                 </tr>
                             </thead>
                             <tbody class="tbody-scroll">
+                                <!-- iterates over a list of entries where each entry contains a card and a card photo for easy iteration display -->
                                 <ui:repeat value="#{binderManager.entries}" var="entry">
                                     <tr>
                                         <td>
@@ -52,15 +58,16 @@ and open the template in the editor.
                                         <td>#{entry.card.cardCondition}</td>
                                         <td>#{entry.card.edition}</td>
                                         <td>#{entry.card.cardValue}$</td>
+                                        <!-- this page is like mybinder but with no action icons -->
                                     </tr>
                                 </ui:repeat>
                             </tbody>
                         </table>
                     </div>
-
-
                 </h:form>
             </div>
+            
+            <!-- This users wants half of the binder-->
             <div class="col-xs-6">
                 <h3>My Wants</h3>
                 <h:form>
@@ -74,6 +81,7 @@ and open the template in the editor.
                                 </tr>
                             </thead>
                             <tbody class="tbody-scroll">
+                                <!-- iterates over this user's list of wants -->
                                 <ui:repeat value="#{binderManager.wants}" var="want">
                                     <tr>
                                         <td class="td-center">#{want.cardName}</td>
@@ -81,13 +89,13 @@ and open the template in the editor.
                                         <td class="td-center">#{want.cardValue}$</td>
                                     </tr>
                                 </ui:repeat>
-
                             </tbody>
                         </table>
                     </div>
                 </h:form>
             </div>
         </div>
+        <!-- footer -->
         <ui:insert name="footer">
             <ui:include src="template/footer.xhtml"/>
         </ui:insert>

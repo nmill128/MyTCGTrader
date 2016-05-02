@@ -564,6 +564,9 @@ public class BinderManager implements Serializable {
 
     //**Redirect, takes us to a users binder
     public String viewUserBinder(Users user) {
+        if(user.getId().equals(this.getLoggedInUser().getId())){
+            return "MyBinder";
+        }
         this.user = user;
         return "OtherBinder";
     }
