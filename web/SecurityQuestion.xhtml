@@ -2,6 +2,8 @@
 <!--
 Created by Matt Morrison on 2016.02.14 
 Copyright © 2016 Matt Morrison. All rights reserved.
+
+This is the intermediate process that comes before reseting your password
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -25,6 +27,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                 <h2 class="form-signin-heading">Please Answer Your Security Question</h2>
                 <div class="panel panel-default col-xs-12 binder">
                 <fieldset>
+                <!-- Question is outputed in a label and user must answer it in the input text field -->
                 <div class="form-group" style="margin-bottom:20px">
                     <h:outputLabel for="question" value="#{passwordResetManager.securityQuestion}" />
                 </div>
@@ -32,6 +35,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                     <h:inputText id="answer" value="#{passwordResetManager.answer}"/>
                 </div>
                 <br/>
+                <!-- User submit the form and if it successs, they will be redirected to next page, otherwise they will have to try again -->
                 <h:commandButton id="submit" action="#{passwordResetManager.securityquestionSubmit()}" value="Submit" />
                 <h:button id="cancel" outcome="index" value="Cancel" />
                 </fieldset>

@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 
+Created by Chris Lai on 2016.04.24 
+Copyright © 2016 Chris Lai. All rights reserved. 
+
+This page consist of basic search functionality.
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core" 
@@ -21,6 +27,7 @@
                             </div>
                             <div class="col-md-3">
                                 <label>Filter by</label>
+                                <!-- This has a dropdown of three criteria to perform a basid search -->
                                 <h:selectOneMenu styleClass="form-control" value="#{searchManager.searchType}">
                                     <!--<select class="form-control">-->
                                     <f:selectItem itemValue="0" itemLabel="All Criteria" />
@@ -30,6 +37,7 @@
                             </div>
                             <div class="col-md-3">
                                 <br />
+                                <!-- Hitting the search button will make it talk to the serach manager while the ladder button will redirect you to a advance search page -->
                                 <h:commandButton  styleClass="btn btn-primary" action="#{searchManager.searchCardsByName}" value="Search"/>
                                 <h:commandButton styleClass="btn btn-primary" action="#{searchManager.toAdvancedSearch()}" value="Advanced Search"/>
                             </div>
@@ -42,6 +50,7 @@
                 <div id="searchTable" class="container" style="">
                     <div class="row col-md-12 custyle">
                         <table class="table table-striped custab results-table">
+                            <!-- This table is generated from the search query that is generanted from the card controller -->
                             <thead>
                                 <tr>
                                     <th>Photo</th>
@@ -54,7 +63,9 @@
                                 <tbody>
                                     <h:form>
                                         <ui:repeat value="#{searchManager.searchResults}" var="card">
+                                            <!-- This table generate for each valid card that match the search criteria -->
                                             <tr>
+                                            <!-- Image are taken from a storage location rather than DB -->
                                                 <td><h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage></td>
                                                 <td class="td-center"><h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}"></h:commandLink></td>
                                                 <td class="td-center">
@@ -72,6 +83,7 @@
                     </div>
                 </div>
                 <script>
+                // This prevent weird dropdown behaviora that occur with this page
                     $(document)
                             .on('click', '.dropdown-menu', function (e) {
                                 e.stopPropagation();
