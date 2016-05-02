@@ -40,9 +40,16 @@ public class UserPhotosController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    /**
+     * Empty constructor for user photos
+     */
     public UserPhotosController() {
     }
 
+    /**
+     * Get the selected userphoto
+     * @return 
+     */
     public UserPhotos getSelected() {
         if (current == null) {
             current = new UserPhotos();
@@ -51,10 +58,18 @@ public class UserPhotosController implements Serializable {
         return current;
     }
 
+    /**
+     * get the userphoto facade
+     * @return the facade associated with userphotos
+     */
     private UserPhotosFacade getFacade() {
         return ejbFacade;
     }
 
+    /**
+     * get the pagination helper generated for user photos
+     * @return the pagination helper for userphotos
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -73,23 +88,39 @@ public class UserPhotosController implements Serializable {
         return pagination;
     }
 
+    /**
+     * Prepare to display the list of userphotos 
+     * @return the xhtml file's name
+     */
     public String prepareList() {
         recreateModel();
         return "List";
     }
 
+    /**
+     * Prepare to display a view of one user photo
+     * @return the xhtml file's name
+     */
     public String prepareView() {
         current = (UserPhotos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
+    /**
+     * Prepare to display the screen for creation of a userphoto
+     * @return the xhtml file's name
+     */
     public String prepareCreate() {
         current = new UserPhotos();
         selectedItemIndex = -1;
         return "Create";
     }
 
+    /**
+     * Create a userphoto in the DB
+     * @return the xhtml file's name if successful, null if not
+     */
     public String create() {
         try {
             getFacade().create(current);
@@ -101,12 +132,20 @@ public class UserPhotosController implements Serializable {
         }
     }
 
+    /**
+     * Prepare to display the screen for editing a user photo
+     * @return the xhtml file's name
+     */
     public String prepareEdit() {
         current = (UserPhotos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
+    /**
+     * UPdate the userphoto in the DB
+     * @return the xhtml file's name if it worked, null if not
+     */
     public String update() {
         try {
             getFacade().edit(current);
@@ -118,6 +157,10 @@ public class UserPhotosController implements Serializable {
         }
     }
 
+    /**
+     * Destroy the user photo object
+     * @return the xhtml file's name if its successful, null if not
+     */
     public String destroy() {
         current = (UserPhotos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -127,6 +170,10 @@ public class UserPhotosController implements Serializable {
         return "List";
     }
 
+    /**
+     * Destroy the user photo object but view the next in a selected list if one exists
+     * @return the xhtml file's name selected by the remaining selected items
+     */
     public String destroyAndView() {
         performDestroy();
         recreateModel();
@@ -140,6 +187,9 @@ public class UserPhotosController implements Serializable {
         }
     }
 
+    /**
+     * Actually destroy the userphoto in the DB
+     */
     private void performDestroy() {
         try {
             getFacade().remove(current);
@@ -149,6 +199,9 @@ public class UserPhotosController implements Serializable {
         }
     }
 
+    /**
+     * Update a userphoto in the DB
+     */
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
@@ -164,6 +217,10 @@ public class UserPhotosController implements Serializable {
         }
     }
 
+    /**
+     * Get the items on a page
+     * @return the datamodel of items in a page
+     */
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
@@ -171,38 +228,68 @@ public class UserPhotosController implements Serializable {
         return items;
     }
 
+    /**
+     * Drop the current data model
+     */
     private void recreateModel() {
         items = null;
     }
 
+    /**
+     * Drop the pagination helper
+     */
     private void recreatePagination() {
         pagination = null;
     }
 
+    /**
+     * Get the next page for the list view
+     * @return the xhtml file's name
+     */
     public String next() {
         getPagination().nextPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get the previous page of the list view
+     * @return the xhtml file's name
+     */
     public String previous() {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get all of the user photos in the db
+     * @return an array of all user photos
+     */
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
+    /**
+     * Get the first user photo in the DB
+     * @return an array of one user photo
+     */
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
+    /**
+     * Get the user photo with the specified ID
+     * @param id is the id we're looking for
+     * @return the user photo with the id ID
+     */
     public UserPhotos getUserPhotos(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
+    /**
+     * Convert this class into an actual controller to be used.
+     */
     @FacesConverter(forClass = UserPhotos.class)
     public static class UserPhotosControllerConverter implements Converter {
 

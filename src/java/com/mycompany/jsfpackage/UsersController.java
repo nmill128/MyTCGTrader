@@ -40,9 +40,16 @@ public class UsersController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    /**
+     * Empty Constructor
+     */
     public UsersController() {
     }
-
+    
+    /**
+    * Get the selected Users
+    * @return all of the selected users
+    */
     public Users getSelected() {
         if (current == null) {
             current = new Users();
@@ -51,10 +58,18 @@ public class UsersController implements Serializable {
         return current;
     }
 
+    /**
+     * GEt the users facade so that it can be connected
+     * @return the usersfacade
+     */
     private UsersFacade getFacade() {
         return ejbFacade;
     }
 
+    /**
+     * Get the pagination helper for users
+     * @return the users pagination helper
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -73,23 +88,39 @@ public class UsersController implements Serializable {
         return pagination;
     }
 
+    /**
+     * Prepare to list out all the users
+     * @return the xhtml file's name
+     */
     public String prepareList() {
         recreateModel();
         return "List";
     }
 
+    /**
+     * Prepare to view one specific user
+     * @return the xhtml file's name
+     */
     public String prepareView() {
         current = (Users) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
+    /**
+     * Get ready to create one new user
+     * @return the xhtml file's name
+     */
     public String prepareCreate() {
         current = new Users();
         selectedItemIndex = -1;
         return "Create";
     }
 
+    /**
+     * Create a new user using the facade
+     * @return the xhtml file's name if it works, null if not
+     */
     public String create() {
         try {
             getFacade().create(current);
@@ -101,12 +132,20 @@ public class UsersController implements Serializable {
         }
     }
 
+    /**
+     * Prepare to edit one user
+     * @return the xhtml file's name
+     */
     public String prepareEdit() {
         current = (Users) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
+    /**
+     * Update a user using the facade
+     * @return the xhtml file's name if it works, null if not
+     */
     public String update() {
         try {
             getFacade().edit(current);
@@ -118,6 +157,10 @@ public class UsersController implements Serializable {
         }
     }
 
+    /**
+     * Destroy a user using the facade
+     * @return the xhtml file's name
+     */
     public String destroy() {
         current = (Users) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -127,6 +170,11 @@ public class UsersController implements Serializable {
         return "List";
     }
 
+    /**
+     * Destroy a user using the facade and view the next one if another one
+     * exists
+     * @return the xhtml file's name 
+     */
     public String destroyAndView() {
         performDestroy();
         recreateModel();
@@ -140,6 +188,9 @@ public class UsersController implements Serializable {
         }
     }
 
+    /**
+     * Actually destroy a user from the database
+     */
     private void performDestroy() {
         try {
             getFacade().remove(current);
@@ -149,6 +200,9 @@ public class UsersController implements Serializable {
         }
     }
 
+    /**
+     * Edit the current user in the database
+     */
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
@@ -164,6 +218,10 @@ public class UsersController implements Serializable {
         }
     }
 
+    /**
+     * Get the datamodel of the item we're using
+     * @return 
+     */
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
@@ -171,38 +229,68 @@ public class UsersController implements Serializable {
         return items;
     }
 
+    /**
+     * Drop the datamodel we have so a new one can be gotten
+     */
     private void recreateModel() {
         items = null;
     }
 
+    /**
+     * Drop the pagination helper so we can get a new one
+     */
     private void recreatePagination() {
         pagination = null;
     }
 
+    /**
+     * Get the next page of pagination
+     * @return the xhtml file's name
+     */
     public String next() {
         getPagination().nextPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get the previuos page of pagination
+     * @return the xhtml file's name
+     */
     public String previous() {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get every user we have
+     * @return an array with every user
+     */
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
+    /**
+     * Get the first user there is
+     * @return an array with the first user
+     */
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
+    /**
+     * Get the user iwth a specific ID
+     * @param id is the id we're looking for
+     * @return the user with id id if there is one
+     */
     public Users getUsers(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
+    /**
+     * Make this class into a controller specifically for the users class
+     */
     @FacesConverter(forClass = Users.class)
     public static class UsersControllerConverter implements Converter {
 
