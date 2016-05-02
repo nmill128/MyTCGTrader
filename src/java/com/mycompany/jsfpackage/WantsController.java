@@ -44,9 +44,17 @@ public class WantsController implements Serializable {
     @EJB
     private UsersFacade userFacade;
 
+    /**
+     * Empty constructor for wants controller
+     */
     public WantsController() {
     }
-
+    
+    
+    /**
+     * Return the selected wants from the currently selected values
+     * @return 
+     */
     public Wants getSelected() {
         if (current == null) {
             current = new Wants();
@@ -55,10 +63,18 @@ public class WantsController implements Serializable {
         return current;
     }
 
+    /**
+     * Get the facade associated with wants
+     * @return 
+     */
     private WantsFacade getFacade() {
         return ejbFacade;
     }
 
+    /**
+     * Get the pagination helper for wants
+     * @return the pagination helper for wants lists
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -77,23 +93,39 @@ public class WantsController implements Serializable {
         return pagination;
     }
 
+    /**
+     * Get ready to display a list of the wants that exist
+     * @return the xhtml file's name
+     */
     public String prepareList() {
         recreateModel();
         return "List";
     }
 
+    /**
+     * Prepare to display a view of one specific want
+     * @return the xhtml file's name
+     */
     public String prepareView() {
         current = (Wants) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
+    /**
+     * Prepare to create a want
+     * @return the xhtml file's name
+     */
     public String prepareCreate() {
         current = new Wants();
         selectedItemIndex = -1;
         return "CreateWant";
     }
 
+    /**
+     * Create a want from the facade
+     * @return the xhtml file's name if it works and null if not
+     */
     public String create() {
         try {
            
@@ -107,17 +139,30 @@ public class WantsController implements Serializable {
         }
     }
 
+    /**
+     * Prepare to edit a single want
+     * @return the xhtml file's name
+     */
     public String prepareEdit() {
         current = (Wants) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
     
+    /**
+     * edit a want from the binder with a specific ID in the wants
+     * @param id is the id we're looking for
+     * @return the xhtml file's name
+     */
     public String binderEdit(int id) {
         current = (Wants) getFacade().find(id);
         return "EditWant";
     }
 
+    /**
+     * Update the want with the facade
+     * @return the xhtml file's name if successful, null if not
+     */
     public String update() {
         try {
             getFacade().edit(current);
@@ -129,6 +174,10 @@ public class WantsController implements Serializable {
         }
     }
 
+    /**
+     * destroy the want using the helper method
+     * @return the xhtml file's name
+     */
     public String destroy() {
         current = (Wants) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -138,12 +187,21 @@ public class WantsController implements Serializable {
         return "List";
     }
     
+    /**
+     * Destroy the want then go back to my binder
+     * @param id is the id of the want we have
+     * @return the xhtml file's name
+     */
     public String binderDestroy(int id) {
         current = (Wants) getFacade().find(id);
         performDestroy();
         return "MyBinder";
     }
 
+    /**
+     * Destroy the want and go back to viewing the next selected item
+     * @return the xhtml file's name view if tehre is more, list if not
+     */
     public String destroyAndView() {
         performDestroy();
         recreateModel();
@@ -157,6 +215,9 @@ public class WantsController implements Serializable {
         }
     }
 
+    /**
+     * Actually destroy the want in the DB
+     */
     private void performDestroy() {
         try {
             getFacade().remove(current);
@@ -166,6 +227,9 @@ public class WantsController implements Serializable {
         }
     }
 
+    /**
+     * Actually update the item in the DB
+     */
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
@@ -181,6 +245,10 @@ public class WantsController implements Serializable {
         }
     }
 
+    /**
+     * Get the datamodel for wants from the facade
+     * @return the wants datamodel
+     */
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
@@ -188,38 +256,69 @@ public class WantsController implements Serializable {
         return items;
     }
 
+    /**
+     * drop the model to redo it
+     */
     private void recreateModel() {
         items = null;
     }
 
+    /**
+     * Drop the pagination to redo it
+     */
     private void recreatePagination() {
         pagination = null;
     }
 
+    /**
+     * Get the next page
+     * @return the xhtml file's name
+     */
     public String next() {
         getPagination().nextPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get the previous page
+     * @return the xhtml file's name
+     */
     public String previous() {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get every want in the DB
+     * @return an array of all the wants in the DB
+     */
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
+    /**
+     * Get the first want in the DB
+     * @return the first wnat in the DB
+     */
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
+    /**
+     * Return the want with the listed id 
+     * @param id is the id we're looking for in the wants
+     * @return the want with that id
+     */
     public Wants getWants(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
+    /**
+     * Convert this class into a controller specifically for the wants class
+     * so that primefaces can use it
+     */
     @FacesConverter(forClass = Wants.class)
     public static class WantsControllerConverter implements Converter {
 

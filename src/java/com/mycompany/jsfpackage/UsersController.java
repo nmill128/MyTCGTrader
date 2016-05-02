@@ -280,7 +280,7 @@ public class UsersController implements Serializable {
     }
 
     /**
-     * Get the user iwth a specific ID
+     * Get the user with a specific ID
      * @param id is the id we're looking for
      * @return the user with id id if there is one
      */
