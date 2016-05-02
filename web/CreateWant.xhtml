@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Created by Matt Morrison on 2016.04.25 
+Copyright © 2016 Matt Morrison. All rights reserved.
+
+This is the same as add card page, however it's added the user want rather than user card that they have -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -29,7 +33,7 @@
                                 <tr>
                                     <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
                                     <td><h:selectOneMenu id="cardCondition" styleClass="form-control" value="#{wantsController.selected.cardCondition}">
-                                            <!--<select class="form-control">-->
+                                            
                                             <f:selectItem itemValue="Mint" itemLabel="Mint" />
                                             <f:selectItem itemValue="Slightly Played" itemLabel="Slightly Played" />
                                             <f:selectItem itemValue="Moderately Played" itemLabel="Moderatly Played" />
