@@ -292,9 +292,11 @@ select[size].form-control{
     width: 90px;
 }
 .scrollable{
-    overflow-y: visible;
+    overflow-x: visible;
 }
-
+.scrollableX{
+    overflow-x: hidden;
+}
 /* MyBinder CSS
 -------------------------------------------------- */
 .binder,.wants-list{
@@ -311,4 +313,15 @@ select[size].form-control{
     display:inline;
     margin-right: 15px;
     margin-bottom: 10px;
+}
+
+.marginBot{
+    margin-bottom: 15px !important;
+}
+
+.offerMsg{
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 0 !important;
+    width: 100%;
 }

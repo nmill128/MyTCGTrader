@@ -19,30 +19,41 @@ and open the template in the editor.
                 <h2 class="centerText">Current Offer</h2>
 
                 <br />
+
                 <h:form >
+                    <h:commandLink action="#{binderManager.viewCurrentOffer(binderManager.currentOffer.parentOfferId.id)}" value="View Previous Offer" styleClass="btn btn-primary marginBot" rendered="#{not (binderManager.currentOffer.parentOfferId eq null)}" ></h:commandLink>
+
                     <div class="row whiteBackground">
                         <div class="col-md-6 card firstCard scrollable">
                             <h3>My Cards</h3>
                             <hr />
-                            <ui:repeat value="#{binderManager.currentOffer.userCards}" var="card">
-                                <div style="margin-bottom: 15px">
-                                    <h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage>
-                                    <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
-                                </div>
-                            </ui:repeat>
+                            <div class="scrollableX">
+                                <ui:repeat value="#{binderManager.currentOffer.userCards}" var="card">
+                                    <div style="margin-bottom: 15px">
+                                        <h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage>
+                                        <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
+                                    </div>
+                                </ui:repeat>
+                            </div>
                         </div>
-                        <div class="col-md-6 card scrollable">
+                        <div class="col-md-6 card s">
                             <h3>#{binderManager.offerUser}'s Cards</h3>
                             <hr />
-                            <ui:repeat value="#{binderManager.currentOffer.otherCards}" var="card">
-                                <div style="margin-bottom: 15px;">
-                                    <h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage>
+                            <div class="scrollableX">
+                                <ui:repeat value="#{binderManager.currentOffer.otherCards}" var="card">
+                                    <div style="margin-bottom: 15px;">
+                                        <h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage>
 
-                                    <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
-                                </div>
-                            </ui:repeat>
+                                        <h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}" styleClass="cardLink"></h:commandLink>
+                                    </div>
+                                </ui:repeat>
+                            </div>
 
                         </div>
+                    </div>
+                    <div class="row">
+                        <h:outputLabel value="This offer has been accepted.  Shipping details in email" styleClass="panel panel-default offerMsg" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"></h:outputLabel>
+                        <h:outputLabel value="This offer has been completed." styleClass="panel panel-default offerMsg" rendered="#{(binderManager.currentOffer.completed)}"></h:outputLabel>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -52,14 +63,12 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-4">
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin"  value="Reject" action="#{binderManager.cancelOffer}" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id)) and (not (binderManager.currentOffer.approved))}"/>
-                            <h:outputLabel value="This offer has been accepted.  Shipping details in email" rendered="#{binderManager.currentOffer.approved and (not (binderManager.currentOffer.completed))}"></h:outputLabel>
-                            <h:outputLabel value="This offer has been completed." rendered="#{(binderManager.currentOffer.completed)}"></h:outputLabel>
+
                         </div>
                         <div class="col-md-4">
                             <h:commandButton  styleClass="btn btn-primary btn-lg btn-block acceptRejectButton buttonMargin" action="#{binderManager.createCounterOffer}"  value="Counter Offer" rendered="#{(not binderManager.currentOffer.creatorId.id.equals(binderManager.loggedInUser.id))  and (not (binderManager.currentOffer.approved))}"/>
                         </div>
                     </div>
-                    <h:commandLink action="#{binderManager.viewCurrentOffer(binderManager.currentOffer.parentOfferId.id)}" value="This is a counter offer - View previous offer" rendered="#{not (binderManager.currentOffer.parentOfferId eq null)}" ></h:commandLink>
 
                     <div class="comment">
                         <div class="row">
