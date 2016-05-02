@@ -41,9 +41,10 @@
 
                 <div id="searchTable" class="container" style="">
                     <div class="row col-md-12 custyle">
-                        <table class="table table-striped custab">
+                        <table class="table table-striped custab results-table">
                             <thead>
                                 <tr>
+                                    <th>Photo</th>
                                     <th>Description</th>
                                     <th>Owner's Username</th>
                                     <th>Edition</th>
@@ -54,6 +55,7 @@
                                     <h:form>
                                         <ui:repeat value="#{searchManager.searchResults}" var="card">
                                             <tr>
+                                                <td><h:graphicImage value="/FileStorageLocation/#{binderManager.getCardPhotoFileName(card)}" styleClass="selectItemImg"></h:graphicImage></td>
                                                 <td class="td-center"><h:commandLink value="#{card.cardName}" action="#{cardsController.binderView(card.id)}"></h:commandLink></td>
                                                 <td class="td-center">
                                                     <h:commandLink value="#{card.userId.username}" action="#{binderManager.viewUserBinder(card.userId)}"></h:commandLink>

@@ -138,16 +138,21 @@ select[size].form-control{
     height: 40px;
     width: 100%;
     padding: 0 15px;
-   
+
 }
 .profile-table select{
-     -webkit-appearance: menulist-button;
-     height: 40px !important;
-     width: 100%;
+    -webkit-appearance: menulist-button;
+    height: 40px !important;
+    width: 100%;
 }
 .profile-table label{
     line-height: 40px;
 }
+
+.results-table tbody tr .td-center {
+    vertical-align: middle;
+}
+
 /* Index Style
 -------------------------------------------------- */
 .container.indexImageContainer{
@@ -252,10 +257,10 @@ select[size].form-control{
 /* CreateOffer CSS
 -------------------------------------------------- */
 .CreateOfferTop{
-    
+
 }
 .createOfferList{
-    
+
 }
 
 .createOfferList td{
@@ -298,7 +303,7 @@ select[size].form-control{
 /* MyBinder CSS
 -------------------------------------------------- */
 .binder,.wants-list{
-    min-height: 250px !important;
+    min-height: 350px !important;
 }
 
 .input-group-addon:first-child{
@@ -312,3 +317,53 @@ select[size].form-control{
     margin-right: 15px;
     margin-bottom: 10px;
 }
+
+
+.card-preview {
+    max-height: 40px;
+    width:auto;
+}
+
+.action-icon-trash{
+    color:red;
+    margin-left:10px;
+}
+
+.action-icon-pencil{
+    color:blue;
+}
+
+.binder-table > tbody > tr > td, .binder-table > thead > tr > th {
+    text-align: center;
+    margin: auto auto auto auto;
+    vertical-align: middle;
+}
+
+.binder {
+    max-height:400px;
+    overflow-y:scroll;
+}
+
+.binder-container {
+    padding-left:100px;
+    padding-right:100px;
+    padding-bottom: 150px;
+}
+
+.wants-list {
+    max-height:400px;
+    overflow-y:scroll;
+}
+
+.wants-list tbody tr {
+    height: 55px;
+}
+
+.wants-list > .binder-table > tbody > tr >  .td-center {
+    vertical-align: middle;
+}
+
+
+.add-card-button {
+    float:right;
+} 
