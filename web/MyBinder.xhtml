@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
+
+
+This is the main page once a use is logged in 
+Here they can add/view/remove their cards they are willing to trade
+and add/view/remove wants (cards they are looking for)
+Other users will see something like this page to see what cards they have and 
+want they want
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -22,10 +28,12 @@ and open the template in the editor.
         <div id="content">
             <div class="container-fluid binder-container">
                 <h1>#{binderManager.loggedInUser.username}'s Trade Binder</h1>
+                <!--The My cards up for trade part of the binder -->
                 <div class="col-xs-6">
                     <h:form>
                         <h3>Cards in my Binder</h3>
                         <div class="panel panel-default col-xs-12 binder">
+                            <!-- Begin card table -->
                             <table class="table binder-table">
                                 <thead>
                                     <tr>
@@ -38,6 +46,8 @@ and open the template in the editor.
                                     </tr>
                                 </thead>
                                 <tbody class="tbody-scroll">
+                                    <!-- Repeats through the list of entries for this user
+                                        Each entry contains a card and cardphoto to display -->
                                     <ui:repeat value="#{binderManager.entries}" var="entry">
                                         <tr>
                                             <td>
@@ -48,6 +58,7 @@ and open the template in the editor.
                                             <td>#{entry.card.edition}</td>
                                             <td>#{entry.card.cardValue}$</td>
                                             <td>
+                                                <!-- action icons for edit and delete -->
                                                 <h:commandLink styleClass="" action="#{cardsController.binderEdit(entry.card.id)}"><span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span></h:commandLink>
                                                 <h:commandLink styleClass="" action="#{cardsController.binderDestroy(entry.card.id)}"><span class="glyphicon glyphicon-trash action-icon-trash" aria-hidden="true"></span></h:commandLink>
                                             </td>
@@ -55,15 +66,17 @@ and open the template in the editor.
                                     </ui:repeat>
                                 </tbody>
                             </table>
+                            <!-- End card Table -->
                         </div>
-
                         <h:commandButton styleClass="btn btn-primary buttonText add-card-button" value="Add Card" action="CreateCard"></h:commandButton>
                     </h:form>
                 </div>
+                <!-- The cards I want to get side of the binder -->
                 <div class="col-xs-6">
                     <h3>My Wants</h3>
                     <h:form>
                         <div class="wants-list panel panel-default col-xs-12">
+                            <!-- begin wants table -->
                             <table class="table binder-table">
                                 <thead>
                                     <tr>
@@ -74,12 +87,14 @@ and open the template in the editor.
                                     </tr>
                                 </thead>
                                 <tbody class="tbody-scroll">
+                                    <!-- repeats over a list of wants for the current user -->
                                     <ui:repeat value="#{binderManager.wants}" var="want">
                                         <tr>
                                             <td class="td-center">#{want.cardName}</td>
                                             <td class="td-center">#{want.cardCondition}</td>
                                             <td class="td-center">#{want.cardValue}$</td>
                                             <td class="td-center">
+                                                <!-- action icons for edit and delete -->
                                                 <h:commandLink styleClass="" action="#{wantsController.binderEdit(want.id)}"><span class="glyphicon glyphicon-pencil action-icon-pencil" aria-hidden="true"></span></h:commandLink>
                                                 <h:commandLink styleClass="" action="#{wantsController.binderDestroy(want.id)}"><span class="glyphicon glyphicon-trash action-icon-trash" aria-hidden="true"></span></h:commandLink>
                                             </td>
@@ -88,12 +103,14 @@ and open the template in the editor.
 
                                 </tbody>
                             </table>
+                            <!-- End wants table -->
                         </div>
                         <h:commandButton styleClass="btn btn-primary buttonText add-card-button" value="Add Want" action="#{wantsController.prepareCreate()}"></h:commandButton>
                     </h:form>
                 </div>
             </div>
         </div>
+        <!-- Footer -->
         <ui:insert name="footer">
             <ui:include src="template/footer.xhtml"/>
         </ui:insert>
