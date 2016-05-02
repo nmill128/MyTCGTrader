@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
  */
 package com.mycompany.sessionBeanPackage;
 
@@ -29,7 +28,10 @@ public class WantsFacade extends AbstractFacade<Wants> {
     public WantsFacade() {
         super(Wants.class);
     }
+ 
+////The following was added to the generated code
     
+    //returns a list of wants that have the user id as the passed
     public List<Wants> findWantsByUserID(Integer userID) {
         return (List<Wants>) em.createNamedQuery("Wants.findWantsByUserId")
                 .setParameter("userId", userID)

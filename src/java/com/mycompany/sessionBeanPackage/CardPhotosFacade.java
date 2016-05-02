@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
  */
 package com.mycompany.sessionBeanPackage;
 
 import com.mycompany.entitypackage.CardPhotos;
-import com.mycompany.entitypackage.UserPhotos;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,7 +30,7 @@ public class CardPhotosFacade extends AbstractFacade<CardPhotos> {
     }
     
                 // The following findPhotosByUserID method is added to the generated code.
-    
+    //returns a list of CardPhotos that have the passed cardID as their cardID in the db
     public List<CardPhotos> findPhotosByCardID(Integer cardID) {
         return (List<CardPhotos>) em.createNamedQuery("CardPhotos.findPhotosByCardId")
                 .setParameter("cardId", cardID)
