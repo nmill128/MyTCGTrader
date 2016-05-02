@@ -1,3 +1,7 @@
+/*
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
+ */
 package com.mycompany.jsfpackage;
 
 import com.mycompany.entitypackage.Tradecomments;
@@ -18,6 +22,13 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+/**
+ *
+ * @author Erik
+ * 
+ * CardPhotos generated controller class with additional methods to help with
+ * viewing and creating from the mybinder page
+ */
 @Named("tradecommentsController")
 @SessionScoped
 public class TradecommentsController implements Serializable {
@@ -29,9 +40,16 @@ public class TradecommentsController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    /**
+     * EMpty Constructor
+     */
     public TradecommentsController() {
     }
 
+    /**
+     * Get the selected tradecomment
+     * @return the tradecomment last accessed
+     */
     public Tradecomments getSelected() {
         if (current == null) {
             current = new Tradecomments();
@@ -40,10 +58,18 @@ public class TradecommentsController implements Serializable {
         return current;
     }
 
+    /**
+     * Get the facade associated with the trade comment
+     * @return 
+     */
     private TradecommentsFacade getFacade() {
         return ejbFacade;
     }
 
+    /**
+     * GEt the pagination helper to appropriately paginate the tradecomments
+     * @return the pagination helper for this table
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -62,23 +88,39 @@ public class TradecommentsController implements Serializable {
         return pagination;
     }
 
+    /**
+     * Prepare for the list 
+     * @return the xhtml file's name
+     */
     public String prepareList() {
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get the current tradecomment ready to view
+     * @return the xhtml file's name
+     */
     public String prepareView() {
         current = (Tradecomments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
+    /**
+     * Make a new tradecomment to be created
+     * @return the xhtml file's name
+     */
     public String prepareCreate() {
         current = new Tradecomments();
         selectedItemIndex = -1;
         return "Create";
     }
 
+    /**
+     * Actually make a new tradecomment in the DB and return it
+     * @return the xhtml file's name
+     */
     public String create() {
         try {
             getFacade().create(current);
@@ -90,12 +132,20 @@ public class TradecommentsController implements Serializable {
         }
     }
 
+    /**
+     * Prepare the current tradecomment to be edited
+     * @return the xhtml file's name
+     */
     public String prepareEdit() {
         current = (Tradecomments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
+    /**
+     * Update the current tradecomment in the database
+     * @return the xhtml file's name if its successful, null if not
+     */
     public String update() {
         try {
             getFacade().edit(current);
@@ -107,6 +157,10 @@ public class TradecommentsController implements Serializable {
         }
     }
 
+    /**
+     * Destroy the current tradecomment in the database
+     * @return the xhtml file's name if successful, null if not
+     */
     public String destroy() {
         current = (Tradecomments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -116,6 +170,10 @@ public class TradecommentsController implements Serializable {
         return "List";
     }
 
+    /**
+     * Destroy the current tradecomment but then view the next one
+     * @return the xhtml file's name view if there are mroe, list if not
+     */
     public String destroyAndView() {
         performDestroy();
         recreateModel();
@@ -129,6 +187,9 @@ public class TradecommentsController implements Serializable {
         }
     }
 
+    /**
+     * Actually destroy something in the database
+     */
     private void performDestroy() {
         try {
             getFacade().remove(current);
@@ -138,6 +199,9 @@ public class TradecommentsController implements Serializable {
         }
     }
 
+    /**
+     * Actually update a tradecomment in the database
+     */
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
@@ -153,45 +217,81 @@ public class TradecommentsController implements Serializable {
         }
     }
 
+    /**
+     * Get the datamodel for the tradecomments in this table
+     * @return a datamodel for tradecomments
+     */
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
         return items;
     }
+    
 
+    /**
+     * Reset the datamodel
+     */
     private void recreateModel() {
         items = null;
     }
 
+    /**
+     * Reset the paginationhelper
+     */
     private void recreatePagination() {
         pagination = null;
     }
 
+    /**
+     * GEt the next page in the pagination
+     * @return the xhtml file's name of the list we're viewing
+     */
     public String next() {
         getPagination().nextPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get the previous page in the pagination
+     * @return the xhtml file's name of the list we're viewing
+     */
     public String previous() {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * GEt every tradecomment
+     * @return an array of every tradecomment
+     */
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
+    /**
+     * Get the first tradecomment
+     * @return the very first trade comment
+     */
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
+    /**
+     * Find the tradecomment with the associated ID
+     * @param id is the id we're looking for
+     * @return the tradecomment with that ID
+     */
     public Tradecomments getTradecomments(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
+    /**
+     * make this into an actual controller class for jsf so that it
+     * can be used effectively
+     */
     @FacesConverter(forClass = Tradecomments.class)
     public static class TradecommentsControllerConverter implements Converter {
 

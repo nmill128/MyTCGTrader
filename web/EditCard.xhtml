@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 
+Created by Chris Lai on 2016.04.24 
+Copyright © 2016 Chris Lai. All rights reserved. 
+
+This page allow the edit a card information using form and that is manager through the cardController
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -19,6 +25,7 @@
                             <p:messages id="msgs" />
 
                             <table class="table profile-table">
+                                <!-- Current Card Information -->
                                 <tr>
                                     <td><p:outputLabel for="cardName" value="Card Name" /></td>
                                     <td><h:inputText id="cardName" value="#{cardsController.selected.cardName}" 
@@ -59,6 +66,7 @@
                                     <td><p:message for="notes" display="icon" /></td>
                                 </tr>
                                 <tr>
+                                <!-- This allow upload of a card that will be downsized to a thumbnail -->
                                     <td><p:outputLabel value="Card Image" for="upload"/></td>
                                     <td><p:fileUpload id="upload" value="#{cardsController.file}" mode="simple" /></td>
                                 </tr>
@@ -66,6 +74,8 @@
                         </div>
                         <h:outputLabel id="error" value="#{cardsController.message}"  />
                         <br/>
+
+                        <!-- Button to update the card or cancel to take it back previously -->
                         <h:commandButton id="add" 
                                          action="#{cardsController.update()}" value="Update" styleClass="btn btn-primary" />   
                         <h:button id="cancel" outcome="MyBinder" value="Cancel" styleClass="btn btn-secondary" />

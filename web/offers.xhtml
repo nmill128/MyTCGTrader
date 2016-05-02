@@ -1,5 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 
+Created by Chris Lai on 2016.04.24 
+Copyright © 2016 Chris Lai. All rights reserved. 
+
+This is the core of my tcg trader. The offer page allows user to trade with other user by looking up other user name. 
+They also can look at previous trade and post comment as well as counter offer in numberous trade.
+
+This page uses the binder manager.
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -21,6 +30,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <!-- This generate the current offer that is on going -->
                                         <ui:repeat value="#{binderManager.currOffers}" var="offer">
                                             <tr onclick="document.getElementsByClassName('offerButton#{offer.id}')[0].click()">
                                                 <td>
@@ -46,6 +56,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <!-- This repeat highlight all of the previous trade the user have encounter in their whole life span -->
                                         <ui:repeat value="#{binderManager.pastOffers}" var="offer">
                                             <tr onclick="document.getElementsByClassName('offerButton#{offer.id}')[0].click()">
                                                 <td>

@@ -1,5 +1,9 @@
 package com.mycompany.jsfpackage;
 
+/*
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
+ */
 import com.mycompany.entitypackage.CardPhotos;
 import com.mycompany.jsfpackage.util.JsfUtil;
 import com.mycompany.jsfpackage.util.PaginationHelper;
@@ -18,6 +22,13 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+/**
+ *
+ * @author Erik
+ * 
+ * CardPhotos generated controller class with additional methods to help with
+ * viewing and creating from the mybinder page
+ */
 @Named("cardPhotosController")
 @SessionScoped
 public class CardPhotosController implements Serializable {
@@ -29,9 +40,16 @@ public class CardPhotosController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    /**
+     * Controller empty constructor
+     */
     public CardPhotosController() {
     }
 
+       /**
+        * Get the selected photos stored right now
+        * @return the cardphotos that are selected 
+        */
     public CardPhotos getSelected() {
         if (current == null) {
             current = new CardPhotos();
@@ -40,10 +58,18 @@ public class CardPhotosController implements Serializable {
         return current;
     }
 
+    /**
+     * Return the facade we're using for cardphotos
+     * @return 
+     */
     private CardPhotosFacade getFacade() {
         return ejbFacade;
     }
 
+    /**
+     * Pagination helper so that cardphotos are displayed in a reasonable quantity
+     * @return the pagination helper object suited to the page sizes we need 
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -62,22 +88,39 @@ public class CardPhotosController implements Serializable {
         return pagination;
     }
 
+    /**
+     * Prepare the list of cardphotos
+     * @return the string value of the xhtml file we're showing next
+     */
     public String prepareList() {
         recreateModel();
         return "List";
     }
 
+    /**
+     * Prepare the values we need to view one cardphoto object
+     * @return the string value of the xhtml file we're showing next
+     */
     public String prepareView() {
         current = (CardPhotos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
+    /**
+     * Prepare the values we need for creating a cardphoto
+     * @return the string value of the xhtml file we're showing next
+     */
     public String prepareCreate() {
         current = new CardPhotos();
         selectedItemIndex = -1;
         return "Create";
     }
+    
+    /**
+     * Create a new cardphoto using the facade and EJB
+     * @return The string value from prepare create which should be that xhtml file
+     */
 
     public String create() {
         try {
@@ -90,12 +133,20 @@ public class CardPhotosController implements Serializable {
         }
     }
 
+    /**
+     * Prepares the values for editing a cardphoto
+     * @return the string value of the xhtml file we're using
+     */
     public String prepareEdit() {
         current = (CardPhotos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
+    /**
+     * Updates the cardphotos and returns to the view
+     * @return the xhtml name of the file we're going to redirect to
+     */
     public String update() {
         try {
             getFacade().edit(current);
@@ -107,6 +158,10 @@ public class CardPhotosController implements Serializable {
         }
     }
 
+    /**
+     * Destroys a cardphoto in the database
+     * @return the xhtml name of the file we're redirecting to
+     */
     public String destroy() {
         current = (CardPhotos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -116,6 +171,10 @@ public class CardPhotosController implements Serializable {
         return "List";
     }
 
+    /**
+     * Destroys a cardphoto but returns to the view on success, not the list again
+     * @return the xhtml name of the file we're redirecting to
+     */
     public String destroyAndView() {
         performDestroy();
         recreateModel();
@@ -129,6 +188,9 @@ public class CardPhotosController implements Serializable {
         }
     }
 
+    /**
+     * This actually takes the facade and destroys the current cardphoto
+     */
     private void performDestroy() {
         try {
             getFacade().remove(current);
@@ -138,6 +200,9 @@ public class CardPhotosController implements Serializable {
         }
     }
 
+    /**
+     * THis updates the current item to be the one we've selected.
+     */
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
@@ -153,6 +218,10 @@ public class CardPhotosController implements Serializable {
         }
     }
 
+    /**
+     * This one will return the bean of the thing we're getting
+     * @return the datamodel for cardphoto
+     */
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
@@ -160,38 +229,68 @@ public class CardPhotosController implements Serializable {
         return items;
     }
 
+    /**
+     * When we need to reset the data model we're using
+     */
     private void recreateModel() {
         items = null;
     }
 
+    /**
+     * For when you need to reset the pagination
+     */
     private void recreatePagination() {
         pagination = null;
     }
 
+    /**
+     * Get the next page in a paginated table
+     * @return the next page in the pagination
+     */
     public String next() {
         getPagination().nextPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get the previous page in a paginated table
+     * @return the previous page in the pagination
+     */
     public String previous() {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get the available cardphotos but select all of them
+     * @return an array of selected items that is all cardphotos
+     */
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
-
+/**
+ * get one available cardphoto
+ * @return the cardphoto you got
+ */
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
+    /**
+     * Get the cardphoto with the established id
+     * @param id is the id of the cardphoto we're looking for
+     * @return the cardphoto with the id in the param
+     */
     public CardPhotos getCardPhotos(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
+    /**
+     * Establish a converter for the cardphotos controller so that the 
+     * rest of the project can understand what it is
+     */
     @FacesConverter(forClass = CardPhotos.class)
     public static class CardPhotosControllerConverter implements Converter {
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--Page to create a card that is added to the user binder-->
+<!-- 
+Created by Matt Morrison on 2016.04.25 
+Copyright © 2016 Matt Morrison. All rights reserved.
+
+Page to create a card that is added to the user binder-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -14,6 +18,7 @@
             <div id="content" class="container-fluid">
                 <div align="center" style="width:50%; margin:0 auto;">
                     <h1 class="centerText">New Card</h1>
+                    <!-- Form to make a new card -->
                     <h:form enctype="multipart/form-data">
                         <br/>
 
@@ -21,6 +26,7 @@
                             <p:messages id="msgs" />
 
                             <table class="table profile-table">
+                                <!-- Table Header -->
                                 <tr>
                                     <td><p:outputLabel for="cardName" value="Card Name" /></td>
                                     <td><h:inputText id="cardName" value="#{cardsController.selected.cardName}" 
@@ -31,7 +37,7 @@
                                 <tr>
                                     <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
                                     <td><h:selectOneMenu id="cardCondition" styleClass="form-control" value="#{cardsController.selected.cardCondition}">
-                                            <!--<select class="form-control">-->
+                                           <!-- Dropdown for card condition, since we have a specific definde condition for each card  -->
                                             <f:selectItem itemValue="Mint" itemLabel="Mint" />
                                             <f:selectItem itemValue="Slightly Played" itemLabel="Slightly Played" />
                                             <f:selectItem itemValue="Moderately Played" itemLabel="Moderatly Played" />
@@ -66,8 +72,10 @@
                                 </tr>
                             </table>
                         </div>
+                        <!-- Error Message Label in case of something going wrong -->
                         <h:outputLabel id="error" value="#{cardsController.message}"  />
                         <br/>
+                        <!-- Button to add a new card or return to the previous screen -->
                         <h:commandButton id="add" 
                                          action="#{cardsController.create()}" value="Add" styleClass="btn btn-primary" />   
                         <h:button id="cancel" outcome="MyBinder" value="Cancel" styleClass="btn btn-secondary" />

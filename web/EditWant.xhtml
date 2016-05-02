@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 
+Created by Chris Lai on 2016.04.24 
+Copyright © 2016 Chris Lai. All rights reserved. 
+
+This page is similiar to EditCard but it is editing want instead
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -20,6 +26,7 @@
                 <p:messages id="msgs" />
 
                 <table class="table profile-table">
+                    <!-- Want Detailed Information -->
                     <tr>
                         <td><p:outputLabel for="cardName" value="Card Name" /></td>
                         <td><h:inputText id="cardName" value="#{wantsController.selected.cardName}" 
@@ -27,6 +34,7 @@
                             </h:inputText></td>
                         <td><p:message for="cardName" display="icon" /></td>
                     </tr>
+                    <!-- Fieldset to change condtion of want card -->
                     <tr>
                         <td><p:outputLabel for="cardCondition" value="Card Condition" /></td>
                         <td><h:selectOneMenu id="cardCondition" styleClass="form-control" value="#{wantsController.selected.cardCondition}">
@@ -49,6 +57,7 @@
                 </table>
             </div>
             <br/>
+            <!-- Update the want card from here -->
             <h:commandButton id="add" 
                              action="#{wantsController.update()}" value="Add" styleClass="btn btn-primary" />   
             <h:button id="cancel" outcome="MyBinder" value="Cancel" styleClass="btn btn-secondary" />

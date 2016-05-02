@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Created by Matt Morrison on 2016.04.25 
+Copyright © 2016 Matt Morrison. All rights reserved.
+
+This page is made to create an offer from one user to another by seraching up their name
+This page make use of the binder manager
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -10,7 +12,7 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <head>
-        <title>TODO supply a title</title>
+        <title>Create Offer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
@@ -19,6 +21,7 @@ and open the template in the editor.
                 <h2 class="centerText">Create Offer</h2>
                 <div class="row">
                     <div class="input-group CreateOfferTop">
+                    <!-- This is the core of the page. User type in the user they want to trade here and then it iwll shower the other user cards if it is valid -->
                         <span class="input-group-addon" >Make a Trade Offer To</span>
                         <h:form>
                             <div class="col-md-11">
@@ -32,6 +35,7 @@ and open the template in the editor.
                 </div>
                 <br />
                 <div class="row whiteBackground">
+                <!-- This contain all the card for the logged user and eventually the desired user to trade too -->
                     <div class="col-md-6 card cardFirst">
                         <h3>My Cards</h3>
                         <hr/>
