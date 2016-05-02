@@ -2,6 +2,8 @@
 <!--
 Created by Matt Morrison on 2016.02.14 
 Copyright © 2016 Matt Morrison. All rights reserved.
+
+This allow user to edit the profile information
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -25,6 +27,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
         <div id="content" class="container-fluid">
             <div align="center" style="width:50%; margin:0 auto;">
                 <h:form class="form-signin">
+                <!-- Form that hold label and input that enable user to update their page -->
                     <h2 class="form-signin-heading">Edit Your Account Information</h2>
                     <br/>
                     <f:event listener="#{accountManager.validateInformation}" type="postValidate"/>
@@ -117,7 +120,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                     <h:commandButton id="submit"
                                      action="#{accountManager.updateAccount()}" value="Update Account" styleClass="btn btn-primary"/>
 
-                    <!-- Delete Account Button -->
+                    <!-- Delete Account Button It prompts the user first if they want to confirm to delete their account-->
                     <h:commandButton id="delete"
                                      action="#{accountManager.deleteAccount()}"                                
                                      value="Delete Account"
@@ -125,7 +128,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                                      onclick="return confirm('Are you sure you want to delete your account permanently?')">
                         <f:actionListener binding="#{fileManager.deletePhoto()}" />
                     </h:commandButton>
-
+                    <!-- Canceling will take the user back to the previous page -->
                     <h:button id="cancel" outcome="Profile" value="Go Back" styleClass="btn btn-secondary" />
                 </h:form>
             </div>
