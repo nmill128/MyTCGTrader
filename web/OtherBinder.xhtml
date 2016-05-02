@@ -20,8 +20,14 @@ and open the template in the editor.
         <ui:insert name="header">
             <ui:include src="template/header.xhtml"/>
         </ui:insert>
-        <div class="container-fluid binder-container">
-            <h1><h:graphicImage styleClass="img-responsive binder-user-photo" value="/FileStorageLocation/#{binderManager.getUserPhotoFileName(binderManager.user)}" ></h:graphicImage>#{binderManager.user.username}'s Trade Binder</h1>
+        <div id="content" class="container-fluid binder-container">
+            <h1>
+                <h:graphicImage styleClass="img-responsive binder-user-photo" value="/FileStorageLocation/#{binderManager.getUserPhotoFileName(binderManager.user)}" ></h:graphicImage>#{binderManager.user.username}'s Trade Binder            
+                
+                <h:commandButton action="#{binderManager.tradeWith}" styleClass="btn btn-primary" value="Trade"></h:commandButton>
+</h1>
+
+
             <div class="col-xs-6">
                 <h:form>
                     <h3>Cards in my Binder</h3>
@@ -38,15 +44,15 @@ and open the template in the editor.
                             </thead>
                             <tbody class="tbody-scroll">
                                 <ui:repeat value="#{binderManager.entries}" var="entry">
-                                <tr>
-                                    <td>
-                                        <h:graphicImage class="card-preview" value="/FileStorageLocation/#{entry.file}"/>
-                                    </td>
-                                    <td>#{entry.card.cardName}</td>
-                                    <td>#{entry.card.cardCondition}</td>
-                                    <td>#{entry.card.edition}</td>
-                                    <td>#{entry.card.cardValue}$</td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            <h:graphicImage class="card-preview" value="/FileStorageLocation/#{entry.file}"/>
+                                        </td>
+                                        <td>#{entry.card.cardName}</td>
+                                        <td>#{entry.card.cardCondition}</td>
+                                        <td>#{entry.card.edition}</td>
+                                        <td>#{entry.card.cardValue}$</td>
+                                    </tr>
                                 </ui:repeat>
                             </tbody>
                         </table>
@@ -69,17 +75,16 @@ and open the template in the editor.
                             </thead>
                             <tbody class="tbody-scroll">
                                 <ui:repeat value="#{binderManager.wants}" var="want">
-                                <tr>
-                                    <td class="td-center">#{want.cardName}</td>
-                                    <td class="td-center">#{want.cardCondition}</td>
-                                    <td class="td-center">#{want.cardValue}$</td>
-                                </tr>
+                                    <tr>
+                                        <td class="td-center">#{want.cardName}</td>
+                                        <td class="td-center">#{want.cardCondition}</td>
+                                        <td class="td-center">#{want.cardValue}$</td>
+                                    </tr>
                                 </ui:repeat>
-                                
+
                             </tbody>
                         </table>
                     </div>
-                    <h:commandButton action="#{binderManager.tradeWith}" value="Trade with #{binderManager.user.username}"></h:commandButton>
                 </h:form>
             </div>
         </div>
