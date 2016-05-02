@@ -491,10 +491,10 @@ public class BinderManager implements Serializable {
         return "CurrentOffer";
     }
 
-    //moves an offer to completed, the offer will no go to past offers
+
 
     /**
-     *
+     * moves an offer to completed, the offer will no go to past offers
      * @return
      */
     public String completeOffer() {
