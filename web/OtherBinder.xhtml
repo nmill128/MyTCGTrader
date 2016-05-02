@@ -21,7 +21,7 @@ and open the template in the editor.
             <ui:include src="template/header.xhtml"/>
         </ui:insert>
         <div class="container-fluid binder-container">
-            <h1>#{binderManager.user.username}'s Trade Binder</h1>
+            <h1><h:graphicImage styleClass="img-responsive binder-user-photo" value="/FileStorageLocation/#{binderManager.getUserPhotoFileName(binderManager.user)}" ></h:graphicImage>#{binderManager.user.username}'s Trade Binder</h1>
             <div class="col-xs-6">
                 <h:form>
                     <h3>Cards in my Binder</h3>

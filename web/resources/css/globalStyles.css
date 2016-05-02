@@ -296,6 +296,14 @@ select[size].form-control{
     height: 90px;
     width: 90px;
 }
+
+.binder-container h1 .binder-user-photo{
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    display:inline;
+    margin-right:20px;
+}
 .scrollable{
     overflow-x: visible;
 }
