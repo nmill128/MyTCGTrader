@@ -85,7 +85,7 @@ public class BinderManager implements Serializable {
             this.photo = photo;
         }
 
-        //getter and setters for private variables
+    //getter and setters for private variables
 
         /**
          *
@@ -122,7 +122,7 @@ public class BinderManager implements Serializable {
         //Get file method to return photo filename for this card
 
         /**
-         *
+         * returns the name of the file for the photo in the entity 
          * @return
          */
         public String getFile() {
@@ -160,10 +160,10 @@ public class BinderManager implements Serializable {
     @EJB
     private com.mycompany.sessionBeanPackage.TradecommentsFacade tradecommentsFacade;
 
-    //constructor
+
 
     /**
-     *
+     * constructor
      */
     public BinderManager() {
 
@@ -172,7 +172,7 @@ public class BinderManager implements Serializable {
     //getter and setter for entries
 
     /**
-     *
+     * getter and setter for entries
      * @return
      */
     public List<Entry> getEntries() {
@@ -194,7 +194,7 @@ public class BinderManager implements Serializable {
     }
 
     /**
-     *
+     * sets entries
      * @param entries
      */
     public void setEntries(List<Entry> entries) {
@@ -211,10 +211,9 @@ public class BinderManager implements Serializable {
         return user;
     }
 
-    //returns the logged in user and sets the user
 
     /**
-     *
+     *returns the logged in user and sets the user
      * @return
      */
     public Users getLoggedInUser() {
@@ -226,7 +225,9 @@ public class BinderManager implements Serializable {
 
     /**
      *
-     * @return
+     * getter and setter for comments
+     * getter fetches comments from the database
+     * @return list tc
      */
     public List<Tradecomments> getComments() {
         setComments(tradecommentsFacade.findCommentsByTradeId(this.currentOffer.getId()));
@@ -234,17 +235,16 @@ public class BinderManager implements Serializable {
     }
 
     /**
-     *
+     * sets comments
      * @param comments
      */
     public void setComments(List<Tradecomments> comments) {
         this.comments = comments;
     }
 
-    //getter and setter for comment message, used in creating new comments
 
     /**
-     *
+     * getter and setter for comment message, used in creating new comments
      * @return
      */
     public String getCommentMessage() {
@@ -259,10 +259,9 @@ public class BinderManager implements Serializable {
         this.commentMessage = cm;
     }
     
-    //create new comment
 
     /**
-     *
+     * create new comment
      * @return
      */
     public String createComment() {
@@ -280,6 +279,8 @@ public class BinderManager implements Serializable {
 
     /**
      *
+     * getter and setter for current and past offers
+     * getters fetch the current/past offers from the database
      * @return
      */
     public List<Trades> getCurrOffers() {
@@ -322,10 +323,9 @@ public class BinderManager implements Serializable {
         return currentOffer;
     }
 
-    //setter prepares the select many maps with cards to be displayed by fetching them from the database
 
     /**
-     *
+     * setter prepares the select many maps with cards to be displayed by fetching them from the database
      * @param t
      */
     public void setCurrentOffer(Trades t) {
@@ -350,10 +350,9 @@ public class BinderManager implements Serializable {
         this.currentOffer.setOtherCards(otherCards);
     }
 
-    //prepares the page to view a current offer **redirects
 
     /**
-     *
+     * prepares the page to view a current offer **redirects
      * @param id
      * @return
      */
@@ -363,10 +362,9 @@ public class BinderManager implements Serializable {
         return "CurrentOffer";
     }
 
-    //getter and setters for offer user
 
     /**
-     *
+     * getter and setters for offer user
      * @return
      */
     public String getOfferUser() {
@@ -381,10 +379,9 @@ public class BinderManager implements Serializable {
         this.offerUser = u;
     }
 
-    //**redirect, using the offer user, prepares the next page to create an offer
 
     /**
-     *
+     * **redirect, using the offer user, prepares the next page to create an offer
      * @return
      */
     public String populateOfferUser() {
@@ -395,10 +392,9 @@ public class BinderManager implements Serializable {
         return "CreateOffer";
     }
 
-    //**redirect, prepares to create an offer with this user
 
     /**
-     *
+     *  prepares to create an offer with this user
      * @return
      */
     public String tradeWith() {
@@ -407,10 +403,9 @@ public class BinderManager implements Serializable {
         return "CreateOfferUser";
     }
 
-    //getters for checks/otherchecks value.  prepares the map, fetches the cards
 
     /**
-     *
+     * getters for checks/otherchecks value.  prepares the map, fetches the cards
      * @return
      */
     public Map<String, Object> getChecksValue() {
@@ -436,14 +431,13 @@ public class BinderManager implements Serializable {
         return otherChecksValue;
     }
 
-    //**redirect, creates the offer being made
-    //pulls the values from checks and creates a new trade in the database
-    //the creates the appropriote tradecards for the many to one relationship
-    //**sends email 
-
+ 
     /**
-     *
-     * @return
+     * creates the offer being made
+     * pulls the values from checks and creates a new trade in the database
+     * the creates the appropriote tradecards for the many to one relationship
+     * **sends email 
+     * @return redirect
      */
     public String submitOffer() {
         if (checks.length == 0 || otherChecks.length == 0) {
@@ -483,11 +477,9 @@ public class BinderManager implements Serializable {
 
     }
 
-    //**redirect, accepts an offer thats currently available
-    //**sends an email
-
     /**
-     *
+     * accepts an offer thats currently available
+     * sends an email
      * @return
      */
     public String acceptOffer() {
