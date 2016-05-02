@@ -1,3 +1,7 @@
+/*
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
+ */
 package com.mycompany.jsfpackage;
 
 import com.mycompany.entitypackage.Tradecards;

@@ -1,3 +1,7 @@
+/*
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
+ */
 package com.mycompany.jsfpackage;
 
 import com.mycompany.entitypackage.Users;
@@ -18,6 +22,13 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+/**
+ *
+ * @author Erik
+ * 
+ * CardPhotos generated controller class with additional methods to help with
+ * viewing and creating from the mybinder page
+ */
 @Named("usersController")
 @SessionScoped
 public class UsersController implements Serializable {
