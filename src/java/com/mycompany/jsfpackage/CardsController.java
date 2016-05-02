@@ -2,7 +2,6 @@ package com.mycompany.jsfpackage;
 
 import com.mycompany.entitypackage.Cards;
 import com.mycompany.entitypackage.CardPhotos;
-import com.mycompany.entitypackage.Users;
 import com.mycompany.jsfpackage.util.JsfUtil;
 import com.mycompany.jsfpackage.util.PaginationHelper;
 import com.mycompany.managers.Constants;
@@ -55,7 +54,7 @@ public class CardsController implements Serializable {
     private String message = "";
 
     /**
-     * The instance variable 'userFacade' is annotated with the @EJB annotation.
+     * The Facade instance variables are annotated with the @EJB annotation.
      * This means that the GlassFish application server, at runtime, will inject
      * in this instance variable a reference to the @Stateless session bean
      * UserFacade.
@@ -63,12 +62,6 @@ public class CardsController implements Serializable {
     @EJB
     private CardsFacade cardsFacade;
 
-    /**
-     * The instance variable 'photoFacade' is annotated with the @EJB
-     * annotation. This means that the GlassFish application server, at runtime,
-     * will inject in this instance variable a reference to the @Stateless
-     * session bean PhotoFacade.
-     */
     @EJB
     private CardPhotosFacade cardPhotosFacade;
 
