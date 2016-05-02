@@ -1,3 +1,8 @@
+/*
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
+ */
+
 package com.mycompany.jsfpackage;
 
 import com.mycompany.entitypackage.Cards;
@@ -39,16 +44,25 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.primefaces.model.UploadedFile;
 
+/**
+ *
+ * @author Erik
+ * 
+ * Cards generated controller class with additional methods to help with
+ * viewing and creating from the mybinder page
+ */
 @Named("cardsController")
 @SessionScoped
 public class CardsController implements Serializable {
 
+    //private variables
     private Cards current;
     private DataModel items = null;
     @EJB
     private com.mycompany.sessionBeanPackage.CardsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    //file variables
     private UploadedFile file;
     private String fileName;
     private String message = "";
@@ -68,9 +82,12 @@ public class CardsController implements Serializable {
     @EJB
     private UsersFacade userFacade;
 
+    
+    //constuctor
     public CardsController() {
     }
 
+    //getter and setters for filename
     public String getFileName() {
         return fileName;
     }
@@ -79,6 +96,7 @@ public class CardsController implements Serializable {
         this.fileName = fileName;
     }
 
+    //for getting selected from list view
     public Cards getSelected() {
         if (current == null) {
             current = new Cards();
@@ -87,10 +105,12 @@ public class CardsController implements Serializable {
         return current;
     }
 
+    //gets the card facade genereated code
     private CardsFacade getFacade() {
         return ejbFacade;
     }
 
+    //pagination for list view
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -109,6 +129,7 @@ public class CardsController implements Serializable {
         return pagination;
     }
 
+    //prepare views for generated xhtml
     public String prepareList() {
         recreateModel();
         return "List";
@@ -120,6 +141,8 @@ public class CardsController implements Serializable {
         return "View";
     }
 
+    //view from in the binder, views card with id passed in
+    //**redirects
     public String binderView(Integer id) {
         current = (Cards) getFacade().find(id);
         List<CardPhotos> photos = cardPhotosFacade.findPhotosByCardID(current.getId());
@@ -130,12 +153,15 @@ public class CardsController implements Serializable {
         return "ViewCard";
     }
 
+    //prepare generated create page
     public String prepareCreate() {
         current = new Cards();
         selectedItemIndex = -1;
         return "Create";
     }
 
+    //creates a new card in the database using current date and loggedin user
+    //**redirect
     public String create() {
         try {
             if (file.getSize() != 0) {
@@ -143,7 +169,6 @@ public class CardsController implements Serializable {
                 current.setDateAdded(new java.sql.Date(new Date().getTime()).toString());
                 getFacade().create(current);
                 copyFile(file);
-                //JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsCreated"));
                 message = "";
                 return "MyBinder";
             } else {
@@ -152,11 +177,12 @@ public class CardsController implements Serializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
+    //File helper methods! taken from userphoto in the user tutorial
+    //copys a file from the request
     public FacesMessage copyFile(UploadedFile file) {
         try {
             deletePhoto();
@@ -192,6 +218,7 @@ public class CardsController implements Serializable {
                 "There was a problem reading the image file. Please try again with a new photo file.");
     }
 
+    //fily copy helper
     private File inputStreamToFile(InputStream inputStream, String childName)
             throws IOException {
         // Read in the series of bytes from the input stream
@@ -210,6 +237,8 @@ public class CardsController implements Serializable {
         return targetFile;
     }
 
+    //creates a thumbnail size of the photo
+    //file helper
     private void saveThumbnail(File inputFile, CardPhotos inputPhoto) {
         try {
             BufferedImage original = ImageIO.read(inputFile);
@@ -221,6 +250,9 @@ public class CardsController implements Serializable {
         }
     }
 
+    //deletes a photo if it exists. used in new photos to make sure there is not
+    //one already there
+    //file helper
     public void deletePhoto() {
         FacesMessage resultMsg;
 
@@ -268,12 +300,14 @@ public class CardsController implements Serializable {
         this.message = message;
     }
 
+    //prepares genereated edit
     public String prepareEdit() {
         current = (Cards) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
+    //prepares edit from binder by the card id passed in
     public String binderEdit(int id) {
         current = (Cards) cardsFacade.findById(id);
         List<CardPhotos> photos = cardPhotosFacade.findPhotosByCardID(current.getId());
@@ -284,20 +318,20 @@ public class CardsController implements Serializable {
         return "EditCard";
     }
 
+    //updates the card in the database, changed for the file
     public String update() {
         try {
             getFacade().edit(current);
             if(file.getSize() != 0){
                 copyFile(file);
             }
-            //JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CardsUpdated"));
             return "MyBinder";
         } catch (Exception e) {
-            //JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
+    //destroy card
     public String destroy() {
         current = (Cards) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -307,13 +341,14 @@ public class CardsController implements Serializable {
         return "List";
     }
 
+    //destoyer from action button in binder by card id
     public String binderDestroy(int id) {
-
         current = (Cards) cardsFacade.findById(id);
         performDestroy();
         return "MyBinder";
     }
 
+    //generated destoyer and view
     public String destroyAndView() {
         performDestroy();
         recreateModel();
@@ -327,6 +362,7 @@ public class CardsController implements Serializable {
         }
     }
 
+    //removes card from the database
     private void performDestroy() {
         try {
             getFacade().remove(current);
@@ -336,6 +372,7 @@ public class CardsController implements Serializable {
         }
     }
 
+//***generated for list use
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
@@ -390,6 +427,7 @@ public class CardsController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    //cards converter class
     @FacesConverter(forClass = Cards.class)
     public static class CardsControllerConverter implements Converter {
 

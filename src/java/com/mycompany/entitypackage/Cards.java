@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
  */
 package com.mycompany.entitypackage;
 
@@ -24,6 +23,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author Erik
+ * 
+ * Cards generated entity class
  */
 @Entity
 @Table(name = "Cards")

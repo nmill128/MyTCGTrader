@@ -33,7 +33,8 @@ import org.primefaces.model.UploadedFile;
 @ManagedBean
 @SessionScoped
 /**
- *
+ * For use with the UserPhotos
+ * CardPhotos are taken care of inside of CardController
  * @author Balci
  */
 public class FileManager {
