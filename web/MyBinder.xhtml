@@ -27,7 +27,7 @@ want they want
         </ui:insert>
         <div id="content">
             <div class="container-fluid binder-container">
-                <h1>#{binderManager.loggedInUser.username}'s Trade Binder</h1>
+                <h1><h:graphicImage styleClass="img-responsive binder-user-photo" value="/FileStorageLocation/#{binderManager.getUserPhotoFileName(binderManager.loggedInUser)}" ></h:graphicImage>#{binderManager.loggedInUser.username}'s Trade Binder</h1>
                 <!--The My cards up for trade part of the binder -->
                 <div class="col-xs-6">
                     <h:form>
