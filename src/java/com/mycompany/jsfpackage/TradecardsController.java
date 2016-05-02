@@ -33,9 +33,16 @@ public class TradecardsController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    /**
+     * Empty constructor
+     */
     public TradecardsController() {
     }
 
+    /**
+     * Get the selected tradecard objects
+     * @return the tradecard tuples we have selected
+     */
     public Tradecards getSelected() {
         if (current == null) {
             current = new Tradecards();
@@ -44,10 +51,18 @@ public class TradecardsController implements Serializable {
         return current;
     }
 
+    /**
+     * Get the facade associated with the tradecards
+     * @return 
+     */
     private TradecardsFacade getFacade() {
         return ejbFacade;
     }
 
+    /**
+     * Get the appropriate pagination associated with the tradecards
+     * @return is the helper for the pagination in this scenario
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -66,23 +81,39 @@ public class TradecardsController implements Serializable {
         return pagination;
     }
 
+    /**
+     * Prepare the list view of the tradecards
+     * @return the xhtml file's name we're redirecting to
+     */
     public String prepareList() {
         recreateModel();
         return "List";
     }
 
+    /**
+     * Prepare the view of one tradecard
+     * @return the xhtml file's name we're redirecting to
+     */
     public String prepareView() {
         current = (Tradecards) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
+    /**
+     * Prepare the creat screen for the tradecard
+     * @return the xhtml file's name we're redirecting to
+     */
     public String prepareCreate() {
         current = new Tradecards();
         selectedItemIndex = -1;
         return "Create";
     }
 
+    /**
+     * Create a new tradecard and return either nothing or a successful xhtml file
+     * @return whether its successful and redirects or is null
+     */
     public String create() {
         try {
             getFacade().create(current);
@@ -94,12 +125,20 @@ public class TradecardsController implements Serializable {
         }
     }
 
+    /**
+     * Prepare the edit screen for a tradecard
+     * @return the xhtml file's name
+     */
     public String prepareEdit() {
         current = (Tradecards) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
+    /**
+     * Update a tradecard object, the current one
+     * @return the xhtml file's name if successful, otherwise null
+     */
     public String update() {
         try {
             getFacade().edit(current);
@@ -111,6 +150,10 @@ public class TradecardsController implements Serializable {
         }
     }
 
+    /**
+     * Destroy a tradecard, the current one
+     * @return the xhtml file's name
+     */
     public String destroy() {
         current = (Tradecards) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -120,6 +163,10 @@ public class TradecardsController implements Serializable {
         return "List";
     }
 
+    /**
+     * destroy a tradecard and go back to viewing it
+     * @return the xhtml file's name either list if its gone or view to view another one
+     */
     public String destroyAndView() {
         performDestroy();
         recreateModel();
@@ -133,6 +180,9 @@ public class TradecardsController implements Serializable {
         }
     }
 
+    /**
+     * Actually destroy the trdecard from the DB
+     */
     private void performDestroy() {
         try {
             getFacade().remove(current);
@@ -142,6 +192,9 @@ public class TradecardsController implements Serializable {
         }
     }
 
+    /**
+     * Update the current item in the DB
+     */
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
@@ -157,6 +210,10 @@ public class TradecardsController implements Serializable {
         }
     }
 
+    /**
+     * GEt the items in a page
+     * @return get the bean for the page
+     */
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
@@ -164,38 +221,69 @@ public class TradecardsController implements Serializable {
         return items;
     }
 
+    /**
+     * Reset the datamodel
+     */
     private void recreateModel() {
         items = null;
     }
 
+    /**
+     * REset the pagination values
+     */
     private void recreatePagination() {
         pagination = null;
     }
 
+    /**
+     * GEt the next page
+     * @return the next page in the list
+     */
     public String next() {
         getPagination().nextPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * Get the previous page
+     * @return the previous page in the pagination
+     */
     public String previous() {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
 
+    /**
+     * GEt all of the tradecards
+     * @return all the tradecards in the DB
+     */
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
+    /**
+     * Get the first tradecard
+     * @return the very first tradecard in the DB
+     */
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
+    /**
+     * Get the tradecard at an id
+     * @param id is the id of the tradecard we want
+     * @return the tradecard with id ID
+     */
     public Tradecards getTradecards(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
+    /**
+     * Convert between the controller and just a regular class so faces knows
+     * what this class is
+     */
     @FacesConverter(forClass = Tradecards.class)
     public static class TradecardsControllerConverter implements Converter {
 
