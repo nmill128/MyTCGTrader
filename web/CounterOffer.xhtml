@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+This page occur after an initial offer is made and the user decide to 'counter offer'
+the trader
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -10,7 +9,7 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <head>
-        <title>TODO supply a title</title>
+        <title>Counter Offer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
@@ -32,6 +31,7 @@ and open the template in the editor.
                         <div class="col-md-6 card scrollable">
                             <h3>#{binderManager.offerUser}'s Cards</h3>
                             <hr />
+                            <!--Checkbox allows user to choose what cards they want-->
                             <h:selectManyCheckbox value="#{binderManager.otherChecks}" styleClass="createOfferList ">
                                 <div class="checkbox">
                                     <f:selectItems value="#{binderManager.otherChecksValue}" />

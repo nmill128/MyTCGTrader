@@ -2,6 +2,8 @@
 <!--
 Created by Matt Morrison on 2016.04.25 
 Copyright © 2016 Matt Morrison. All rights reserved.
+
+This webpage serve as a advance search where it has more filter and value to look at.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -13,6 +15,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
         <ui:composition template="template/commonLayout.xhtml">
             <ui:define name="content">
                 <div class="container">
+                    <!--e This form take in multiple input as oppose to one input in the basic search-->
                     <h:form>
                         <div class="row">
                             <div class="col-md-2">
@@ -66,7 +69,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                     </h:form>
                 </div>
 
-
+                <!--This is the table of all the displayed result-->
                 <div id="searchTable" class="container" style="">
                     <div class="row col-md-12 custyle">
                         <table class="table table-striped custab">
@@ -94,6 +97,8 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                     </div>
                 </div>
                 <script>
+//                    This function prevent default action of a dropdown menu, 
+//                    we found a bug where it select a option before we actually select it
                     $(document)
                             .on('click', '.dropdown-menu', function (e) {
                                 e.stopPropagation();
