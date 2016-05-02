@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
  */
 package com.mycompany.entitypackage;
 
@@ -25,7 +24,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * Generated entity class for TradeComments
  * @author Erik
  */
 @Entity
@@ -38,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tradecomments.findCommentsByTradeId", query = "SELECT t FROM Tradecomments t WHERE t.tradeID.id = :tradeID"),
     @NamedQuery(name = "Tradecomments.findByCreateDate", query = "SELECT t FROM Tradecomments t WHERE t.createDate = :createDate")})
 public class Tradecomments implements Serializable {
-
+    //private variables and their db counter parts
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,55 +61,108 @@ public class Tradecomments implements Serializable {
     @ManyToOne(optional = false)
     private Users creatorId;
 
+    /**
+     * Constructor
+     */
     public Tradecomments() {
     }
 
+    /**
+     * Constructs with id
+     * @param id
+     */
     public Tradecomments(Integer id) {
         this.id = id;
     }
 
+    /**
+     * constructors with params
+     * @param id
+     * @param string
+     * @param createDate
+     */
     public Tradecomments(Integer id, String string, Date createDate) {
         this.id = id;
         this.string = string;
         this.createDate = createDate;
     }
 
+    /**
+     * gets id 
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * sets id 
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * gets creator id 
+     * @return
+     */
     public Users getCreatorId() {
         return creatorId;
     }
 
+    /**
+     * sets creator id
+     * @param creatorId
+     */
     public void setCreatorId(Users creatorId) {
         this.creatorId = creatorId;
     }
 
+    /**
+     * gets trade id 
+     * @return
+     */
     public Trades getTradeID() {
         return tradeID;
     }
 
+    /**
+     * sets trade id 
+     * @param tradeID
+     */
     public void setTradeID(Trades tradeID) {
         this.tradeID = tradeID;
     }
 
+    /**
+     * gets string (message)
+     * @return
+     */
     public String getString() {
         return string;
     }
 
+    /**
+     * sets string
+     * @param string
+     */
     public void setString(String string) {
         this.string = string;
     }
 
+    /**
+     * gets create date
+     * @return
+     */
     public Date getCreateDate() {
         return createDate;
     }
 
+    /**
+     * sets create date
+     * @param createDate
+     */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }

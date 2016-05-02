@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
  */
 package com.mycompany.entitypackage;
 
@@ -24,13 +23,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
+ * generated entity class for USer
  * @author Erik
  */
 @Entity
 @Table(name = "Users")
 @XmlRootElement
-@NamedQueries({
+@NamedQueries({ //queries
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
     @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
@@ -49,7 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByBadTrades", query = "SELECT u FROM Users u WHERE u.badTrades = :badTrades"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")})
 public class Users implements Serializable {
-
+    //private variables with db counterparts
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -127,13 +126,37 @@ public class Users implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Wants> wantsCollection;
 
+    /**
+     * Constructor 
+     */
     public Users() {
     }
 
+    /**
+     * Constructs with id
+     * @param id
+     */
     public Users(Integer id) {
         this.id = id;
     }
 
+    /**
+     * constructs with params
+     * @param id
+     * @param username
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param address1
+     * @param city
+     * @param usState
+     * @param zipcode
+     * @param securityQuestion
+     * @param securityAnswer
+     * @param goodTrades
+     * @param badTrades
+     * @param email
+     */
     public Users(Integer id, String username, String password, String firstName, String lastName, String address1, String city, String usState, int zipcode, int securityQuestion, String securityAnswer, int goodTrades, int badTrades, String email) {
         this.id = id;
         this.username = username;
@@ -151,139 +174,275 @@ public class Users implements Serializable {
         this.email = email;
     }
 
+    /**
+     * get id
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * set id 
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * get username
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * set username
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * get password
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * set password
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * get first name
+     * @return
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * set first name 
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * get middle name
+     * @return
+     */
     public String getMiddleName() {
         return middleName;
     }
 
+    /**
+     * set middle name 
+     * @param middleName
+     */
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
+    /** 
+     * get last name
+     * @return
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * set last name
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * gets address1
+     * @return
+     */
     public String getAddress1() {
         return address1;
     }
 
+    /**
+     * sets address1
+     * @param address1
+     */
     public void setAddress1(String address1) {
         this.address1 = address1;
     }
 
+    /**
+     * gets address2 
+     * @return
+     */
     public String getAddress2() {
         return address2;
     }
 
+    /**
+     * sets address2
+     * @param address2
+     */
     public void setAddress2(String address2) {
         this.address2 = address2;
     }
 
+    /**
+     * gets cidy
+     * @return
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * sets city
+     * @param city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * gets us state
+     * @return
+     */
     public String getUsState() {
         return usState;
     }
 
+    /**
+     * sets us state
+     * @param usState
+     */
     public void setUsState(String usState) {
         this.usState = usState;
     }
 
+    /**
+     * gets zipcode
+     * @return
+     */
     public int getZipcode() {
         return zipcode;
     }
 
+    /**
+     * sets zipcode
+     * @param zipcode
+     */
     public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
     }
 
+    /**
+     * gets security Question
+     * @return
+     */
     public int getSecurityQuestion() {
         return securityQuestion;
     }
 
+    /**
+     * sets security q
+     * @param securityQuestion
+     */
     public void setSecurityQuestion(int securityQuestion) {
         this.securityQuestion = securityQuestion;
     }
 
+    /**
+     * get security a
+     * @return
+     */
     public String getSecurityAnswer() {
         return securityAnswer;
     }
 
+    /**
+     * sets security a
+     * @param securityAnswer
+     */
     public void setSecurityAnswer(String securityAnswer) {
         this.securityAnswer = securityAnswer;
     }
 
+    /**
+     * get Good trades
+     * @return
+     */
     public int getGoodTrades() {
         return goodTrades;
     }
 
+    /**
+     * set good trades 
+     * @param goodTrades
+     */
     public void setGoodTrades(int goodTrades) {
         this.goodTrades = goodTrades;
     }
 
+    /**
+     * get bad trades
+     * @return
+     */
     public int getBadTrades() {
         return badTrades;
     }
 
+    /**
+     * set bad trades
+     * @param badTrades
+     */
     public void setBadTrades(int badTrades) {
         this.badTrades = badTrades;
     }
 
+    /**
+     * gets email
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * sets email
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * gets wants
+     * @return
+     */
     @XmlTransient
     public Collection<Wants> getWantsCollection() {
         return wantsCollection;
     }
 
+    /**
+     * sets wants
+     * @param wantsCollection
+     */
     public void setWantsCollection(Collection<Wants> wantsCollection) {
         this.wantsCollection = wantsCollection;
     }

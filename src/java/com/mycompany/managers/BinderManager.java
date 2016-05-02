@@ -33,6 +33,10 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.*;
 
+/**
+ *
+ * @author Erik
+ */
 @Named(value = "binderManager")
 @SessionScoped
 /**
@@ -71,29 +75,56 @@ public class BinderManager implements Serializable {
         private CardPhotos photo;
         private Cards card;
 
+        /**
+         *
+         * @param card
+         * @param photo
+         */
         public Entry(Cards card, CardPhotos photo) {
             this.card = card;
             this.photo = photo;
         }
 
         //getter and setters for private variables
+
+        /**
+         *
+         * @return
+         */
         public Cards getCard() {
             return card;
         }
 
+        /**
+         *
+         * @param card
+         */
         public void setCard(Cards card) {
             this.card = card;
         }
 
+        /**
+         *
+         * @return
+         */
         public CardPhotos getPhoto() {
             return photo;
         }
 
+        /**
+         *
+         * @param photo
+         */
         public void setPhoto(CardPhotos photo) {
             this.photo = photo;
         }
 
         //Get file method to return photo filename for this card
+
+        /**
+         *
+         * @return
+         */
         public String getFile() {
             if (photo == null) {
                 return "/DefaultUserPhoto.png";
@@ -130,11 +161,20 @@ public class BinderManager implements Serializable {
     private com.mycompany.sessionBeanPackage.TradecommentsFacade tradecommentsFacade;
 
     //constructor
+
+    /**
+     *
+     */
     public BinderManager() {
 
     }
 
     //getter and setter for entries
+
+    /**
+     *
+     * @return
+     */
     public List<Entry> getEntries() {
         List<Cards> cards = cardsFacade.findCardsByUserID(getUser().getId());
         List<Entry> entriesReturn = new ArrayList(0);
@@ -153,6 +193,10 @@ public class BinderManager implements Serializable {
         return entriesReturn;
     }
 
+    /**
+     *
+     * @param entries
+     */
     public void setEntries(List<Entry> entries) {
         this.entries = entries;
     }
@@ -168,31 +212,59 @@ public class BinderManager implements Serializable {
     }
 
     //returns the logged in user and sets the user
+
+    /**
+     *
+     * @return
+     */
     public Users getLoggedInUser() {
         return user = userFacade.find(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user_id"));
     }
 
     //getter and setter for comments
     //getter fetches comments from the database
+
+    /**
+     *
+     * @return
+     */
     public List<Tradecomments> getComments() {
         setComments(tradecommentsFacade.findCommentsByTradeId(this.currentOffer.getId()));
         return this.comments;
     }
 
+    /**
+     *
+     * @param comments
+     */
     public void setComments(List<Tradecomments> comments) {
         this.comments = comments;
     }
 
     //getter and setter for comment message, used in creating new comments
+
+    /**
+     *
+     * @return
+     */
     public String getCommentMessage() {
         return this.commentMessage;
     }
 
+    /**
+     *
+     * @param cm
+     */
     public void setCommentMessage(String cm) {
         this.commentMessage = cm;
     }
     
     //create new comment
+
+    /**
+     *
+     * @return
+     */
     public String createComment() {
         Tradecomments tc = new Tradecomments();
         tc.setCreatorId(getLoggedInUser());
@@ -205,30 +277,57 @@ public class BinderManager implements Serializable {
 
     //getter and setter for current and past offers
     //getters fetch the current/past offers from the database
+
+    /**
+     *
+     * @return
+     */
     public List<Trades> getCurrOffers() {
         setCurrOffers(tradesFacade.findCurrTradesByUserId(getLoggedInUser().getId()));
         return this.currOffers;
     }
 
+    /**
+     *
+     * @param offers
+     */
     public void setCurrOffers(List<Trades> offers) {
         this.currOffers = offers;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Trades> getPastOffers() {
         setPastOffers(tradesFacade.findPastTradesByUserId(getLoggedInUser().getId()));
         return this.pastOffers;
     }
 
+    /**
+     *
+     * @param offers
+     */
     public void setPastOffers(List<Trades> offers) {
         this.pastOffers = offers;
     }
 
     //getter and setter for current offer
+
+    /**
+     *
+     * @return
+     */
     public Trades getCurrentOffer() {
         return currentOffer;
     }
 
     //setter prepares the select many maps with cards to be displayed by fetching them from the database
+
+    /**
+     *
+     * @param t
+     */
     public void setCurrentOffer(Trades t) {
         this.currentOffer = t;
         List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(this.currentOffer.getId());
@@ -252,6 +351,12 @@ public class BinderManager implements Serializable {
     }
 
     //prepares the page to view a current offer **redirects
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     public String viewCurrentOffer(Integer id) {
         Trades trade = tradesFacade.find(id);
         setCurrentOffer(trade);
@@ -259,15 +364,29 @@ public class BinderManager implements Serializable {
     }
 
     //getter and setters for offer user
+
+    /**
+     *
+     * @return
+     */
     public String getOfferUser() {
         return offerUser;
     }
 
+    /**
+     *
+     * @param u
+     */
     public void setOfferUser(String u) {
         this.offerUser = u;
     }
 
     //**redirect, using the offer user, prepares the next page to create an offer
+
+    /**
+     *
+     * @return
+     */
     public String populateOfferUser() {
         Users oUser = (Users) userFacade.findByUsername(this.offerUser);
         if (oUser != null && !oUser.getId().equals(user.getId())) {
@@ -277,6 +396,11 @@ public class BinderManager implements Serializable {
     }
 
     //**redirect, prepares to create an offer with this user
+
+    /**
+     *
+     * @return
+     */
     public String tradeWith() {
         this.offerUser = user.getUsername();
         populateOfferUser();
@@ -284,6 +408,11 @@ public class BinderManager implements Serializable {
     }
 
     //getters for checks/otherchecks value.  prepares the map, fetches the cards
+
+    /**
+     *
+     * @return
+     */
     public Map<String, Object> getChecksValue() {
         checksValue = new LinkedHashMap();
         List<Cards> cards = cardsFacade.findCardsByUserID(getLoggedInUser().getId());
@@ -293,6 +422,10 @@ public class BinderManager implements Serializable {
         return checksValue;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<String, Object> getOtherChecksValue() {
         otherChecksValue = new LinkedHashMap();
         Users oUser = (Users) userFacade.findByUsername(this.offerUser);
@@ -307,6 +440,11 @@ public class BinderManager implements Serializable {
     //pulls the values from checks and creates a new trade in the database
     //the creates the appropriote tradecards for the many to one relationship
     //**sends email 
+
+    /**
+     *
+     * @return
+     */
     public String submitOffer() {
         if (checks.length == 0 || otherChecks.length == 0) {
             return "CreateOfferUser";
@@ -347,6 +485,11 @@ public class BinderManager implements Serializable {
 
     //**redirect, accepts an offer thats currently available
     //**sends an email
+
+    /**
+     *
+     * @return
+     */
     public String acceptOffer() {
         this.currentOffer.setApproved(true);
         tradesFacade.edit(currentOffer);
@@ -357,6 +500,11 @@ public class BinderManager implements Serializable {
     }
 
     //moves an offer to completed, the offer will no go to past offers
+
+    /**
+     *
+     * @return
+     */
     public String completeOffer() {
         this.currentOffer.setCompleted(true);
         tradesFacade.edit(currentOffer);
@@ -367,6 +515,11 @@ public class BinderManager implements Serializable {
     //cancels the currentoffer by removing it from the db
     //also recursivly removes all parent offers
     //**sends email
+
+    /**
+     *
+     * @return
+     */
     public String cancelOffer() {
         List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(this.currentOffer.getId());
         for (Tradecards tc : tradecards) {
@@ -383,6 +536,11 @@ public class BinderManager implements Serializable {
 
     //recursive offer cancel helper
     //deletes offer sent from db and recursivly deletes its parent offer
+
+    /**
+     *
+     * @param offer
+     */
     public void cancelOffer(Trades offer) {
         if (offer != null) {
             List<Tradecards> tradecards = tradecardsFacade.findTradecardsByTradeId(offer.getId());
@@ -397,6 +555,11 @@ public class BinderManager implements Serializable {
     //**redirect, prepares a counter offer by preparing the checked cards from
     //the last offer with tradecards from the database, then sets the select many
     //values to it
+
+    /**
+     *
+     * @return
+     */
     public String createCounterOffer() {
         if (this.currentOffer.getCreatorId().getId().equals(getLoggedInUser().getId())) {
             this.offerUser = this.currentOffer.getRecieverId().getUsername();
@@ -434,6 +597,11 @@ public class BinderManager implements Serializable {
     //**redirect, actually creates the counter offer into the database
     //very similar to creating a normal offer
     //**sends email
+
+    /**
+     *
+     * @return
+     */
     public String submitCounterOffer() {
         if (checks.length == 0 || otherChecks.length == 0) {
             return "CreateOfferUser";
@@ -474,18 +642,35 @@ public class BinderManager implements Serializable {
     }
 
     //getter and setters for checks and other checks
+
+    /**
+     *
+     * @return
+     */
     public int[] getChecks() {
         return checks;
     }
 
+    /**
+     *
+     * @param checks
+     */
     public void setChecks(int[] checks) {
         this.checks = checks;
     }
 
+    /**
+     *
+     * @return
+     */
     public int[] getOtherChecks() {
         return otherChecks;
     }
 
+    /**
+     *
+     * @param checks
+     */
     public void setOtherChecks(int[] checks) {
         this.otherChecks = checks;
     }
@@ -499,15 +684,28 @@ public class BinderManager implements Serializable {
 
     //getter and setters for wants
     //getter fetches wants from the db
+
+    /**
+     *
+     * @return
+     */
     public List<Wants> getWants() {
         return wantsFacade.findWantsByUserID(user.getId());
     }
 
+    /**
+     *
+     */
     public void setWants() {
         this.wants = wantsFacade.findWantsByUserID(user.getId());;
     }
 
     //**redirect, prepares to view my binder
+
+    /**
+     *
+     * @return
+     */
     public String viewMyBinder() {
         user = getLoggedInUser();
         wants = wantsFacade.findWantsByUserID(user.getId());
@@ -516,6 +714,14 @@ public class BinderManager implements Serializable {
 
     //Send mail helper function, hard coded with our smtp information
     //takes in subject, message and to for the email
+
+    /**
+     *
+     * @param subject
+     * @param message
+     * @param to
+     * @return
+     */
     public int sendMail(String subject, String message, String to) {
         try {
             if (false) {
@@ -563,6 +769,12 @@ public class BinderManager implements Serializable {
     }
 
     //**Redirect, takes us to a users binder
+
+    /**
+     *
+     * @param user
+     * @return
+     */
     public String viewUserBinder(Users user) {
         if(user.getId().equals(this.getLoggedInUser().getId())){
             return "MyBinder";
@@ -572,6 +784,12 @@ public class BinderManager implements Serializable {
     }
 
     //Helper for getting the file name of a user photo
+
+    /**
+     *
+     * @param u
+     * @return
+     */
     public String getUserPhotoFileName(Users u) {
         List<UserPhotos> userPhotos = this.userPhotosFacade.findPhotosByUserID(u.getId());
         if (!userPhotos.isEmpty()) {
@@ -582,6 +800,12 @@ public class BinderManager implements Serializable {
     }
 
     //helper for getting the file name of a cards photo
+
+    /**
+     *
+     * @param c
+     * @return
+     */
     public String getCardPhotoFileName(Cards c) {
         CardPhotos cp = this.cardPhotosFacade.findPhotosByCardID(c.getId()).get(0);
         return cp.getThumbnailName();

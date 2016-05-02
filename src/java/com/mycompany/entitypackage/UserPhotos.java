@@ -22,19 +22,19 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * generated entity class for user photos
  * @author nmiller
  */
 @Entity
 @Table(name = "UserPhotos")
 @XmlRootElement
-@NamedQueries({
+@NamedQueries({ //queries
     @NamedQuery(name = "UserPhotos.findAll", query = "SELECT u FROM UserPhotos u"),
     @NamedQuery(name = "UserPhotos.findById", query = "SELECT u FROM UserPhotos u WHERE u.id = :id"),
     @NamedQuery(name = "UserPhotos.findPhotosByUserId", query = "SELECT u FROM UserPhotos u WHERE u.userId.id = :userId"),
     @NamedQuery(name = "UserPhotos.findByExtension", query = "SELECT u FROM UserPhotos u WHERE u.extension = :extension")})
 public class UserPhotos implements Serializable {
-
+    //private variables and the db counter parts
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,43 +50,84 @@ public class UserPhotos implements Serializable {
     @ManyToOne
     private Users userId;
 
+    /**
+     * Constructor
+     */
     public UserPhotos() {
     }
 
+    /**
+     * constructs with id
+     * @param id
+     */
     public UserPhotos(Integer id) {
         this.id = id;
     }
 
+    /**
+     * constructs with params
+     * @param id
+     * @param extension
+     */
     public UserPhotos(Integer id, String extension) {
         this.id = id;
         this.extension = extension;
     }
     
+    /**
+     * constructs with params
+     * @param extension
+     * @param id
+     */
     public UserPhotos(String extension, Users id) {
         this.extension = extension;
         userId = id;
     }
 
+    /**
+     * gets id 
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * sets id 
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * gets extension
+     * @return
+     */
     public String getExtension() {
         return extension;
     }
 
+    /**
+     * sets extension
+     * @param extension
+     */
     public void setExtension(String extension) {
         this.extension = extension;
     }
 
+    /**
+     * gets user id
+     * @return
+     */
     public Users getUserId() {
         return userId;
     }
 
+    /**
+     * sets user id
+     * @param userId
+     */
     public void setUserId(Users userId) {
         this.userId = userId;
     }
@@ -116,18 +157,34 @@ public class UserPhotos implements Serializable {
         return "com.mycompany.entitypackage.UserPhotos[ id=" + id + " ]";
     }
     
+    /**
+     * gets filepath of photo
+     * @return
+     */
     public String getFilePath() {
         return Constants.ROOT_DIRECTORY + getFilename();
     }
 
+    /**
+     *gets file name of photo
+     * @return
+     */
     public String getFilename() {
         return "userPhotos/" + getId() + "." + getExtension();
     }
     
+    /**
+     * gets thumbnail name of photo
+     * @return
+     */
     public String getThumbnailName() {
         return "userPhotos/" + getId() + "_thumbnail." + getExtension();
     }
     
+    /**
+     * gets thumbnail file path
+     * @return
+     */
     public String getThumbnailFilePath() {
         return Constants.ROOT_DIRECTORY + getThumbnailName();
     }

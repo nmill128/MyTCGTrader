@@ -78,13 +78,29 @@ public class Cards implements Serializable {
     @ManyToOne(optional = false)
     private Users userId;
 
+    /**
+     * Constructor
+     */
     public Cards() {
     }
 
+    /**
+     * Creates with id
+     * @param id
+     */
     public Cards(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Creates with params
+     * @param id
+     * @param cardName
+     * @param cardCondition
+     * @param edition
+     * @param cardValue
+     * @param dateAdded
+     */
     public Cards(Integer id, String cardName, String cardCondition, String edition, int cardValue, String dateAdded) {
         this.id = id;
         this.cardName = cardName;
@@ -94,66 +110,130 @@ public class Cards implements Serializable {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     * gets id
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * sets id
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * gets card name
+     * @return
+     */
     public String getCardName() {
         return cardName;
     }
 
+    /**
+     *sets card name
+     * @param cardName
+     */
     public void setCardName(String cardName) {
         this.cardName = cardName;
     }
 
+    /**
+     * gets card condition
+     * @return
+     */
     public String getCardCondition() {
         return cardCondition;
     }
 
+    /**
+     * sets card condition
+     * @param cardCondition
+     */
     public void setCardCondition(String cardCondition) {
         this.cardCondition = cardCondition;
     }
 
+    /**
+     *gets card edition
+     * @return
+     */
     public String getEdition() {
         return edition;
     }
 
+    /**
+     * sets card edition
+     * @param edition
+     */
     public void setEdition(String edition) {
         this.edition = edition;
     }
 
+    /**
+     * gets card value
+     * @return
+     */
     public float getCardValue() {
         return cardValue;
     }
 
+    /**
+     * sets card value
+     * @param cardValue
+     */
     public void setCardValue(float cardValue) {
         this.cardValue = cardValue;
     }
 
+    /**
+     * get notes
+     * @return
+     */
     public String getNotes() {
         return notes;
     }
 
+    /**
+     * set notes
+     * @param notes
+     */
     public void setNotes(String notes) {
         this.notes = notes;
     }
 
+    /**
+     * gets date added
+     * @return
+     */
     public String getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     * sets date added
+     * @param dateAdded
+     */
     public void setDateAdded(String dateAdded) {
         this.dateAdded = (dateAdded);
     }
 
+    /**
+     * gets user id
+     * @return
+     */
     public Users getUserId() {
         return userId;
     }
 
+    /**
+     * sets user id
+     * @param userId
+     */
     public void setUserId(Users userId) {
         this.userId = userId;
     }

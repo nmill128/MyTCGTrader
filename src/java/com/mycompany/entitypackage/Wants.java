@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created by Erik Yeomans on 2016.05.02  * 
+ * Copyright © 2016 Erik Yeomans. All rights reserved. * 
  */
 package com.mycompany.entitypackage;
 
@@ -22,13 +21,13 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * Generated entity class for Want
  * @author Erik
  */
 @Entity
 @Table(name = "Wants")
 @XmlRootElement
-@NamedQueries({
+@NamedQueries({ //query
     @NamedQuery(name = "Wants.findAll", query = "SELECT w FROM Wants w"),
     @NamedQuery(name = "Wants.findById", query = "SELECT w FROM Wants w WHERE w.id = :id"),
     @NamedQuery(name = "Wants.findByCardName", query = "SELECT w FROM Wants w WHERE w.cardName = :cardName"),
@@ -36,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Wants.findWantsByUserId", query = "SELECT w FROM Wants w WHERE w.userId.id = :userId"),
     @NamedQuery(name = "Wants.findByCardValue", query = "SELECT w FROM Wants w WHERE w.cardValue = :cardValue")})
 public class Wants implements Serializable {
-
+    //private variables and the db counter parts
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,13 +60,27 @@ public class Wants implements Serializable {
     @ManyToOne(optional = false)
     private Users userId;
 
+    /**
+     * Constructor
+     */
     public Wants() {
     }
 
+    /**
+     * Constructs with id
+     * @param id
+     */
     public Wants(Integer id) {
         this.id = id;
     }
 
+    /**
+     * constructs with params
+     * @param id
+     * @param cardName
+     * @param cardCondition
+     * @param cardValue
+     */
     public Wants(Integer id, String cardName, String cardCondition, int cardValue) {
         this.id = id;
         this.cardName = cardName;
@@ -75,42 +88,82 @@ public class Wants implements Serializable {
         this.cardValue = cardValue;
     }
 
+    /**
+     * gets id
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * sets id
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *gets card name
+     * @return
+     */
     public String getCardName() {
         return cardName;
     }
 
+    /**
+     * sets card name
+     * @param cardName
+     */
     public void setCardName(String cardName) {
         this.cardName = cardName;
     }
 
+    /**
+     * gets cards condition
+     * @return
+     */
     public String getCardCondition() {
         return cardCondition;
     }
 
+    /**
+     * sets cards condition
+     * @param cardCondition
+     */
     public void setCardCondition(String cardCondition) {
         this.cardCondition = cardCondition;
     }
 
+    /**
+     * gets card value
+     * @return
+     */
     public float getCardValue() {
         return cardValue;
     }
 
+    /**
+     * sets card value
+     * @param cardValue
+     */
     public void setCardValue(float cardValue) {
         this.cardValue = cardValue;
     }
 
+    /**
+     * gets user id
+     * @return
+     */
     public Users getUserId() {
         return userId;
     }
 
+    /**
+     * sets user id
+     * @param userId
+     */
     public void setUserId(Users userId) {
         this.userId = userId;
     }
