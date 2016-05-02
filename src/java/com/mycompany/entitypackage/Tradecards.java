@@ -45,33 +45,64 @@ public class Tradecards implements Serializable {
     @ManyToOne(optional = false)
     private Cards cardID;
 
+    /**
+     * Constructor 
+     */
     public Tradecards() {
     }
 
+    /**
+     * constructs with id 
+     * @param id
+     */
     public Tradecards(Integer id) {
         this.id = id;
     }
 
+    /**
+     * gets id
+     * @return
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * sets id 
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * gets trade id 
+     * @return
+     */
     public Trades getTradeID() {
         return tradeID;
     }
 
+    /**
+     * sets trade id 
+     * @param tradeID
+     */
     public void setTradeID(Trades tradeID) {
         this.tradeID = tradeID;
     }
     
+    /**
+     * gets card id
+     * @return
+     */
     public Cards getCardID() {
         return cardID;
     }
 
+    /**
+     * sets card id
+     * @param cardID
+     */
     public void setCardID(Cards cardID) {
         this.cardID = cardID;
     }

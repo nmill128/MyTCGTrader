@@ -2,6 +2,8 @@
 <!--
 Created by Matt Morrison on 2016.02.14 
 Copyright © 2016 Matt Morrison. All rights reserved.
+
+This page is the main for for a user profile. It display the user information and allow the user to edit thei profile if they so desire to.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -30,12 +32,15 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                           class="img-rounded col-md-3 block-image"></h:graphicImage>
                           <br />
                     <h2> #{profileViewManager.loggedInUser.firstName} #{profileViewManager.loggedInUser.lastName} </h2>
+                    <!-- Button that allow user to edit their profile or change their profile picture -->
                     <h:button value="Edit Profile"  outcome="EditAccount" styleClass="btn btn-primary"/>
                     <h:button value="Change Profile Picture"  outcome="EditPhoto" styleClass="btn btn-primary"/>
                 <br/>
                 <br/>
                 <div class="panel panel-default col-xs-12 panelPadding">
-                    <!-- Basic Info goes here -->
+                    <!-- Basic Info goes here 
+                            this table is full of label and input field that can alter the user personal information
+                    -->
                     <table class="table profile-table">
                         <tr>
                             <td><h:outputText value="First Name: " /></td>

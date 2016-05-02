@@ -16,6 +16,10 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+/**
+ *
+ * @author Erik
+ */
 @Named("searchManager")
 @SessionScoped
 /**
@@ -43,100 +47,193 @@ public class SearchManager implements Serializable {
     private CardsFacade cardsFacade;
     
     //constructor
+
+    /**
+     *
+     */
     public SearchManager(){
         
     }
     
 ////Getter and setters section
     //G+S for search string
+
+    /**
+     *
+     * @return
+     */
     public String getSearchString() {
         return searchString;
     }
     
+    /**
+     *
+     * @param searchString
+     */
     public void setSearchString(String searchString) {
         this.searchString = searchString;
     }
  
    //G+S for searchResults
+
+    /**
+     *
+     * @return
+     */
     public List<Cards> getSearchResults() {
         return searchResults;
     }
     
-    
+    /**
+     *
+     * @param searchResults
+     */
     public void setSearchResults(List<Cards> searchResults) {
         this.searchResults = searchResults;
     }
     
     //G+S for searchType
+
+    /**
+     *
+     * @return
+     */
     public int getSearchType() {
         return searchType;
     }
     
+    /**
+     *
+     * @param searchType
+     */
     public void setSearchType(int searchType) {
         this.searchType = searchType;
     }
     
     //G+S for cardName
+
+    /**
+     *
+     * @return
+     */
     public String getCardName() {
         return cardName;
     }
     
-    
+    /**
+     *
+     * @param cardName
+     */
     public void setCardName(String cardName) {
         this.cardName = cardName;
     }
     
     //G+S for username
+
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
     
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
     
     //G+S for value
+
+    /**
+     *
+     * @return
+     */
     public String getValue() {
         return value;
     }
     
+    /**
+     *
+     * @param value
+     */
     public void setValue(String value) {
         this.value = value;
     }
     
     //G+S for edition
+
+    /**
+     *
+     * @return
+     */
     public String getEdition() {
         return edition;
     }
     
+    /**
+     *
+     * @param edition
+     */
     public void setEdition(String edition) {
         this.edition = edition;
     }
     
     //G+S for cardCondition
+
+    /**
+     *
+     * @return
+     */
     public int getCardCondition() {
         return cardCondition;
     }
     
+    /**
+     *
+     * @param cardCondition
+     */
     public void setCardCondition(int cardCondition) {
         this.cardCondition = cardCondition;
     }
     
     //G+S for valueType
+
+    /**
+     *
+     * @return
+     */
     public int getValueType() {
         return valueType;
     }
     
+    /**
+     *
+     * @param valueType
+     */
     public void setValueType(int valueType) {
         this.valueType = valueType;
     }
     
     //redirect for advancedsearch
+
+    /**
+     *
+     * @return
+     */
     public String toAdvancedSearch() {
         return "AdvancedSearch";
     }
     
     //redirect for basic search
+
+    /**
+     *
+     * @return
+     */
     public String toBasicSearch() {
         return "search";
     }
@@ -144,6 +241,10 @@ public class SearchManager implements Serializable {
 ////Search Functions
     
     //Search cards by name
+
+    /**
+     *
+     */
     public void searchCardsByName() {
         switch (searchType) {
             case 0:
@@ -163,6 +264,10 @@ public class SearchManager implements Serializable {
     }
     
     //perform an advanced search with many critaria 
+
+    /**
+     *
+     */
     public void advancedSearch() {
         searchResults = cardsFacade.findByAdvancedCriteria(cardName, username, cardCondition, value, valueType);
     }

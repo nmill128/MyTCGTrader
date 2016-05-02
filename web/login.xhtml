@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 
+Created by Chris Lai on 2016.04.24 
+Copyright © 2016 Chris Lai. All rights reserved. 
+This is the main way to enter the website. The login manager handle the logged in user .
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core" 
@@ -18,6 +23,7 @@
                         <h:form class="form-signin">
                             <div align="center" style="width:50%; margin:0 auto;">
                                 <div class="panel panel-default panelPadding col-xs-12">
+                                    <!-- User simply need to type in their username nad password to have access to the website -->
                                     <table class="table profile-table">
                                         <tr>
                                             <td><h:outputLabel styleClass="outputLabel" for="loginname" value="Username: " /></td>
@@ -31,9 +37,10 @@
                                 </div>
                                 <br />
                                 <fieldset style="width:50%; margin:0 auto;">
+                                <!-- These are extra link that makes it more user friendly to navigiate toward other page -->
                                     <h:commandButton id="login"  action="#{loginManager.loginUser()}" value="Login" styleClass="btn btn-primary buttonText largeButton"/><br />
                                     <h:commandButton id="retrieve"  action="#{loginManager.resetPassword()}" value="Forgot Password?" styleClass="btn btn-link buttonText"/><br />
-                                    <h:commandButton id="create"  action="#{loginManager.createUser()}" value="Not Register?" styleClass="btn btn-link buttonText"/>             
+                                    <h:commandButton id="create"  action="#{loginManager.createUser()}" value="Not Registered?" styleClass="btn btn-link buttonText"/>             
                                 </fieldset>  
                             </div>
                             <br/>
