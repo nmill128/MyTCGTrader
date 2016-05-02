@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 
+Created by Chris Lai on 2016.04.24 
+Copyright © 2016 Chris Lai. All rights reserved. 
+
+This page allw you to view an individual Card
+It uses the card controller class
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -13,13 +20,14 @@
                 <div class="container-fluid">
                     <div align="center" style="width:50%; margin:0 auto;">
                         <h:form >
+                            <!-- Grabs the file from a local storyage with the given file name -->
                             <h:graphicImage value="FileStorageLocation/#{cardsController.fileName}" id="profilePic"
                                             class="img-rounded col-md-3 block-image"></h:graphicImage>
                             <br/>
 
                             <div class="panel panel-default col-xs-12">
                                 
-
+                                <!-- This uses the card controller class to generate what the card is -->
                                 <table class="table profile-table">
                                     <tr>
                                         <td><p:outputLabel for="cardName" value="Card Name" /></td>
@@ -65,6 +73,7 @@
                             </div>
                             <h:outputLabel id="error" value="#{cardsController.message}"  />
                             <br/>  
+                            <!-- This button goes back one page in history -->
                             <input type="button" id="cancel" onclick="history.go(-1);" value="Cancel" styleClass="btn btn-secondary" />
                         </h:form>
                     </div>
