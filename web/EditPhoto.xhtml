@@ -2,6 +2,8 @@
 <!--
 Created by Matt Morrison on 2016.02.14 
 Copyright © 2016 Matt Morrison. All rights reserved.
+
+Page that allows you to edit photo for the user profile.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -30,10 +32,12 @@ Copyright © 2016 Matt Morrison. All rights reserved.
                     <h2>Please Choose a File for Your Photo</h2>
                     <p:fileUpload id="upload" value="#{fileManager.file}" mode="simple" />
                     <br/>
+                    <!-- This takes in a iamgile file format and submit it to the file manager -->
                     <fieldset>
                         <p:commandButton id="button" value="Upload" 
                                          ajax="false" action="#{fileManager.upload}" styleClass="btn btn-primary" />
                     </fieldset>
+                    <!-- Message that is output from the filemamanger -->
                     <h:outputText value="#{fileManager.message}" />
                     <br/>
                     <h:commandButton value="Cancel" action="#{fileManager.cancel()}" styleClass="btn btn-secondary"/>

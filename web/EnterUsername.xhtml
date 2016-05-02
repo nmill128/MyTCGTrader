@@ -2,6 +2,8 @@
 <!--
 Created by Matt Morrison on 2016.02.14 
 Copyright © 2016 Matt Morrison. All rights reserved.
+
+This is part of the passwordResetManager, whereah if you forget your password you can hit this page to recover it.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -24,6 +26,7 @@ Copyright © 2016 Matt Morrison. All rights reserved.
             <h:form class="form-signin">
                 <h2 class="form-signin-heading">Please Enter Your Username</h2>
                 <fieldset>
+                    <!-- A simple textbox that asked your username and the password reset manager will handle the rest if it can find the username in the database -->
                     <div class="form-group panel panel-default col-xs-12 binder" style="margin-bottom: 5px">
                         <h:inputText id="username" value="#{passwordResetManager.username}" required="true"/>
                     </div>
