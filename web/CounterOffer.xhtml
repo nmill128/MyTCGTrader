@@ -2,6 +2,7 @@
 <!--
 This page occur after an initial offer is made and the user decide to 'counter offer'
 the trader
+This uses the binderManager for all of the CRUD operation
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -28,6 +29,7 @@ the trader
                                 </div>
                             </h:selectManyCheckbox>
                         </div>
+                        <!-- User are able to select checkbox to request what card they want in return in the negotiation -->
                         <div class="col-md-6 card scrollable">
                             <h3>#{binderManager.offerUser}'s Cards</h3>
                             <hr />
